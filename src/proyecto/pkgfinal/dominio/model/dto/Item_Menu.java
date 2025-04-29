@@ -37,6 +37,13 @@ public class Item_Menu {
         this.ingredientes = ingredientes;
     }
     
+    public void addIngrediente(Ingrediente ingrediente){
+        ingredientes.add(ingrediente);
+    }
+
+    public void removeIngrediente(Ingrediente ingrediente){
+        ingredientes.remove(ingrediente);
+    }
     
     
 }

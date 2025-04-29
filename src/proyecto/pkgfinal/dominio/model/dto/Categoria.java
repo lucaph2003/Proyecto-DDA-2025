@@ -27,6 +27,13 @@ public class Categoria {
         this.items = items;
     }
     
+    public void addItem(Item_Menu item){
+        items.add(item);
+    }
+
+    public void removeItem(Item_Menu item){
+        items.remove(item);
+    }
     
 
 }
