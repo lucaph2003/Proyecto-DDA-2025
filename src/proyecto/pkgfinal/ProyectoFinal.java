@@ -8,7 +8,7 @@ public class ProyectoFinal {
         
         Datos.precarga();
         VentanaInicial frame = new VentanaInicial();
-        frame.show(true);
+        frame.setVisible(true);
     }
     
 }
