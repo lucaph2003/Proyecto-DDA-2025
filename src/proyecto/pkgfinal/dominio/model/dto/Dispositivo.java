@@ -11,6 +11,6 @@ public class Dispositivo {
         this.numeroIdentificador = numeroIdentificador;
     }
     
-    
+    //TODO agregar Equals
     
 }

@@ -5,12 +5,12 @@ import proyecto.pkgfinal.dominio.model.utils.dto.NombreCompleto;
 public class Usuario {
     private NombreCompleto nombreCompleto;
     private String password;
-    private String username;
+    private String identificador;
 
-    public Usuario(NombreCompleto nombreCompleto, String password, String username) {
+    public Usuario(NombreCompleto nombreCompleto, String password, String identificador) {
         this.nombreCompleto = nombreCompleto;
         this.password = password;
-        this.username = username;
+        this.identificador = identificador;
     }
 
     public NombreCompleto getNombreCompleto() {
@@ -29,12 +29,12 @@ public class Usuario {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
+    public String getIdentificador() {
+        return identificador;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setIdentificador(String identificador) {
+        this.identificador = identificador;
     }
     
     

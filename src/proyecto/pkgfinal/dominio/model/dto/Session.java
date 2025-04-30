@@ -1,13 +1,17 @@
 package proyecto.pkgfinal.dominio.model.dto;
 
+import java.time.Instant;
 import java.util.Date;
 
 public class Session {
     private Date fecha = new Date();
     private Usuario usuario;
+    private Dispositivo dispositivo;
 
-    public Session(Usuario usuario) {
+    public Session(Usuario usuario, Dispositivo dis) {
         this.usuario = usuario;
+        this.dispositivo = dis;
+        this.fecha = Date.from(Instant.now());
     }
 
     public Date getFecha() {
@@ -16,6 +20,10 @@ public class Session {
 
     public Usuario getUsuario() {
         return usuario;
+    }
+
+    public Dispositivo getDispositivo() {
+        return dispositivo;
     }
 
     @Override

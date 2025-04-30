@@ -8,7 +8,7 @@ import proyecto.pkgfinal.dominio.model.dto.Usuario;
 import proyecto.pkgfinal.dominio.model.exceptions.SessionException;
 import proyecto.pkgfinal.dominio.model.dto.Cliente;
 import proyecto.pkgfinal.dominio.model.dto.Gestor;
-import proyecto.pkgfinal.dominio.model.utils.enums.SessionTypesErrors;
+import proyecto.pkgfinal.dominio.model.dto.Dispositivo;
 
 public class SistemaAccesso {
 
@@ -16,36 +16,41 @@ public class SistemaAccesso {
     private ArrayList<Gestor> listaGestores = new ArrayList<>();
     private ArrayList<Session> SesionesActivas = new ArrayList<>();
 
-     public Session LoginGestor(String ci, String password) throws SessionException {
-        if(!existeSesion(ci, SesionesActivas)){
-            Gestor gestor = (Gestor) buscarUsuario(ci,password,listaGestores);
-            Session s = null;
-            if(gestor!=null){
-                s = new Session(gestor);
-                SesionesActivas.add(s);
-            }else {
-                throw new SessionException("Credenciales incorrectas.", SessionTypesErrors.BAD_CREDENTIALS);
-            }
-            return s;
-        }else{
-            throw new SessionException("Acceso denegado. El usuario ya está logueado.", SessionTypesErrors.SESION_EXISTENTE);
+     public Session LoginCliente(String numeroCliente, String password, Dispositivo dispositivo) throws SessionException {
+
+        if(existeSesionEnDispositivo(dispositivo)){
+            throw new SessionException("Debe primero finalizar el servicio actual.");
         }
+
+        if(existeSesion(numeroCliente)){
+            throw new SessionException("Ud. ya esta identificado en otro dispositivo.");
+        }
+        
+        Gestor gestor = (Gestor) buscarUsuario(numeroCliente,password,listaGestores);
+        Session s = null;
+        if(gestor!=null){
+            s = new Session(gestor, dispositivo);
+                SesionesActivas.add(s);
+        }else {
+            throw new SessionException("Credenciales incorrectas.");   
+        }
+        return s;        
     }
 
-    public Session LoginCliente(String ci, String password) throws SessionException {
-        if(!existeSesion(ci, SesionesActivas)){
-            Cliente cliente = (Cliente) buscarUsuario(ci,password,listaClientes);
-            Session s = null;
-            if(cliente!=null){
-                s = new Session(cliente);
-                SesionesActivas.add(s);
-            }else {
-                throw new SessionException("Credenciales incorrectas.", SessionTypesErrors.BAD_CREDENTIALS);
-            }
-            return s;
-        }else{
-            throw new SessionException("Acceso denegado. El usuario ya está logueado.", SessionTypesErrors.SESION_EXISTENTE);
+    public Session LoginGestor(String username, String password,Dispositivo dispositivo) throws SessionException {
+        if(existeSesion(username)){
+            throw new SessionException("Acceso denegado. El usuario ya está logueado.");
         }
+
+        Cliente cliente = (Cliente) buscarUsuario(username,password,listaClientes);
+        Session s = null;
+        if(cliente!=null){
+            s = new Session(cliente,dispositivo);
+            SesionesActivas.add(s);
+        }else {
+            throw new SessionException("Credenciales incorrectas.");
+        }
+        return s;
     }
 
 
@@ -53,18 +58,29 @@ public class SistemaAccesso {
         Usuario u;
         for(Object o:lista){
             u = (Usuario) o;
-            if(u.getUsername().equals(username) && u.getPassword().equals(password)){
+            if(u.getIdentificador().equals(username) && u.getPassword().equals(password)){
                 return u;
             }
         }
         return null;
     }
 
-    private Boolean existeSesion(String Username, List<Session> lista){
+    private Boolean existeSesionEnDispositivo(Dispositivo dispositivo){
         Session s;
-        for(Session session : lista){
+        for(Session session : SesionesActivas){
             s =  session;
-            if(s.getUsuario().getUsername().equals(Username)){
+            if(s.getDispositivo().equals(dispositivo)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean existeSesion(String Username){
+        Session s;
+        for(Session session : SesionesActivas){
+            s =  session;
+            if(s.getUsuario().getIdentificador().equals(Username)){
                 return true;
             }
         }
