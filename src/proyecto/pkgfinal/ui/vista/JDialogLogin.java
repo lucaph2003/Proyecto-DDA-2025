@@ -3,9 +3,11 @@ package proyecto.pkgfinal.ui.vista;
 import proyecto.pkgfinal.dominio.model.dto.Session;
 
 public class JDialogLogin extends javax.swing.JDialog implements IVistaLogin{
+    
+    private String title;
 
-    public JDialogLogin(boolean modal) {
-        super( modal);
+    public JDialogLogin() {
+        inicializar();
         initComponents();
     }
 
@@ -102,6 +104,14 @@ public class JDialogLogin extends javax.swing.JDialog implements IVistaLogin{
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    
+    @Override
+    public void inicializar() {
+        //TODO Agregar todos los
+       this.setTitle(title);
+    }
+
+
     @Override
     public void mostrarEror(String error) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -121,4 +131,5 @@ public class JDialogLogin extends javax.swing.JDialog implements IVistaLogin{
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
-}
+
+ }
