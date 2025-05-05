@@ -5,6 +5,8 @@ import java.util.ArrayList;
 public class Item_Menu {
     private String nombre;
     private int precio;
+    private Unidad_Procesadora_Pedido unidadProcesaora;
+    private boolean disponible;
     private ArrayList<Ingrediente> ingredientes;
 
     public Item_Menu(String nombre, int precio) {

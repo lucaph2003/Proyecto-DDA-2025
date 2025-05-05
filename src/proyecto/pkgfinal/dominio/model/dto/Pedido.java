@@ -1,9 +1,14 @@
 package proyecto.pkgfinal.dominio.model.dto;
 
+import proyecto.pkgfinal.dominio.model.utils.enums.PedidoStatus;
+
 public class Pedido {
     private int id;
     private Item_Menu item;
     private String Comentario;
+    private PedidoStatus estado;
+    private Gestor gestorAsignado;
+
     
     private static int contador = 0;
 
@@ -33,7 +38,17 @@ public class Pedido {
         this.Comentario = Comentario;
     }
 
-    
+    public void confirmar(){
+
+    }
+
+    public void cancelar(){
+
+    }
+
+    public void setGestor(Gestor gestor){
+        this.gestorAsignado = gestor;
+    }
     
     
     

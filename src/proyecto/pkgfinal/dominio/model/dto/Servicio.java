@@ -2,10 +2,13 @@ package proyecto.pkgfinal.dominio.model.dto;
 
 import java.util.ArrayList;
 
+import proyecto.pkgfinal.dominio.model.utils.enums.ServicioStatus;
+
 public class Servicio {
     private int id;
     private double montoTotal;
     private ArrayList<Pedido> pedidos;
+    private ServicioStatus estado;
     
     private static int contador = 0;
 
@@ -13,6 +16,7 @@ public class Servicio {
         this.id = contador++;
         this.montoTotal = montoTotal;
         this.pedidos = pedidos;
+        this.estado = ServicioStatus.ACTIVO;
     }
 
     public int getId() {
