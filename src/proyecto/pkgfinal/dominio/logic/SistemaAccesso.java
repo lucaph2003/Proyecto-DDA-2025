@@ -26,10 +26,10 @@ public class SistemaAccesso {
             throw new SessionException("Ud. ya esta identificado en otro dispositivo.");
         }
         
-        Gestor gestor = (Gestor) buscarUsuario(numeroCliente,password,listaGestores);
+        Cliente cliente = (Cliente) buscarUsuario(numeroCliente,password,listaClientes);
         Session s = null;
-        if(gestor!=null){
-            s = new Session(gestor, dispositivo);
+        if(cliente!=null){
+            s = new Session(cliente, dispositivo);
                 SesionesActivas.add(s);
         }else {
             throw new SessionException("Credenciales incorrectas.");   
