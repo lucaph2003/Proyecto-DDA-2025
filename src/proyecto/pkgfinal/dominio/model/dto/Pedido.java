@@ -15,6 +15,7 @@ public class Pedido {
     public Pedido(Item_Menu item, String Comentario) {
         this.id = contador++;
         this.item = item;
+        this.estado = PedidoStatus.NO_CONFIRMADO;
         this.Comentario = Comentario;
     }
 

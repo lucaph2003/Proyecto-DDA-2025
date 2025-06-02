@@ -13,7 +13,7 @@ public class Observable {
         observadores.remove(observador);
     }
 
-    protected void avisar(Object evento) {
+    public void avisar(Object evento) {
         for (Observador o : observadores) {
             o.actualizar(this, evento);
         }

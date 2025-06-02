@@ -5,6 +5,12 @@ public class Dispositivo {
     private Cliente clienteLogueado;
     private Servicio servicioActual;
 
+    public Dispositivo(int numeroIdentificador) {
+        this.numeroIdentificador = numeroIdentificador;
+    }
+    
+    
+
     public int getNumeroIdentificador() {
         return numeroIdentificador;
     }

@@ -25,5 +25,8 @@ public class Ingrediente {
         this.insumo = insumo;
     }
     
+    public boolean estaDisponible(){
+        return cantidad <= insumo.getStockActual();
+    }
     
 }
