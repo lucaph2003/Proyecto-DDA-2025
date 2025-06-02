@@ -2,13 +2,17 @@ package proyecto.pkgfinal.servicios.fachada;
 
 import java.util.ArrayList;
 import proyecto.pkgfinal.dominio.logic.SistemaAccesso;
+import proyecto.pkgfinal.dominio.logic.SistemaCategoria;
 import proyecto.pkgfinal.dominio.logic.SistemaDispositivo;
+import proyecto.pkgfinal.dominio.logic.SistemaPedido;
 import proyecto.pkgfinal.dominio.model.dto.Categoria;
 import proyecto.pkgfinal.dominio.model.dto.Cliente;
 import proyecto.pkgfinal.dominio.model.dto.Dispositivo;
 import proyecto.pkgfinal.dominio.model.dto.Gestor;
+import proyecto.pkgfinal.dominio.model.dto.Ingrediente;
 import proyecto.pkgfinal.dominio.model.dto.Insumo;
 import proyecto.pkgfinal.dominio.model.dto.Item_Menu;
+import proyecto.pkgfinal.dominio.model.dto.Pedido;
 import proyecto.pkgfinal.dominio.model.dto.Session;
 import proyecto.pkgfinal.dominio.model.dto.Unidad_Procesadora_Pedido;
 import proyecto.pkgfinal.dominio.model.exceptions.SessionException;
@@ -19,12 +23,19 @@ public class Fachada extends Observable {
     //Sistemas
     private SistemaAccesso sAcceso;
     private SistemaDispositivo sDispositivo;
+    private SistemaCategoria sCategoria;
+    private SistemaPedido sPedido;
+    
+    //Eventos
+    public enum eventos_pedidos {pedidoAgregado};
     
     //Singleton
     private static Fachada instancia;
     private Fachada(){
         sAcceso = new SistemaAccesso();
         sDispositivo = new SistemaDispositivo();
+        sCategoria = new SistemaCategoria();
+        sPedido = new SistemaPedido();
     }
     
     public static Fachada getInstancia(){
@@ -52,7 +63,7 @@ public class Fachada extends Observable {
     }
 
     public void AgregarCategoria(Categoria categoria){
-
+        sCategoria.AgregarCategoria(categoria);
     }
 
     public void AgregarItemsMenu(Item_Menu item){
@@ -62,6 +73,11 @@ public class Fachada extends Observable {
     public void AgregarInsumo(Insumo insumo){
 
     }
+    
+    public void AgregarIngrediente(Ingrediente ingrediente){
+
+    }
+    
 
     //Metodos para Sistema de Acceso al Sistema
      public Session LoginGestor(String username, String password,Dispositivo dispositivo) throws SessionException {
@@ -83,9 +99,14 @@ public class Fachada extends Observable {
     
     
     //Metodos para Sistema de Categorias
-    // public ArrayList<Categoria> VerCategorias(){
-        
-    // }
+    public ArrayList<Categoria> VerCategorias(){
+        return sCategoria.getCategorias();
+    }
+
+    //Metodos para Sistem de Pedidos
+    public void AgregarPedido(Pedido pedido) {
+        sPedido.AgregarPedido(pedido);
+    }
 
     
 }

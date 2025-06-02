@@ -1,13 +1,19 @@
 package proyecto.pkgfinal.ui.vista;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
+import proyecto.pkgfinal.dominio.model.dto.Categoria;
 import proyecto.pkgfinal.dominio.model.dto.Dispositivo;
+import proyecto.pkgfinal.dominio.model.dto.Item_Menu;
+import proyecto.pkgfinal.dominio.model.dto.Pedido;
 import proyecto.pkgfinal.ui.controller.DispositivoController;
 
 public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDispositivo{
 
-    private DispositivoController controlador;
-    private Dispositivo dispositivo;
+    private final DispositivoController controlador;
+    private final Dispositivo dispositivo;
     
     public VentanaDispositivo(Dispositivo dispositivo) {
         initComponents();
@@ -28,19 +34,19 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         btnLogin = new javax.swing.JButton();
         jpanelMenu = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        ListItems = new javax.swing.JList<>();
         jLabel3 = new javax.swing.JLabel();
         btnAgregarPedido = new javax.swing.JButton();
         btnEliminarPedido = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        ListCategorias = new javax.swing.JList<>();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtAreaComentario = new javax.swing.JTextArea();
         jPanelPedidos = new javax.swing.JPanel();
         btnConfirmarPedidos = new javax.swing.JButton();
         btnFinalizarServicio = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablePedidos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -93,12 +99,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
         jpanelMenu.setBorder(javax.swing.BorderFactory.createTitledBorder("Menú"));
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane3.setViewportView(jList2);
+        jScrollPane3.setViewportView(ListItems);
 
         jLabel3.setText("Items:");
 
@@ -111,18 +112,18 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
         btnEliminarPedido.setText("Eliminar Pedido");
 
-        jList1.setBorder(javax.swing.BorderFactory.createTitledBorder("Categorias"));
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        ListCategorias.setBorder(javax.swing.BorderFactory.createTitledBorder("Categorias"));
+        ListCategorias.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListCategoriasValueChanged(evt);
+            }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(ListCategorias);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder("Comentario"));
-        jScrollPane2.setViewportView(jTextArea1);
+        txtAreaComentario.setColumns(20);
+        txtAreaComentario.setRows(5);
+        txtAreaComentario.setBorder(javax.swing.BorderFactory.createTitledBorder("Comentario"));
+        jScrollPane2.setViewportView(txtAreaComentario);
 
         javax.swing.GroupLayout jpanelMenuLayout = new javax.swing.GroupLayout(jpanelMenu);
         jpanelMenu.setLayout(jpanelMenuLayout);
@@ -173,7 +174,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
         btnFinalizarServicio.setText("Finalizar Servicio");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -184,7 +185,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
                 "Item", "Comentario", "Estado", "Unidad", "Gestor", "Precio"
             }
         ));
-        jScrollPane4.setViewportView(jTable1);
+        jScrollPane4.setViewportView(tablePedidos);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Monto total: $");
@@ -208,7 +209,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
                             .addGroup(jPanelPedidosLayout.createSequentialGroup()
                                 .addComponent(btnConfirmarPedidos)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnFinalizarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnFinalizarServicio, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -278,8 +279,12 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPedidoActionPerformed
-        
+        agregarPedido();
     }//GEN-LAST:event_btnAgregarPedidoActionPerformed
+
+    private void ListCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListCategoriasValueChanged
+        controlador.cargarItems(ListCategorias.getSelectedIndex());
+    }//GEN-LAST:event_ListCategoriasValueChanged
 
     @Override
     public void inicializar() {
@@ -303,6 +308,8 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<Categoria> ListCategorias;
+    private javax.swing.JList<Item_Menu> ListItems;
     private javax.swing.JButton btnAgregarPedido;
     private javax.swing.JButton btnConfirmarPedidos;
     private javax.swing.JButton btnEliminarPedido;
@@ -313,8 +320,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelPedidos;
@@ -322,9 +327,9 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel jpanelMenu;
+    private javax.swing.JTable tablePedidos;
+    private javax.swing.JTextArea txtAreaComentario;
     private javax.swing.JLabel txtError;
     private javax.swing.JTextField txtNumeroCliente;
     private javax.swing.JTextField txtPassword;
@@ -339,7 +344,10 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void agregarPedido() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String comentario = txtAreaComentario.getText();
+        int posCategoria = ListCategorias.getSelectedIndex();
+        int posItem = ListItems.getSelectedIndex();
+        controlador.agregarPedido(comentario,posCategoria,posItem);
     }
 
     @Override
@@ -358,9 +366,10 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     }
 
     @Override
-    public void mostrarSesion() {
+    public void mostrarSesion(String nombreCompleto) {
         this.jpanelMenu.setVisible(true);
         this.jPanelPedidos.setVisible(true);
+        this.setTitle("Pollo-Morfismo  | DISPOSITIVO: "+ this.dispositivo.getNumeroIdentificador() + " | Cliente "+nombreCompleto);
     }
 
     @Override
@@ -368,4 +377,48 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         this.txtError.setForeground(Color.BLUE);
         this.txtError.setText(mensaje);
     }
+
+    @Override
+    public void mostrarCategorias(ArrayList<Categoria> lista) {
+        DefaultListModel<Categoria> modelo = new DefaultListModel<>();
+        for(Categoria c : lista){
+            modelo.addElement(c);
+        }
+        ListCategorias.setModel(modelo);
+    }
+
+    @Override
+    public void mostrarItems(ArrayList<Item_Menu> lista) {
+        if (lista == null) return;
+        DefaultListModel<Item_Menu> modelo = new DefaultListModel<>();
+        for(Item_Menu im: lista){
+            modelo.addElement(im);
+        }
+        ListItems.setModel(modelo);
+    }
+
+    @Override
+    public void actualizarPedidos() {
+        /*
+        DefaultTableModel datos = new DefaultTableModel();
+        datos.addColumn("Item");
+        datos.addColumn("Comentario");
+        datos.addColumn("Estado");
+        datos.addColumn("Unidad");
+        datos.addColumn("Gestor");
+        datos.addColumn("Precio");
+        datos.setRowCount(sesiones.size());
+        int fila = 0;
+        
+        for (Pedido sesion: sesiones){
+            datos.setValueAt(sesion.getUsuario().getNombreCompleto(),fila,0);
+            datos.setValueAt(sesion.getUsuario().getAgenda().cantidadContactos()+"",fila,1);
+            datos.setValueAt(sesion.getFechaIngreso(),fila,2);
+            fila++;
+        }
+        tablePedidos.setModel(datos);       
+*/
+    }
+    
+    
 }

@@ -5,7 +5,7 @@ import proyecto.pkgfinal.dominio.model.utils.dto.NombreCompleto;
 public class Gestor extends Usuario{
     private Unidad_Procesadora_Pedido unidadAsignada;
 
-    public Gestor(NombreCompleto nombreCompleto, String password, String username,Unidad_Procesadora_Pedido unidadAsignada) {
+    public Gestor(NombreCompleto nombreCompleto, String password, String username, Unidad_Procesadora_Pedido unidadAsignada) {
         super(nombreCompleto, password, username);
         this.unidadAsignada = unidadAsignada;
     }

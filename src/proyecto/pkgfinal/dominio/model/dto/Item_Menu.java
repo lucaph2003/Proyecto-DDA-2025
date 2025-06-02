@@ -9,10 +9,11 @@ public class Item_Menu {
     private boolean disponible;
     private ArrayList<Ingrediente> ingredientes;
 
-    public Item_Menu(String nombre, int precio) {
+    public Item_Menu(String nombre, int precio,Unidad_Procesadora_Pedido uni) {
         this.nombre = nombre;
         this.precio = precio;
         this.ingredientes = new ArrayList();
+        this.unidadProcesaora = uni;
     }
 
     public String getNombre() {
@@ -45,6 +46,22 @@ public class Item_Menu {
 
     public void removeIngrediente(Ingrediente ingrediente){
         ingredientes.remove(ingrediente);
+    }
+    
+    public boolean tieneStock(){
+        boolean tieneStock = true;
+        for(Ingrediente i : ingredientes){
+            if(!i.estaDisponible()){
+                tieneStock = false;
+                break;
+            }
+        }
+        return tieneStock;
+    }
+
+    @Override
+    public String toString() {
+        return nombre + " - $" + precio ;
     }
     
     

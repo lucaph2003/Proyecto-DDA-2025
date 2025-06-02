@@ -22,6 +22,15 @@ public class Categoria {
     public ArrayList<Item_Menu> getItems() {
         return items;
     }
+    
+     public ArrayList<Item_Menu> getItemsStock() {
+        ArrayList<Item_Menu> items_Disponibles =  new ArrayList();
+        for(Item_Menu item : items){
+            if(item.tieneStock()) items_Disponibles.add(item);
+            System.out.println("item: " + item.getNombre() + " ,stock: " + item.tieneStock());
+        }
+        return items_Disponibles;
+    }
 
     public void setItems(ArrayList<Item_Menu> items) {
         this.items = items;
@@ -34,6 +43,16 @@ public class Categoria {
     public void removeItem(Item_Menu item){
         items.remove(item);
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
+
+    public Item_Menu getItemByPos(int posItem) {
+        return items.get(posItem);
+    }
     
 
+    
 }

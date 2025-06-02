@@ -1,16 +1,12 @@
 package proyecto.pkgfinal.ui.vista;
 
-import proyecto.pkgfinal.ui.controller.GestorController;
-
-public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
-
-    private GestorController controlador;
-    
-    public VistaGestor() {
+public class VistaLoginGestor extends javax.swing.JFrame implements IVistaLoginGestor{
+ 
+    public VistaLoginGestor() {
         initComponents();
-        this.controlador = new GestorController(this);
     }
 
+ 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -32,10 +28,13 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
     }// </editor-fold>//GEN-END:initComponents
 
     @Override
+    public void login() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
     public void inicializar() {
-        this.setTitle("Procesar Pedidos");
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -45,8 +44,9 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
 
     @Override
     public void cerrar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.dispose();
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

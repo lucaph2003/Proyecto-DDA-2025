@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import proyecto.pkgfinal.dominio.model.utils.enums.ServicioStatus;
 
 public class Servicio {
-    private int id;
+    private final int id;
     private double montoTotal;
     private ArrayList<Pedido> pedidos;
     private ServicioStatus estado;
+    private Cliente cliente;
     
     private static int contador = 0;
 

@@ -22,7 +22,7 @@ public class VentanaInicial extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnCliente = new javax.swing.JButton();
+        btnGestor = new javax.swing.JButton();
         btnCargarDispositivos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -35,14 +35,14 @@ public class VentanaInicial extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Pollo-Morfismo");
 
-        btnCliente.setBackground(new java.awt.Color(0, 102, 204));
-        btnCliente.setFont(new java.awt.Font("Yu Gothic", 0, 48)); // NOI18N
-        btnCliente.setForeground(new java.awt.Color(255, 255, 255));
-        btnCliente.setText("Nuevo Gestor");
-        btnCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnCliente.addActionListener(new java.awt.event.ActionListener() {
+        btnGestor.setBackground(new java.awt.Color(0, 102, 204));
+        btnGestor.setFont(new java.awt.Font("Yu Gothic", 0, 48)); // NOI18N
+        btnGestor.setForeground(new java.awt.Color(255, 255, 255));
+        btnGestor.setText("Nuevo Gestor");
+        btnGestor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGestor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnClienteActionPerformed(evt);
+                btnGestorActionPerformed(evt);
             }
         });
 
@@ -61,7 +61,7 @@ public class VentanaInicial extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCliente)
+                    .addComponent(btnGestor)
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -75,7 +75,7 @@ public class VentanaInicial extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCargarDispositivos)
                 .addContainerGap(25, Short.MAX_VALUE))
@@ -95,11 +95,11 @@ public class VentanaInicial extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClienteActionPerformed
-       
+    private void btnGestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestorActionPerformed
+       new VistaGestor();
         
         
-    }//GEN-LAST:event_btnClienteActionPerformed
+    }//GEN-LAST:event_btnGestorActionPerformed
 
     private void btnCargarDispositivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarDispositivosActionPerformed
         ArrayList<Dispositivo> dispositivos = Fachada.getInstancia().getDispositivos();
@@ -111,7 +111,7 @@ public class VentanaInicial extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCargarDispositivos;
-    private javax.swing.JButton btnCliente;
+    private javax.swing.JButton btnGestor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
