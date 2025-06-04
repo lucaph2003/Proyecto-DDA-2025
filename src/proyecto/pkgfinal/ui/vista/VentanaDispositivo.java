@@ -4,10 +4,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
-import proyecto.pkgfinal.dominio.model.dto.Categoria;
-import proyecto.pkgfinal.dominio.model.dto.Dispositivo;
-import proyecto.pkgfinal.dominio.model.dto.Item_Menu;
-import proyecto.pkgfinal.dominio.model.dto.Pedido;
+import proyecto.pkgfinal.dominio.model.Categoria;
+import proyecto.pkgfinal.dominio.model.Dispositivo;
+import proyecto.pkgfinal.dominio.model.Item_Menu;
+import proyecto.pkgfinal.dominio.model.Pedido;
+import proyecto.pkgfinal.dominio.model.utils.utils;
 import proyecto.pkgfinal.ui.controller.DispositivoController;
 
 public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDispositivo{
@@ -111,6 +112,11 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         });
 
         btnEliminarPedido.setText("Eliminar Pedido");
+        btnEliminarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPedidoActionPerformed(evt);
+            }
+        });
 
         ListCategorias.setBorder(javax.swing.BorderFactory.createTitledBorder("Categorias"));
         ListCategorias.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -286,6 +292,10 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         controlador.cargarItems(ListCategorias.getSelectedIndex());
     }//GEN-LAST:event_ListCategoriasValueChanged
 
+    private void btnEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPedidoActionPerformed
+        controlador.verDispo();
+    }//GEN-LAST:event_btnEliminarPedidoActionPerformed
+
     @Override
     public void inicializar() {
         this.setVisible(true);
@@ -398,8 +408,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     }
 
     @Override
-    public void actualizarPedidos() {
-        /*
+    public void actualizarPedidos(ArrayList<Pedido> lista) {
         DefaultTableModel datos = new DefaultTableModel();
         datos.addColumn("Item");
         datos.addColumn("Comentario");
@@ -407,17 +416,20 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         datos.addColumn("Unidad");
         datos.addColumn("Gestor");
         datos.addColumn("Precio");
-        datos.setRowCount(sesiones.size());
+        datos.setRowCount(lista.size());
         int fila = 0;
         
-        for (Pedido sesion: sesiones){
-            datos.setValueAt(sesion.getUsuario().getNombreCompleto(),fila,0);
-            datos.setValueAt(sesion.getUsuario().getAgenda().cantidadContactos()+"",fila,1);
-            datos.setValueAt(sesion.getFechaIngreso(),fila,2);
+        for (Pedido pedido: lista){
+            datos.setValueAt(pedido.getItem().getNombre(),fila,0);
+            datos.setValueAt(pedido.getComentario(),fila,1);
+            datos.setValueAt(pedido.getEstado(),fila,2);
+            datos.setValueAt(pedido.getItem().getNombre(),fila,3);
+            datos.setValueAt(pedido.getItem().getNombre(),fila,4);
+            datos.setValueAt(utils.formatearPrecio(pedido.calcularPrecio()),fila,5);
             fila++;
         }
         tablePedidos.setModel(datos);       
-*/
+
     }
     
     

@@ -2,8 +2,9 @@
 package proyecto.pkgfinal.ui.vista;
 
 import java.util.ArrayList;
-import proyecto.pkgfinal.dominio.model.dto.Categoria;
-import proyecto.pkgfinal.dominio.model.dto.Item_Menu;
+import proyecto.pkgfinal.dominio.model.Categoria;
+import proyecto.pkgfinal.dominio.model.Item_Menu;
+import proyecto.pkgfinal.dominio.model.Pedido;
 
 public interface IVistaDispositivo extends IVista{
     public void login();
@@ -15,5 +16,5 @@ public interface IVistaDispositivo extends IVista{
     public void mostrarSesion(String nombreCompleto);
     public void mostrarOk(String mensaje);
     public void mostrarItems(ArrayList<Item_Menu> lis);
-    public void actualizarPedidos();
+    public void actualizarPedidos(ArrayList<Pedido> lista);
 }

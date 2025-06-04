@@ -1,7 +1,7 @@
 package proyecto.pkgfinal.ui.vista;
 
 import java.util.ArrayList;
-import proyecto.pkgfinal.dominio.model.dto.Dispositivo;
+import proyecto.pkgfinal.dominio.model.Dispositivo;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class VentanaInicial extends javax.swing.JFrame {

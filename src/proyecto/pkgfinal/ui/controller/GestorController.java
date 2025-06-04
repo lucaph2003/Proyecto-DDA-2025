@@ -1,6 +1,6 @@
 package proyecto.pkgfinal.ui.controller;
 
-import proyecto.pkgfinal.dominio.model.dto.Session;
+import proyecto.pkgfinal.dominio.model.Session;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 import proyecto.pkgfinal.ui.vista.VistaGestor;
 

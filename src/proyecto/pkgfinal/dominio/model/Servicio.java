@@ -1,4 +1,4 @@
-package proyecto.pkgfinal.dominio.model.dto;
+package proyecto.pkgfinal.dominio.model;
 
 import java.util.ArrayList;
 
@@ -9,14 +9,13 @@ public class Servicio {
     private double montoTotal;
     private ArrayList<Pedido> pedidos;
     private ServicioStatus estado;
-    private Cliente cliente;
     
     private static int contador = 0;
 
-    public Servicio(double montoTotal, ArrayList<Pedido> pedidos) {
+    public Servicio() {
         this.id = contador++;
-        this.montoTotal = montoTotal;
-        this.pedidos = pedidos;
+        this.montoTotal = 0;
+        this.pedidos = new ArrayList<>();
         this.estado = ServicioStatus.ACTIVO;
     }
 
@@ -39,6 +38,27 @@ public class Servicio {
     public static void setContador(int contador) {
         Servicio.contador = contador;
     }
+
+    public ArrayList<Pedido> getPedidos() {
+        return pedidos;
+    }
+
+    public void setPedidos(ArrayList<Pedido> pedidos) {
+        this.pedidos = pedidos;
+    }
+
+    public ServicioStatus getEstado() {
+        return estado;
+    }
+
+    public void setEstado(ServicioStatus estado) {
+        this.estado = estado;
+    }
+
+    public void agregarPedido(Pedido pedido) {
+        this.pedidos.add(pedido);
+    }
+    
     
     
     

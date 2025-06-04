@@ -1,4 +1,4 @@
-package proyecto.pkgfinal.dominio.model.dto;
+package proyecto.pkgfinal.dominio.model;
 
 import proyecto.pkgfinal.dominio.model.utils.enums.PedidoStatus;
 
@@ -50,6 +50,20 @@ public class Pedido {
     public void setGestor(Gestor gestor){
         this.gestorAsignado = gestor;
     }
+
+    public PedidoStatus getEstado() {
+        return estado;
+    }
+
+    public Gestor getGestorAsignado() {
+        return gestorAsignado;
+    }
+
+    public int calcularPrecio() {
+        return 100;
+    }
+    
+    
     
     
     

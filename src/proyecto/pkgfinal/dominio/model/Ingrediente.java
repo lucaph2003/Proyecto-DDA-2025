@@ -1,4 +1,4 @@
-package proyecto.pkgfinal.dominio.model.dto;
+package proyecto.pkgfinal.dominio.model;
 
 public class Ingrediente {
     private int cantidad;

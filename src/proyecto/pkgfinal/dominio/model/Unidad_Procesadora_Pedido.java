@@ -1,4 +1,4 @@
-package proyecto.pkgfinal.dominio.model.dto;
+package proyecto.pkgfinal.dominio.model;
 
 public class Unidad_Procesadora_Pedido {
     private int id;
