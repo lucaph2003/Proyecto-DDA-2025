@@ -29,7 +29,7 @@ public class Fachada extends Observable {
 
     
     //Eventos
-    public enum eventos_pedidos {pedidoAgregado};
+    public enum eventos_pedidos {pedidoAgregado, pedidoEliminado};
     
     public enum eventos_acceso { login};
     
@@ -84,16 +84,16 @@ public class Fachada extends Observable {
     
 
     //Metodos para Sistema de Acceso al Sistema
-     public Session LoginGestor(String username, String password,Dispositivo dispositivo) throws SessionException {
-        return sAcceso.LoginGestor(username, password,dispositivo);
+     public Session LoginGestor(String username, String password) throws SessionException {
+        return sAcceso.LoginGestor(username, password);
     }
 
     public Dispositivo LoginCliente(String username, String password,Dispositivo dispositivo) throws SessionException {
         return sAcceso.LoginCliente(username, password,dispositivo);
     }
     
-    public void Logout(Dispositivo s){
-        //this.sAcceso.Logout();
+    public void Logout(Dispositivo d){
+        this.sAcceso.LogoutCliente(d);
     }
     
     //MEtodos para Sistema Dispositivo

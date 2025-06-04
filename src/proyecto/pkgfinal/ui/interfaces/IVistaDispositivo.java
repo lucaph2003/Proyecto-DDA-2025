@@ -1,5 +1,5 @@
 
-package proyecto.pkgfinal.ui.vista;
+package proyecto.pkgfinal.ui.interfaces;
 
 import java.util.ArrayList;
 import proyecto.pkgfinal.dominio.model.Categoria;

@@ -1,5 +1,6 @@
 package proyecto.pkgfinal.dominio.model;
 
+import java.util.Date;
 import proyecto.pkgfinal.dominio.model.utils.enums.PedidoStatus;
 
 public class Pedido {
@@ -8,7 +9,7 @@ public class Pedido {
     private String Comentario;
     private PedidoStatus estado;
     private Gestor gestorAsignado;
-
+    private Date fechaHora;
     
     private static int contador = 0;
 
@@ -17,6 +18,7 @@ public class Pedido {
         this.item = item;
         this.estado = PedidoStatus.NO_CONFIRMADO;
         this.Comentario = Comentario;
+        this.fechaHora = new Date();
     }
 
     public int getId() {
@@ -62,6 +64,11 @@ public class Pedido {
     public int calcularPrecio() {
         return 100;
     }
+
+    public Date getFechaHora() {
+        return fechaHora;
+    }
+    
     
     
     

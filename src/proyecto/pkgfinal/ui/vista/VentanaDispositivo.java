@@ -10,19 +10,19 @@ import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.utils.utils;
 import proyecto.pkgfinal.ui.controller.DispositivoController;
+import proyecto.pkgfinal.ui.interfaces.IVistaDispositivo;
 
 public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDispositivo{
 
     private final DispositivoController controlador;
-    private final Dispositivo dispositivo;
+    private String valorTitleInicial; 
     
     public VentanaDispositivo(Dispositivo dispositivo) {
         initComponents();
-        this.dispositivo = dispositivo;
-        controlador = new DispositivoController(this);
+        controlador = new DispositivoController(this,dispositivo);
+        inicializar();
     }
 
-   
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -177,8 +177,18 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         jPanelPedidos.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedidos del Servicio"));
 
         btnConfirmarPedidos.setText("Confirmar Pedidos");
+        btnConfirmarPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarPedidosActionPerformed(evt);
+            }
+        });
 
         btnFinalizarServicio.setText("Finalizar Servicio");
+        btnFinalizarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarServicioActionPerformed(evt);
+            }
+        });
 
         tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -293,13 +303,22 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     }//GEN-LAST:event_ListCategoriasValueChanged
 
     private void btnEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPedidoActionPerformed
-        controlador.verDispo();
+        eliminarPedido();
     }//GEN-LAST:event_btnEliminarPedidoActionPerformed
+
+    private void btnFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarServicioActionPerformed
+        finalizarServicio();
+    }//GEN-LAST:event_btnFinalizarServicioActionPerformed
+
+    private void btnConfirmarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPedidosActionPerformed
+        confirmarPedidos();
+    }//GEN-LAST:event_btnConfirmarPedidosActionPerformed
 
     @Override
     public void inicializar() {
         this.setVisible(true);
-        this.setTitle("Pollo-Morfismo  | DISPOSITIVO: "+ this.dispositivo.getNumeroIdentificador());
+        this.valorTitleInicial = "Pollo-Morfismo  | DISPOSITIVO: "+ controlador.getDispositivo().getNumeroIdentificador();
+        this.setTitle(valorTitleInicial);
         this.setLocationRelativeTo(null);
         this.jpanelMenu.setVisible(false);
         this.jPanelPedidos.setVisible(false);
@@ -313,7 +332,11 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void cerrar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Logica de cerrar la sesion");
+        controlador.logout();
+        this.setTitle(valorTitleInicial);
+        this.jpanelMenu.setVisible(false);
+        this.jPanelPedidos.setVisible(false);
     }
 
 
@@ -349,7 +372,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     public void login() {
        String numeroCliente = txtNumeroCliente.getText();
        String password = txtPassword.getText();
-       controlador.login(numeroCliente, password, dispositivo);
+       controlador.login(numeroCliente, password);
     }
 
     @Override
@@ -362,24 +385,27 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void eliminarPedido() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Eliminando pedido seleccionado");
+        //Obtener pedido seleccionado en la tabla
+        //Llamar a metodo del controlador
     }
 
     @Override
     public void confirmarPedidos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Confirmando pedidos seleciconado?");
     }
 
     @Override
     public void finalizarServicio() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Finalizando servico...");
+        this.cerrar();
     }
 
     @Override
     public void mostrarSesion(String nombreCompleto) {
         this.jpanelMenu.setVisible(true);
         this.jPanelPedidos.setVisible(true);
-        this.setTitle("Pollo-Morfismo  | DISPOSITIVO: "+ this.dispositivo.getNumeroIdentificador() + " | Cliente "+nombreCompleto);
+        this.setTitle(valorTitleInicial + " | Cliente "+nombreCompleto);
     }
 
     @Override

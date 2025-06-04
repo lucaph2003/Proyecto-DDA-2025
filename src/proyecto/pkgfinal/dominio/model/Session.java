@@ -5,12 +5,10 @@ import java.util.Date;
 
 public class Session {
     private Date fecha = new Date();
-    private Usuario usuario;
-    private Dispositivo dispositivo;
+    private final Usuario usuario;
 
-    public Session(Usuario usuario, Dispositivo dis) {
+    public Session(Usuario usuario) {
         this.usuario = usuario;
-        this.dispositivo = dis;
         this.fecha = Date.from(Instant.now());
     }
 
@@ -22,13 +20,9 @@ public class Session {
         return usuario;
     }
 
-    public Dispositivo getDispositivo() {
-        return dispositivo;
-    }
-
     @Override
     public String toString() {
-        return usuario.getNombreCompleto().show();
+        return usuario.getNombreCompleto();
     }
 
     @Override

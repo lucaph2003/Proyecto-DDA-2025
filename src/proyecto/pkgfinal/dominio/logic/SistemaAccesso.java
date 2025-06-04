@@ -47,15 +47,15 @@ public class SistemaAccesso {
         return dispositivo;        
     }
 
-    public Session LoginGestor(String username, String password,Dispositivo dispositivo) throws SessionException {
+    public Session LoginGestor(String username, String password) throws SessionException {
         if(existeSesion(username)){
             throw new SessionException("Acceso denegado. El usuario ya está logueado.");
         }
 
-        Cliente cliente = (Cliente) buscarUsuario(username,password,listaClientes);
+        Gestor gestor = (Gestor) buscarUsuario(username,password,listaGestores);
         Session s = null;
-        if(cliente!=null){
-            s = new Session(cliente,dispositivo);
+        if(gestor!=null){
+            s = new Session(gestor);
             SesionesActivas.add(s);
         }else {
             throw new SessionException("Credenciales incorrectas.");
@@ -86,8 +86,8 @@ public class SistemaAccesso {
         return false;
     }
 
-    public void Logout(Session s){
-        SesionesActivas.remove(s);
+    public void LogoutCliente(Dispositivo d){
+        d.liberar();
     }
 
     public void AgregarCliente(Cliente cliente){

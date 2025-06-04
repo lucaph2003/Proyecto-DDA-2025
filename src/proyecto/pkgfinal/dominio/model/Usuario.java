@@ -13,8 +13,8 @@ public class Usuario {
         this.identificador = identificador;
     }
 
-    public NombreCompleto getNombreCompleto() {
-        return nombreCompleto;
+    public String getNombreCompleto() {
+        return nombreCompleto.show();
     }
 
     public void setNombreCompleto(NombreCompleto nombreCompleto) {
