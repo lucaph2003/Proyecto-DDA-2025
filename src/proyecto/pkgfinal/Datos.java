@@ -1,14 +1,14 @@
 package proyecto.pkgfinal;
 
-import proyecto.pkgfinal.dominio.model.dto.Categoria;
-import proyecto.pkgfinal.dominio.model.dto.Cliente;
-import proyecto.pkgfinal.dominio.model.dto.Dispositivo;
-import proyecto.pkgfinal.dominio.model.dto.Gestor;
-import proyecto.pkgfinal.dominio.model.dto.Ingrediente;
-import proyecto.pkgfinal.dominio.model.dto.Insumo;
-import proyecto.pkgfinal.dominio.model.dto.Item_Menu;
-import proyecto.pkgfinal.dominio.model.dto.Unidad_Procesadora_Pedido;
-import proyecto.pkgfinal.dominio.model.utils.dto.NombreCompleto;
+import proyecto.pkgfinal.dominio.model.Categoria;
+import proyecto.pkgfinal.dominio.model.Cliente;
+import proyecto.pkgfinal.dominio.model.Dispositivo;
+import proyecto.pkgfinal.dominio.model.Gestor;
+import proyecto.pkgfinal.dominio.model.Ingrediente;
+import proyecto.pkgfinal.dominio.model.Insumo;
+import proyecto.pkgfinal.dominio.model.Item_Menu;
+import proyecto.pkgfinal.dominio.model.Unidad_Procesadora_Pedido;
+import proyecto.pkgfinal.dominio.model.helpers.dto.NombreCompleto;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class Datos {

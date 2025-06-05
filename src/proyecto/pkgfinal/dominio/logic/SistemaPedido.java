@@ -1,7 +1,7 @@
 package proyecto.pkgfinal.dominio.logic;
 
 import java.util.ArrayList;
-import proyecto.pkgfinal.dominio.model.dto.Pedido;
+import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class SistemaPedido{
@@ -10,7 +10,6 @@ public class SistemaPedido{
 
      
     public void AgregarPedido(Pedido pedido){
-        System.out.println("Entramo");
         listaPedidos.add(pedido);
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoAgregado);
     }

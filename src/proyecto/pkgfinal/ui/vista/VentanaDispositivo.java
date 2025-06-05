@@ -2,27 +2,31 @@ package proyecto.pkgfinal.ui.vista;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
-import proyecto.pkgfinal.dominio.model.dto.Categoria;
-import proyecto.pkgfinal.dominio.model.dto.Dispositivo;
-import proyecto.pkgfinal.dominio.model.dto.Item_Menu;
-import proyecto.pkgfinal.dominio.model.dto.Pedido;
+import proyecto.pkgfinal.dominio.model.Categoria;
+import proyecto.pkgfinal.dominio.model.Dispositivo;
+import proyecto.pkgfinal.dominio.model.Item_Menu;
+import proyecto.pkgfinal.dominio.model.Pedido;
+import proyecto.pkgfinal.dominio.model.helpers.utils;
 import proyecto.pkgfinal.ui.controller.DispositivoController;
+import proyecto.pkgfinal.ui.interfaces.IVistaDispositivo;
 
-public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDispositivo{
+public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDispositivo {
 
     private final DispositivoController controlador;
-    private final Dispositivo dispositivo;
-    
+    private String valorTitleInicial;
+
     public VentanaDispositivo(Dispositivo dispositivo) {
         initComponents();
-        this.dispositivo = dispositivo;
-        controlador = new DispositivoController(this);
+        controlador = new DispositivoController(this, dispositivo);
+        inicializar();
     }
 
-   
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -48,7 +52,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         jScrollPane4 = new javax.swing.JScrollPane();
         tablePedidos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        txtMontoTotal = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         txtError = new javax.swing.JLabel();
 
@@ -111,6 +115,11 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         });
 
         btnEliminarPedido.setText("Eliminar Pedido");
+        btnEliminarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPedidoActionPerformed(evt);
+            }
+        });
 
         ListCategorias.setBorder(javax.swing.BorderFactory.createTitledBorder("Categorias"));
         ListCategorias.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -171,8 +180,18 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         jPanelPedidos.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedidos del Servicio"));
 
         btnConfirmarPedidos.setText("Confirmar Pedidos");
+        btnConfirmarPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarPedidosActionPerformed(evt);
+            }
+        });
 
         btnFinalizarServicio.setText("Finalizar Servicio");
+        btnFinalizarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFinalizarServicioActionPerformed(evt);
+            }
+        });
 
         tablePedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,7 +209,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Monto total: $");
 
-        jLabel5.setText("0");
+        txtMontoTotal.setText("0");
 
         javax.swing.GroupLayout jPanelPedidosLayout = new javax.swing.GroupLayout(jPanelPedidos);
         jPanelPedidos.setLayout(jPanelPedidosLayout);
@@ -203,7 +222,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
                         .addGap(823, 823, 823)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelPedidosLayout.createSequentialGroup()
                         .addGroup(jPanelPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelPedidosLayout.createSequentialGroup()
@@ -226,7 +245,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(txtMontoTotal))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -274,22 +293,36 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnLoginActionPerformed
         login();
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }// GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPedidoActionPerformed
+    private void btnAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAgregarPedidoActionPerformed
         agregarPedido();
-    }//GEN-LAST:event_btnAgregarPedidoActionPerformed
+    }// GEN-LAST:event_btnAgregarPedidoActionPerformed
 
-    private void ListCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListCategoriasValueChanged
+    private void ListCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {// GEN-FIRST:event_ListCategoriasValueChanged
         controlador.cargarItems(ListCategorias.getSelectedIndex());
-    }//GEN-LAST:event_ListCategoriasValueChanged
+    }// GEN-LAST:event_ListCategoriasValueChanged
+
+    private void btnEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEliminarPedidoActionPerformed
+        eliminarPedido();
+    }// GEN-LAST:event_btnEliminarPedidoActionPerformed
+
+    private void btnFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnFinalizarServicioActionPerformed
+        finalizarServicio();
+    }// GEN-LAST:event_btnFinalizarServicioActionPerformed
+
+    private void btnConfirmarPedidosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnConfirmarPedidosActionPerformed
+        confirmarPedidos();
+    }// GEN-LAST:event_btnConfirmarPedidosActionPerformed
 
     @Override
     public void inicializar() {
         this.setVisible(true);
-        this.setTitle("Pollo-Morfismo  | DISPOSITIVO: "+ this.dispositivo.getNumeroIdentificador());
+        this.valorTitleInicial = "Pollo-Morfismo  | DISPOSITIVO: "
+                + controlador.getDispositivo().getNumeroIdentificador();
+        this.setTitle(valorTitleInicial);
         this.setLocationRelativeTo(null);
         this.jpanelMenu.setVisible(false);
         this.jPanelPedidos.setVisible(false);
@@ -303,9 +336,12 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void cerrar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Logica de cerrar la sesion");
+        controlador.logout();
+        this.setTitle(valorTitleInicial);
+        this.jpanelMenu.setVisible(false);
+        this.jPanelPedidos.setVisible(false);
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<Categoria> ListCategorias;
@@ -319,7 +355,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelPedidos;
@@ -331,45 +366,52 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     private javax.swing.JTable tablePedidos;
     private javax.swing.JTextArea txtAreaComentario;
     private javax.swing.JLabel txtError;
+    private javax.swing.JLabel txtMontoTotal;
     private javax.swing.JTextField txtNumeroCliente;
     private javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void login() {
-       String numeroCliente = txtNumeroCliente.getText();
-       String password = txtPassword.getText();
-       controlador.login(numeroCliente, password, dispositivo);
+        String numeroCliente = txtNumeroCliente.getText();
+        String password = txtPassword.getText();
+        controlador.login(numeroCliente, password);
     }
 
     @Override
     public void agregarPedido() {
         String comentario = txtAreaComentario.getText();
-        int posCategoria = ListCategorias.getSelectedIndex();
-        int posItem = ListItems.getSelectedIndex();
-        controlador.agregarPedido(comentario,posCategoria,posItem);
+        Item_Menu item = ListItems.getSelectedValue();
+        controlador.agregarPedido(comentario, item);
     }
 
     @Override
     public void eliminarPedido() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Eliminando pedido seleccionado");
+        int filaSeleccionada = tablePedidos.getSelectedRow();
+        ArrayList<Pedido> lista = controlador.getDispositivo().getServicioActual().getPedidos();
+        if (filaSeleccionada >= 0 && filaSeleccionada < lista.size()) {
+            Pedido pedidoSeleccionado = lista.get(filaSeleccionada);
+            controlador.eliminarPedido(pedidoSeleccionado);
+        }
     }
 
     @Override
     public void confirmarPedidos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        controlador.confirmarPedidos();
     }
 
     @Override
     public void finalizarServicio() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        System.out.println("Finalizando servico...");
+        this.cerrar();
     }
 
     @Override
     public void mostrarSesion(String nombreCompleto) {
         this.jpanelMenu.setVisible(true);
         this.jPanelPedidos.setVisible(true);
-        this.setTitle("Pollo-Morfismo  | DISPOSITIVO: "+ this.dispositivo.getNumeroIdentificador() + " | Cliente "+nombreCompleto);
+        this.setTitle(valorTitleInicial + " | Cliente " + nombreCompleto);
     }
 
     @Override
@@ -381,25 +423,25 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     @Override
     public void mostrarCategorias(ArrayList<Categoria> lista) {
         DefaultListModel<Categoria> modelo = new DefaultListModel<>();
-        for(Categoria c : lista){
+        for (Categoria c : lista) {
             modelo.addElement(c);
         }
         ListCategorias.setModel(modelo);
     }
 
     @Override
-    public void mostrarItems(ArrayList<Item_Menu> lista) {
-        if (lista == null) return;
+    public void mostrarItems(List<Item_Menu> lista) {
         DefaultListModel<Item_Menu> modelo = new DefaultListModel<>();
-        for(Item_Menu im: lista){
-            modelo.addElement(im);
+
+        if (lista != null && !lista.isEmpty()) {
+            lista.forEach(modelo::addElement);
         }
+
         ListItems.setModel(modelo);
     }
 
     @Override
-    public void actualizarPedidos() {
-        /*
+    public void actualizarPedidos(ArrayList<Pedido> lista) {
         DefaultTableModel datos = new DefaultTableModel();
         datos.addColumn("Item");
         datos.addColumn("Comentario");
@@ -407,18 +449,24 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         datos.addColumn("Unidad");
         datos.addColumn("Gestor");
         datos.addColumn("Precio");
-        datos.setRowCount(sesiones.size());
+        datos.setRowCount(lista.size());
         int fila = 0;
-        
-        for (Pedido sesion: sesiones){
-            datos.setValueAt(sesion.getUsuario().getNombreCompleto(),fila,0);
-            datos.setValueAt(sesion.getUsuario().getAgenda().cantidadContactos()+"",fila,1);
-            datos.setValueAt(sesion.getFechaIngreso(),fila,2);
+
+        for (Pedido pedido : lista) {
+            datos.setValueAt(pedido.getItem().getNombre(), fila, 0);
+            datos.setValueAt(pedido.getComentario(), fila, 1);
+            datos.setValueAt(pedido.getEstado().toString(), fila, 2);
+            datos.setValueAt(pedido.getItem().getNombre(), fila, 3);
+            datos.setValueAt(pedido.getItem().getNombre(), fila, 4);
+            datos.setValueAt(utils.formatearPrecio(pedido.calcularPrecio()), fila, 5);
             fila++;
         }
-        tablePedidos.setModel(datos);       
-*/
+        tablePedidos.setModel(datos);
     }
-    
-    
+
+    @Override
+    public void actualizarMontoTotal(double montoTotal) {
+        this.txtMontoTotal.setText(String.valueOf(montoTotal));
+    }
+
 }

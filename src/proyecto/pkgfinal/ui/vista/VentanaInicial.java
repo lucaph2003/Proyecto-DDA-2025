@@ -1,7 +1,7 @@
 package proyecto.pkgfinal.ui.vista;
 
 import java.util.ArrayList;
-import proyecto.pkgfinal.dominio.model.dto.Dispositivo;
+import proyecto.pkgfinal.dominio.model.Dispositivo;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class VentanaInicial extends javax.swing.JFrame {
@@ -96,9 +96,7 @@ public class VentanaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGestorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestorActionPerformed
-       new VistaGestor();
-        
-        
+       new VistaLoginGestor();      
     }//GEN-LAST:event_btnGestorActionPerformed
 
     private void btnCargarDispositivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarDispositivosActionPerformed
