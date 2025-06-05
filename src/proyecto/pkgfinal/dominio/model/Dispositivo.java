@@ -34,6 +34,7 @@ public class Dispositivo {
     }
     
     public void iniciarNuevoServicioCliente(Cliente c){
+        System.out.println("INICIAMO SERVICIO");
         this.clienteLogueado = c;
         this.servicioActual = new Servicio();
     }

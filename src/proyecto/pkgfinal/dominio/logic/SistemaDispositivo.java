@@ -40,14 +40,22 @@ public class SistemaDispositivo {
         return false;
     }
 
-    public Dispositivo AgregarServicioDispositivo(Dispositivo dispositivo, Cliente c) {
-         for(Dispositivo d : listDispositivos){
+    public void AgregarServicioDispositivo(Dispositivo dispositivo, Cliente c) {
+        for(Dispositivo d : listDispositivos){
             if(d.equals(dispositivo)){
                 d.iniciarNuevoServicioCliente(c);
-                return d;
             }
         }
-        return null;
+    }
+
+    public Dispositivo getDispositivo(Dispositivo d) {
+        for(Dispositivo dispositivo: this.listDispositivos){
+            if(dispositivo.equals(d)){
+                d = dispositivo;
+                break;
+            }
+        }
+        return d;
     }
     
 }

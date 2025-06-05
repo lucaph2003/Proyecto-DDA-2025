@@ -3,6 +3,7 @@ package proyecto.pkgfinal.dominio.model;
 import java.util.ArrayList;
 
 import proyecto.pkgfinal.dominio.model.utils.enums.ServicioStatus;
+import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class Servicio {
     private final int id;
@@ -57,6 +58,24 @@ public class Servicio {
 
     public void agregarPedido(Pedido pedido) {
         this.pedidos.add(pedido);
+        this.montoTotal += pedido.calcularPrecio();
+        Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoAgregado);
+    }
+    
+    
+    public void eliminarPedido(Pedido pedido) {
+        this.pedidos.remove(pedido);
+        this.montoTotal -= pedido.calcularPrecio();
+        Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoEliminado);
+    }
+
+    public void confirmarPedidos() {
+        for(Pedido p : this.pedidos){
+            if(p.esSinConfirmar()){
+                p.confirmar();
+            }
+        }
+        Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidosConfirmados);
     }
     
     

@@ -1,7 +1,6 @@
 package proyecto.pkgfinal.ui.controller;
 
 import java.util.ArrayList;
-import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
 import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
@@ -27,25 +26,26 @@ public class DispositivoController implements Observador {
     @Override
     public void actualizar(Observable origen, Object evento) {
         //TODO aca verificar eventos y mosttrar en la lista
-        if(evento == Fachada.eventos_pedidos.pedidoAgregado || evento == Fachada.eventos_pedidos.pedidoEliminado){
-            actualizarVista();
+        if(evento == Fachada.eventos_pedidos.pedidoAgregado || evento == Fachada.eventos_pedidos.pedidoEliminado ||  evento == Fachada.eventos_pedidos.pedidosConfirmados){
+            System.out.println("Ocurrio un evento de pedidos...");
         }
         
         if(evento == Fachada.eventos_acceso.login){
-            System.out.println("Se logueo por evento!");
+            System.out.println("Ocurrio un login...");
         }
     }
     
     private void actualizarVista(){
         vista.actualizarPedidos(dispositivo.getServicioActual().getPedidos());
+        vista.actualizarMontoTotal(dispositivo.getServicioActual().getMontoTotal());
     }
     
     //Eventos del usuario
     public void login(String numeroUsuario,String password){
         try{
-            Dispositivo dispositivo1 = fachada.LoginCliente(numeroUsuario, password, dispositivo); 
-            this.dispositivo = dispositivo1;
-            vista.mostrarSesion(dispositivo1.getClienteLogueado().getNombreCompleto());
+            fachada.LoginCliente(numeroUsuario, password, dispositivo);
+            dispositivo = fachada.getDispositivo(dispositivo);
+            vista.mostrarSesion(dispositivo.getClienteLogueado().getNombreCompleto());
             vista.mostrarCategorias(fachada.VerCategorias());
             vista.mostrarOk("Logueado con exito! Bienvenido, "+ dispositivo.getClienteLogueado().getNombreCompleto());
         }catch(SessionException ex){
@@ -70,19 +70,11 @@ public class DispositivoController implements Observador {
         } 
     }
 
-    public void agregarPedido(String comentario, int posCategoria, int posItem) {
+    public void agregarPedido(String comentario,  Item_Menu item) {
         try{
-            if(posCategoria!=-1){
-                Categoria categoria = fachada.VerCategorias().get(posCategoria);
-                Item_Menu item = categoria.getItemByPos(posItem);
-                Pedido pedido = new Pedido(item, comentario);
-                
-                //TODO hacer por fachada que mande un evento y el actualizar lo recibe por evento solamente
-                dispositivo.getServicioActual().agregarPedido(pedido);
-                actualizarVista();
-            }else {
-                vista.mostrarItems(null);
-            }
+            Pedido pedido = new Pedido(item, comentario);
+            dispositivo.getServicioActual().agregarPedido(pedido);
+            actualizarVista();
         }catch(Exception ex){
             vista.mostrarEror(ex.getMessage());
         } 
@@ -90,6 +82,16 @@ public class DispositivoController implements Observador {
 
     public Dispositivo getDispositivo() {
         return this.dispositivo;
+    }
+    
+    public void eliminarPedido(Pedido pedido){
+        dispositivo.getServicioActual().eliminarPedido(pedido);
+        actualizarVista();
+    }
+    
+    public void confirmarPedidos(){
+        dispositivo.getServicioActual().confirmarPedidos();
+        actualizarVista();
     }
     
     

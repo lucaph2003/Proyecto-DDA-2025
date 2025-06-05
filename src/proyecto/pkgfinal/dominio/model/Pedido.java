@@ -1,10 +1,10 @@
 package proyecto.pkgfinal.dominio.model;
 
 import java.util.Date;
-import proyecto.pkgfinal.dominio.model.utils.enums.PedidoStatus;
+import proyecto.pkgfinal.dominio.model.helpers.enums.PedidoStatus;
 
 public class Pedido {
-    private int id;
+    private final int id;
     private Item_Menu item;
     private String Comentario;
     private PedidoStatus estado;
@@ -42,7 +42,7 @@ public class Pedido {
     }
 
     public void confirmar(){
-
+        this.estado = PedidoStatus.CONFIRMADO;
     }
 
     public void cancelar(){
@@ -57,16 +57,25 @@ public class Pedido {
         return estado;
     }
 
+    public void setEstado(PedidoStatus estado) {
+        this.estado = estado;
+    }
+   
+
     public Gestor getGestorAsignado() {
         return gestorAsignado;
     }
 
     public int calcularPrecio() {
-        return 100;
+        return this.item.getPrecio();
     }
 
     public Date getFechaHora() {
         return fechaHora;
+    }
+
+    boolean esSinConfirmar() {
+        return ( this.estado == PedidoStatus.NO_CONFIRMADO );
     }
     
     

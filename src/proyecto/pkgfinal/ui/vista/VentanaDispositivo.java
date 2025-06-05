@@ -2,6 +2,8 @@ package proyecto.pkgfinal.ui.vista;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 import proyecto.pkgfinal.dominio.model.Categoria;
@@ -12,18 +14,19 @@ import proyecto.pkgfinal.dominio.model.utils.utils;
 import proyecto.pkgfinal.ui.controller.DispositivoController;
 import proyecto.pkgfinal.ui.interfaces.IVistaDispositivo;
 
-public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDispositivo{
+public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDispositivo {
 
     private final DispositivoController controlador;
-    private String valorTitleInicial; 
-    
+    private String valorTitleInicial;
+
     public VentanaDispositivo(Dispositivo dispositivo) {
         initComponents();
-        controlador = new DispositivoController(this,dispositivo);
+        controlador = new DispositivoController(this, dispositivo);
         inicializar();
     }
 
     @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -49,7 +52,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         jScrollPane4 = new javax.swing.JScrollPane();
         tablePedidos = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        txtMontoTotal = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         txtError = new javax.swing.JLabel();
 
@@ -206,7 +209,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Monto total: $");
 
-        jLabel5.setText("0");
+        txtMontoTotal.setText("0");
 
         javax.swing.GroupLayout jPanelPedidosLayout = new javax.swing.GroupLayout(jPanelPedidos);
         jPanelPedidos.setLayout(jPanelPedidosLayout);
@@ -219,7 +222,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
                         .addGap(823, 823, 823)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtMontoTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelPedidosLayout.createSequentialGroup()
                         .addGroup(jPanelPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelPedidosLayout.createSequentialGroup()
@@ -242,7 +245,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelPedidosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(txtMontoTotal))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -290,34 +293,35 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnLoginActionPerformed
         login();
-    }//GEN-LAST:event_btnLoginActionPerformed
+    }// GEN-LAST:event_btnLoginActionPerformed
 
-    private void btnAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarPedidoActionPerformed
+    private void btnAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAgregarPedidoActionPerformed
         agregarPedido();
-    }//GEN-LAST:event_btnAgregarPedidoActionPerformed
+    }// GEN-LAST:event_btnAgregarPedidoActionPerformed
 
-    private void ListCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListCategoriasValueChanged
+    private void ListCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {// GEN-FIRST:event_ListCategoriasValueChanged
         controlador.cargarItems(ListCategorias.getSelectedIndex());
-    }//GEN-LAST:event_ListCategoriasValueChanged
+    }// GEN-LAST:event_ListCategoriasValueChanged
 
-    private void btnEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPedidoActionPerformed
+    private void btnEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEliminarPedidoActionPerformed
         eliminarPedido();
-    }//GEN-LAST:event_btnEliminarPedidoActionPerformed
+    }// GEN-LAST:event_btnEliminarPedidoActionPerformed
 
-    private void btnFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarServicioActionPerformed
+    private void btnFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnFinalizarServicioActionPerformed
         finalizarServicio();
-    }//GEN-LAST:event_btnFinalizarServicioActionPerformed
+    }// GEN-LAST:event_btnFinalizarServicioActionPerformed
 
-    private void btnConfirmarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarPedidosActionPerformed
+    private void btnConfirmarPedidosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnConfirmarPedidosActionPerformed
         confirmarPedidos();
-    }//GEN-LAST:event_btnConfirmarPedidosActionPerformed
+    }// GEN-LAST:event_btnConfirmarPedidosActionPerformed
 
     @Override
     public void inicializar() {
         this.setVisible(true);
-        this.valorTitleInicial = "Pollo-Morfismo  | DISPOSITIVO: "+ controlador.getDispositivo().getNumeroIdentificador();
+        this.valorTitleInicial = "Pollo-Morfismo  | DISPOSITIVO: "
+                + controlador.getDispositivo().getNumeroIdentificador();
         this.setTitle(valorTitleInicial);
         this.setLocationRelativeTo(null);
         this.jpanelMenu.setVisible(false);
@@ -339,7 +343,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         this.jPanelPedidos.setVisible(false);
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<Categoria> ListCategorias;
     private javax.swing.JList<Item_Menu> ListItems;
@@ -352,7 +355,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelPedidos;
@@ -364,35 +366,39 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     private javax.swing.JTable tablePedidos;
     private javax.swing.JTextArea txtAreaComentario;
     private javax.swing.JLabel txtError;
+    private javax.swing.JLabel txtMontoTotal;
     private javax.swing.JTextField txtNumeroCliente;
     private javax.swing.JTextField txtPassword;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void login() {
-       String numeroCliente = txtNumeroCliente.getText();
-       String password = txtPassword.getText();
-       controlador.login(numeroCliente, password);
+        String numeroCliente = txtNumeroCliente.getText();
+        String password = txtPassword.getText();
+        controlador.login(numeroCliente, password);
     }
 
     @Override
     public void agregarPedido() {
         String comentario = txtAreaComentario.getText();
-        int posCategoria = ListCategorias.getSelectedIndex();
-        int posItem = ListItems.getSelectedIndex();
-        controlador.agregarPedido(comentario,posCategoria,posItem);
+        Item_Menu item = ListItems.getSelectedValue();
+        controlador.agregarPedido(comentario, item);
     }
 
     @Override
     public void eliminarPedido() {
         System.out.println("Eliminando pedido seleccionado");
-        //Obtener pedido seleccionado en la tabla
-        //Llamar a metodo del controlador
+        int filaSeleccionada = tablePedidos.getSelectedRow();
+        ArrayList<Pedido> lista = controlador.getDispositivo().getServicioActual().getPedidos();
+        if (filaSeleccionada >= 0 && filaSeleccionada < lista.size()) {
+            Pedido pedidoSeleccionado = lista.get(filaSeleccionada);
+            controlador.eliminarPedido(pedidoSeleccionado);
+        }
     }
 
     @Override
     public void confirmarPedidos() {
-        System.out.println("Confirmando pedidos seleciconado?");
+        controlador.confirmarPedidos();
     }
 
     @Override
@@ -405,7 +411,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     public void mostrarSesion(String nombreCompleto) {
         this.jpanelMenu.setVisible(true);
         this.jPanelPedidos.setVisible(true);
-        this.setTitle(valorTitleInicial + " | Cliente "+nombreCompleto);
+        this.setTitle(valorTitleInicial + " | Cliente " + nombreCompleto);
     }
 
     @Override
@@ -417,19 +423,20 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     @Override
     public void mostrarCategorias(ArrayList<Categoria> lista) {
         DefaultListModel<Categoria> modelo = new DefaultListModel<>();
-        for(Categoria c : lista){
+        for (Categoria c : lista) {
             modelo.addElement(c);
         }
         ListCategorias.setModel(modelo);
     }
 
     @Override
-    public void mostrarItems(ArrayList<Item_Menu> lista) {
-        if (lista == null) return;
+    public void mostrarItems(List<Item_Menu> lista) {
         DefaultListModel<Item_Menu> modelo = new DefaultListModel<>();
-        for(Item_Menu im: lista){
-            modelo.addElement(im);
+
+        if (lista != null && !lista.isEmpty()) {
+            lista.forEach(modelo::addElement);
         }
+
         ListItems.setModel(modelo);
     }
 
@@ -444,19 +451,22 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         datos.addColumn("Precio");
         datos.setRowCount(lista.size());
         int fila = 0;
-        
-        for (Pedido pedido: lista){
-            datos.setValueAt(pedido.getItem().getNombre(),fila,0);
-            datos.setValueAt(pedido.getComentario(),fila,1);
-            datos.setValueAt(pedido.getEstado(),fila,2);
-            datos.setValueAt(pedido.getItem().getNombre(),fila,3);
-            datos.setValueAt(pedido.getItem().getNombre(),fila,4);
-            datos.setValueAt(utils.formatearPrecio(pedido.calcularPrecio()),fila,5);
+
+        for (Pedido pedido : lista) {
+            datos.setValueAt(pedido.getItem().getNombre(), fila, 0);
+            datos.setValueAt(pedido.getComentario(), fila, 1);
+            datos.setValueAt(pedido.getEstado().toString(), fila, 2);
+            datos.setValueAt(pedido.getItem().getNombre(), fila, 3);
+            datos.setValueAt(pedido.getItem().getNombre(), fila, 4);
+            datos.setValueAt(utils.formatearPrecio(pedido.calcularPrecio()), fila, 5);
             fila++;
         }
-        tablePedidos.setModel(datos);       
-
+        tablePedidos.setModel(datos);
     }
-    
-    
+
+    @Override
+    public void actualizarMontoTotal(double montoTotal) {
+        this.txtMontoTotal.setText(String.valueOf(montoTotal));
+    }
+
 }

@@ -26,10 +26,12 @@ public class Fachada extends Observable {
     private final SistemaCategoria sCategoria;
     private final SistemaPedido sPedido;
 
+   
+
 
     
     //Eventos
-    public enum eventos_pedidos {pedidoAgregado, pedidoEliminado};
+    public enum eventos_pedidos {pedidoAgregado, pedidoEliminado, pedidosConfirmados};
     
     public enum eventos_acceso { login};
     
@@ -88,8 +90,8 @@ public class Fachada extends Observable {
         return sAcceso.LoginGestor(username, password);
     }
 
-    public Dispositivo LoginCliente(String username, String password,Dispositivo dispositivo) throws SessionException {
-        return sAcceso.LoginCliente(username, password,dispositivo);
+    public void LoginCliente(String username, String password,Dispositivo dispositivo) throws SessionException {
+        sAcceso.LoginCliente(username, password,dispositivo);
     }
     
     public void Logout(Dispositivo d){
@@ -97,8 +99,12 @@ public class Fachada extends Observable {
     }
     
     //MEtodos para Sistema Dispositivo
-     public ArrayList<Dispositivo> getDispositivos(){
+    public ArrayList<Dispositivo> getDispositivos(){
         return sDispositivo.getDispositivos();
+    }
+     
+     public Dispositivo getDispositivo(Dispositivo d) {
+        return sDispositivo.getDispositivo(d);
     }
      
     public boolean existeSesionEnDispositivo(Dispositivo dispositivo) {
@@ -109,8 +115,8 @@ public class Fachada extends Observable {
         return sDispositivo.existeServicio(cliente);
     }
 
-    public Dispositivo AgregarServicioDispositivo(Dispositivo dispositivo,Cliente c) {
-        return sDispositivo.AgregarServicioDispositivo(dispositivo,c);
+    public void AgregarServicioDispositivo(Dispositivo dispositivo,Cliente c) {
+        sDispositivo.AgregarServicioDispositivo(dispositivo,c);
     }
     
     

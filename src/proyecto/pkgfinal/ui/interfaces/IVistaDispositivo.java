@@ -2,6 +2,7 @@
 package proyecto.pkgfinal.ui.interfaces;
 
 import java.util.ArrayList;
+import java.util.List;
 import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
@@ -15,6 +16,7 @@ public interface IVistaDispositivo extends IVista{
     public void mostrarCategorias(ArrayList<Categoria> lista);
     public void mostrarSesion(String nombreCompleto);
     public void mostrarOk(String mensaje);
-    public void mostrarItems(ArrayList<Item_Menu> lis);
+    public void mostrarItems(List<Item_Menu> lis);
     public void actualizarPedidos(ArrayList<Pedido> lista);
+    public void actualizarMontoTotal(double montoTotal);
 }

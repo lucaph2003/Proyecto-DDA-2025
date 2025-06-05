@@ -225,11 +225,12 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
 
     @Override
     public void finalizarServicio() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        controlador.finarServicio();
     }
 
     @Override
     public void entregarPedido() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        //Pedido p = Lista pedido seleccionado
+        //controlador.entregarPedido(p);
     }
 }

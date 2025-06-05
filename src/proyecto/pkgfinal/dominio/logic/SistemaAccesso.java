@@ -8,7 +8,6 @@ import proyecto.pkgfinal.dominio.model.exceptions.SessionException;
 import proyecto.pkgfinal.dominio.model.Cliente;
 import proyecto.pkgfinal.dominio.model.Gestor;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
-import proyecto.pkgfinal.dominio.model.Servicio;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class SistemaAccesso {
@@ -18,7 +17,6 @@ public class SistemaAccesso {
     private final ArrayList<Gestor> listaGestores;
     
     private final ArrayList<Session> SesionesActivas;
-    
 
     public SistemaAccesso() {
         this.listaGestores = new ArrayList<>();
@@ -26,25 +24,18 @@ public class SistemaAccesso {
         this.SesionesActivas = new ArrayList<>();
     }
     
-    
-
-    public Dispositivo LoginCliente(String numeroCliente, String password, Dispositivo dispositivo) throws SessionException {
-        
+    public void LoginCliente(String numeroCliente, String password, Dispositivo dispositivo) throws SessionException {
         Cliente cliente = (Cliente) buscarUsuario(numeroCliente,password,listaClientes);
-        Servicio s = null;
         if(cliente!=null){
             if(Fachada.getInstancia().existeSesionEnDispositivo(dispositivo)) throw new SessionException("Debe primero finalizar el servicio actual.");
 
             if(Fachada.getInstancia().existeServicio(cliente)) throw new SessionException("Ud. ya esta identificado en otro dispositivo.");
         
-            System.out.println(dispositivo.toString());
-            dispositivo = Fachada.getInstancia().AgregarServicioDispositivo(dispositivo,cliente);
-            System.out.println(dispositivo.toString());
+            Fachada.getInstancia().AgregarServicioDispositivo(dispositivo,cliente);
             Fachada.getInstancia().avisar(Fachada.eventos_acceso.login);
         }else {
             throw new SessionException("Credenciales incorrectas.");   
-        }
-        return dispositivo;        
+        }        
     }
 
     public Session LoginGestor(String username, String password) throws SessionException {

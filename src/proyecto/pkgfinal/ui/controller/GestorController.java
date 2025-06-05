@@ -44,4 +44,10 @@ public class GestorController {
             vista.mostrarEror(e.getMessage());
         }
     }
+
+    public void finarServicio() {
+        //TODO Implementacion de finalizar servicio
+        
+    }
+    
 }
