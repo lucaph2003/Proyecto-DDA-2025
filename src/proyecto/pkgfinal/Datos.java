@@ -8,7 +8,7 @@ import proyecto.pkgfinal.dominio.model.Ingrediente;
 import proyecto.pkgfinal.dominio.model.Insumo;
 import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Unidad_Procesadora_Pedido;
-import proyecto.pkgfinal.dominio.model.utils.dto.NombreCompleto;
+import proyecto.pkgfinal.dominio.model.helpers.dto.NombreCompleto;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class Datos {

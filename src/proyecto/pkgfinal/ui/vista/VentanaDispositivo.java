@@ -10,7 +10,7 @@ import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
 import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
-import proyecto.pkgfinal.dominio.model.utils.utils;
+import proyecto.pkgfinal.dominio.model.helpers.utils;
 import proyecto.pkgfinal.ui.controller.DispositivoController;
 import proyecto.pkgfinal.ui.interfaces.IVistaDispositivo;
 

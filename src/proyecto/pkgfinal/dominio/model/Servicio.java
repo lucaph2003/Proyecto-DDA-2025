@@ -2,7 +2,7 @@ package proyecto.pkgfinal.dominio.model;
 
 import java.util.ArrayList;
 
-import proyecto.pkgfinal.dominio.model.utils.enums.ServicioStatus;
+import proyecto.pkgfinal.dominio.model.helpers.enums.ServicioStatus;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class Servicio {

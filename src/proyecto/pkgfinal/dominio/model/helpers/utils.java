@@ -1,4 +1,4 @@
-package proyecto.pkgfinal.dominio.model.utils;
+package proyecto.pkgfinal.dominio.model.helpers;
 
 public final class utils {
     

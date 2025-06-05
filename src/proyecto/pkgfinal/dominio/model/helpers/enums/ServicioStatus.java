@@ -1,4 +1,4 @@
-package proyecto.pkgfinal.dominio.model.utils.enums;
+package proyecto.pkgfinal.dominio.model.helpers.enums;
 
 public enum ServicioStatus {
     ACTIVO,

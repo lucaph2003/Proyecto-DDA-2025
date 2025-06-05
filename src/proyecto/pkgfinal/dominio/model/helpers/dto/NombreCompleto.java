@@ -1,4 +1,4 @@
-package proyecto.pkgfinal.dominio.model.utils.dto;
+package proyecto.pkgfinal.dominio.model.helpers.dto;
 
 public class NombreCompleto {
     private String nombre;
