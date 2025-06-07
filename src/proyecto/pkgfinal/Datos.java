@@ -9,6 +9,9 @@ import proyecto.pkgfinal.dominio.model.Insumo;
 import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Unidad_Procesadora_Pedido;
 import proyecto.pkgfinal.dominio.model.helpers.dto.NombreCompleto;
+import proyecto.pkgfinal.dominio.model.strategy.ClienteComun;
+import proyecto.pkgfinal.dominio.model.strategy.ClienteDeLaCasa;
+import proyecto.pkgfinal.dominio.model.strategy.ClientePreferencial;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class Datos {
@@ -22,9 +25,9 @@ public class Datos {
         fachada.AgregarDispositivo(new Dispositivo(102));
 
         //TODO: Altas de Clientes
-        fachada.AgregarCliente(new Cliente(new NombreCompleto("Luca","Podesta"),"1234","2000"));
-        fachada.AgregarCliente(new Cliente(new NombreCompleto("Santiago","Caceres"),"1234","2001"));
-        fachada.AgregarCliente(new Cliente(new NombreCompleto("Lionel","Messi"),"1234","2003"));
+        fachada.AgregarCliente(new Cliente(new NombreCompleto("Luca","Podesta"),"1234","2000",new ClienteComun()));
+        fachada.AgregarCliente(new Cliente(new NombreCompleto("Santiago","Caceres"),"1234","2001",new ClienteDeLaCasa()));
+        fachada.AgregarCliente(new Cliente(new NombreCompleto("Lionel","Messi"),"1234","2003",new ClientePreferencial()));
 
         
         //TODO: Unidades Procesadoras de pedidos

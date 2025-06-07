@@ -1,15 +1,16 @@
 package proyecto.pkgfinal.dominio.model.strategy;
 
-public class ClientePreferencial implements TipoCliente{
+public class ClientePreferencial extends TipoCliente{
+
+    public ClientePreferencial() {
+        super(true);
+    }
 
     @Override
     public double calcularDescuento(double montoTotal) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        /*TODO implementar esto*/
+        return 0.0;
     }
 
-    @Override
-    public int getPrioridad() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
 }

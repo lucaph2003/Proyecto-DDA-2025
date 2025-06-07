@@ -8,6 +8,7 @@ import proyecto.pkgfinal.dominio.model.exceptions.SessionException;
 import proyecto.pkgfinal.dominio.model.Cliente;
 import proyecto.pkgfinal.dominio.model.Gestor;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
+import proyecto.pkgfinal.dominio.model.SessionGestor;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class SistemaAccesso {
@@ -46,7 +47,7 @@ public class SistemaAccesso {
         Gestor gestor = (Gestor) buscarUsuario(username,password,listaGestores);
         Session s = null;
         if(gestor!=null){
-            s = new Session(gestor);
+            s = new SessionGestor(gestor);
             SesionesActivas.add(s);
         }else {
             throw new SessionException("Credenciales incorrectas.");

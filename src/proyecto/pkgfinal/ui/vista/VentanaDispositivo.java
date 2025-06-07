@@ -324,8 +324,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
                 + controlador.getDispositivo().getNumeroIdentificador();
         this.setTitle(valorTitleInicial);
         this.setLocationRelativeTo(null);
-        this.jpanelMenu.setVisible(false);
-        this.jPanelPedidos.setVisible(false);
     }
 
     @Override
@@ -409,8 +407,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void mostrarSesion(String nombreCompleto) {
-        this.jpanelMenu.setVisible(true);
-        this.jPanelPedidos.setVisible(true);
         this.setTitle(valorTitleInicial + " | Cliente " + nombreCompleto);
     }
 

@@ -3,9 +3,9 @@ package proyecto.pkgfinal.dominio.model;
 import java.time.Instant;
 import java.util.Date;
 
-public class Session {
+public abstract class Session {
     private Date fecha = new Date();
-    private final Usuario usuario;
+    public final Usuario usuario;
 
     public Session(Usuario usuario) {
         this.usuario = usuario;
@@ -34,4 +34,6 @@ public class Session {
         }
         return false;
     }
+
+    protected abstract boolean validarTipoUsuario();
 }
