@@ -38,7 +38,7 @@ public class Fachada extends Observable {
     //Singleton
     private static Fachada instancia;
     private Fachada(){
-        sAcceso = new SistemaAccesso();
+        sAcceso = new SistemaAccesso(this);
         sDispositivo = new SistemaDispositivo();
         sCategoria = new SistemaCategoria();
         sPedido = new SistemaPedido();

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.DefaultListModel;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
@@ -34,8 +34,8 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         jLabel1 = new javax.swing.JLabel();
         txtNumeroCliente = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
         jpanelMenu = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         ListItems = new javax.swing.JList<>();
@@ -82,9 +82,9 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
                 .addComponent(txtNumeroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(42, 42, 42)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
                 .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -96,8 +96,8 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
                     .addComponent(jLabel1)
                     .addComponent(txtNumeroCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLogin))
+                    .addComponent(btnLogin)
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -324,8 +324,8 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
                 + controlador.getDispositivo().getNumeroIdentificador();
         this.setTitle(valorTitleInicial);
         this.setLocationRelativeTo(null);
-        this.jpanelMenu.setVisible(false);
-        this.jPanelPedidos.setVisible(false);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
     }
 
     @Override
@@ -336,7 +336,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void cerrar() {
-        System.out.println("Logica de cerrar la sesion");
         controlador.logout();
         this.setTitle(valorTitleInicial);
         this.jpanelMenu.setVisible(false);
@@ -368,7 +367,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     private javax.swing.JLabel txtError;
     private javax.swing.JLabel txtMontoTotal;
     private javax.swing.JTextField txtNumeroCliente;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -387,7 +386,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void eliminarPedido() {
-        System.out.println("Eliminando pedido seleccionado");
         int filaSeleccionada = tablePedidos.getSelectedRow();
         ArrayList<Pedido> lista = controlador.getDispositivo().getServicioActual().getPedidos();
         if (filaSeleccionada >= 0 && filaSeleccionada < lista.size()) {
@@ -403,14 +401,11 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void finalizarServicio() {
-        System.out.println("Finalizando servico...");
         this.cerrar();
     }
 
     @Override
     public void mostrarSesion(String nombreCompleto) {
-        this.jpanelMenu.setVisible(true);
-        this.jPanelPedidos.setVisible(true);
         this.setTitle(valorTitleInicial + " | Cliente " + nombreCompleto);
     }
 

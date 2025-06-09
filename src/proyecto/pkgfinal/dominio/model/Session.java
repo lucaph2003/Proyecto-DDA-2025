@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Session {
     private Date fecha = new Date();
-    private final Usuario usuario;
+    public final Usuario usuario;
 
     public Session(Usuario usuario) {
         this.usuario = usuario;
@@ -34,4 +34,5 @@ public class Session {
         }
         return false;
     }
+
 }
