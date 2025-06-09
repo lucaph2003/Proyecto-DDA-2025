@@ -31,14 +31,12 @@ public class SistemaDispositivo {
         return false;
     }
 
-    public Dispositivo AgregarServicioDispositivo(Dispositivo dispositivo, Cliente c) {
+    public void AgregarServicioDispositivo(Dispositivo dispositivo, Cliente c) {
         for(Dispositivo d : listDispositivos){
             if(d.equals(dispositivo)){
                 d.iniciarNuevoServicioCliente(c);
-                return d;
             }
         }
-        return null;
     }
 
     public Dispositivo getDispositivo(Dispositivo d) {

@@ -42,21 +42,11 @@ public class Dispositivo {
         this.servicioActual = null;
         this.clienteLogueado = null;
     }
-    
-    //TODO agregar Equals
+
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Dispositivo other = (Dispositivo) obj;
-        return this.numeroIdentificador == other.numeroIdentificador;
+        Dispositivo dispo = (Dispositivo) obj;
+        return this.numeroIdentificador == dispo.getNumeroIdentificador();
     }
 
     @Override
@@ -64,6 +54,8 @@ public class Dispositivo {
         return "Dispositivo{" + "numeroIdentificador=" + numeroIdentificador + ", clienteLogueado=" + clienteLogueado + ", servicioActual=" + servicioActual + '}';
     }
 
-    
-    
+
+    public boolean esLogueado() {
+        return this.clienteLogueado != null;
+    }
 }

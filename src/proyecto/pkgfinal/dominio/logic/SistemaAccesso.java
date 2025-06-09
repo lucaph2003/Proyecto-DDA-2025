@@ -28,16 +28,15 @@ public class SistemaAccesso {
         this.fachada = pFachada;
     }
     
-    public Dispositivo LoginCliente(String numeroCliente, String password, Dispositivo dispositivo) throws SessionException {
+    public void LoginCliente(String numeroCliente, String password, Dispositivo dispositivo) throws SessionException {
         Cliente cliente = (Cliente) buscarUsuario(numeroCliente,password,listaClientes);
         if(cliente!=null){
             if(fachada.existeSesionEnDispositivo(dispositivo)) throw new SessionException("Debe primero finalizar el servicio actual.");
 
             if(fachada.existeServicio(cliente)) throw new SessionException("Ud. ya esta identificado en otro dispositivo.");
         
-            Dispositivo d = fachada.AgregarServicioDispositivo(dispositivo,cliente);
+            fachada.AgregarServicioDispositivo(dispositivo,cliente);
             fachada.avisar(Fachada.eventos_acceso.login);
-            return d;
         }else {
             throw new SessionException("Credenciales incorrectas.");   
         }   

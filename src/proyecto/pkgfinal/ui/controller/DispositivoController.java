@@ -32,9 +32,11 @@ public class DispositivoController implements Observador {
         }
         
         if(evento == Fachada.eventos_acceso.login){
-            vista.mostrarSesion(dispositivo.getClienteLogueado().getNombreCompleto());
-            vista.mostrarCategorias(fachada.VerCategorias());
-            vista.mostrarOk("Logueado con exito! Bienvenido, "+ dispositivo.getClienteLogueado().getNombreCompleto());
+
+            if(dispositivo.esLogueado()){
+                vista.mostrarSesion(dispositivo.getClienteLogueado().getNombreCompleto());
+                vista.mostrarOk("Logueado con exito! Bienvenido, "+ dispositivo.getClienteLogueado().getNombreCompleto());
+            }
         }
     }
     
@@ -46,7 +48,9 @@ public class DispositivoController implements Observador {
     //Eventos del usuario
     public void login(String numeroUsuario,String password){
         try{
-            this.dispositivo = fachada.LoginCliente(numeroUsuario, password, dispositivo);
+            fachada.LoginCliente(numeroUsuario, password, dispositivo);
+            this.dispositivo = fachada.getDispositivo(dispositivo);
+            vista.mostrarCategorias(fachada.VerCategorias());
         }catch(SessionException ex){
             vista.mostrarEror(ex.getMessage());
         } 
