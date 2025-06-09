@@ -15,13 +15,6 @@ public class SistemaDispositivo {
         return listDispositivos;
     }
     
-    public boolean tieneServicioAsignado(Dispositivo d){
-        for( Dispositivo dispo: this.listDispositivos){
-            if(dispo.equals(d)) return true;
-        }
-        return false;
-    }
-
     public boolean existeSesionEnDispositivo(Dispositivo dispositivo) {
         for(Dispositivo d : listDispositivos){
             if(d.equals(dispositivo)){
@@ -33,29 +26,26 @@ public class SistemaDispositivo {
 
     public boolean existeServicio(Cliente cliente) {
         for(Dispositivo d : listDispositivos){
-            if(d.getClienteLogueado() != null && d.getClienteLogueado().equals(cliente) ){
-                return true;
-            }
+            if(d.getClienteLogueado() != null && d.getClienteLogueado().equals(cliente) ) return true;
         }
         return false;
     }
 
-    public void AgregarServicioDispositivo(Dispositivo dispositivo, Cliente c) {
+    public Dispositivo AgregarServicioDispositivo(Dispositivo dispositivo, Cliente c) {
         for(Dispositivo d : listDispositivos){
             if(d.equals(dispositivo)){
                 d.iniciarNuevoServicioCliente(c);
+                return d;
             }
         }
+        return null;
     }
 
     public Dispositivo getDispositivo(Dispositivo d) {
         for(Dispositivo dispositivo: this.listDispositivos){
-            if(dispositivo.equals(d)){
-                d = dispositivo;
-                break;
-            }
+            if(dispositivo.equals(d))  return  dispositivo;
         }
-        return d;
+        return null;
     }
     
 }

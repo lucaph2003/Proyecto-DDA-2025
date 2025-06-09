@@ -6,7 +6,7 @@ import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class SistemaPedido{
     
-    private ArrayList<Pedido> listaPedidos = new ArrayList<>();
+    private final ArrayList<Pedido> listaPedidos = new ArrayList<>();
 
      
     public void AgregarPedido(Pedido pedido){

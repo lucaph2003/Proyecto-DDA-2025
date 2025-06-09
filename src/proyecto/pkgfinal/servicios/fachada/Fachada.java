@@ -38,7 +38,7 @@ public class Fachada extends Observable {
     //Singleton
     private static Fachada instancia;
     private Fachada(){
-        sAcceso = new SistemaAccesso();
+        sAcceso = new SistemaAccesso(this);
         sDispositivo = new SistemaDispositivo();
         sCategoria = new SistemaCategoria();
         sPedido = new SistemaPedido();
@@ -90,8 +90,8 @@ public class Fachada extends Observable {
         return sAcceso.LoginGestor(username, password);
     }
 
-    public void LoginCliente(String username, String password,Dispositivo dispositivo) throws SessionException {
-        sAcceso.LoginCliente(username, password,dispositivo);
+    public Dispositivo LoginCliente(String username, String password,Dispositivo dispositivo) throws SessionException {
+        return sAcceso.LoginCliente(username, password,dispositivo);
     }
     
     public void Logout(Dispositivo d){
@@ -115,8 +115,8 @@ public class Fachada extends Observable {
         return sDispositivo.existeServicio(cliente);
     }
 
-    public void AgregarServicioDispositivo(Dispositivo dispositivo,Cliente c) {
-        sDispositivo.AgregarServicioDispositivo(dispositivo,c);
+    public Dispositivo AgregarServicioDispositivo(Dispositivo dispositivo,Cliente c) {
+        return sDispositivo.AgregarServicioDispositivo(dispositivo,c);
     }
     
     

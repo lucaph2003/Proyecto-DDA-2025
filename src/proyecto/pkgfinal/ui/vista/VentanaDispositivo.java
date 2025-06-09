@@ -334,7 +334,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void cerrar() {
-        System.out.println("Logica de cerrar la sesion");
         controlador.logout();
         this.setTitle(valorTitleInicial);
         this.jpanelMenu.setVisible(false);
@@ -385,7 +384,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void eliminarPedido() {
-        System.out.println("Eliminando pedido seleccionado");
         int filaSeleccionada = tablePedidos.getSelectedRow();
         ArrayList<Pedido> lista = controlador.getDispositivo().getServicioActual().getPedidos();
         if (filaSeleccionada >= 0 && filaSeleccionada < lista.size()) {
@@ -401,7 +399,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void finalizarServicio() {
-        System.out.println("Finalizando servico...");
         this.cerrar();
     }
 

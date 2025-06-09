@@ -17,62 +17,57 @@ public class SistemaAccesso {
     private final ArrayList<Gestor> listaGestores;
     
     private final ArrayList<Session> SesionesActivas;
+    
+    //TODO esta bien inyectarla como dependencia?
+    private Fachada fachada;
 
-    public SistemaAccesso() {
+    public SistemaAccesso(Fachada pFachada) {
         this.listaGestores = new ArrayList<>();
         this.listaClientes = new ArrayList<>();
         this.SesionesActivas = new ArrayList<>();
+        this.fachada = pFachada;
     }
     
-    public void LoginCliente(String numeroCliente, String password, Dispositivo dispositivo) throws SessionException {
+    public Dispositivo LoginCliente(String numeroCliente, String password, Dispositivo dispositivo) throws SessionException {
         Cliente cliente = (Cliente) buscarUsuario(numeroCliente,password,listaClientes);
         if(cliente!=null){
-            if(Fachada.getInstancia().existeSesionEnDispositivo(dispositivo)) throw new SessionException("Debe primero finalizar el servicio actual.");
+            if(fachada.existeSesionEnDispositivo(dispositivo)) throw new SessionException("Debe primero finalizar el servicio actual.");
 
-            if(Fachada.getInstancia().existeServicio(cliente)) throw new SessionException("Ud. ya esta identificado en otro dispositivo.");
+            if(fachada.existeServicio(cliente)) throw new SessionException("Ud. ya esta identificado en otro dispositivo.");
         
-            Fachada.getInstancia().AgregarServicioDispositivo(dispositivo,cliente);
-            Fachada.getInstancia().avisar(Fachada.eventos_acceso.login);
+            Dispositivo d = fachada.AgregarServicioDispositivo(dispositivo,cliente);
+            fachada.avisar(Fachada.eventos_acceso.login);
+            return d;
         }else {
             throw new SessionException("Credenciales incorrectas.");   
-        }        
+        }   
     }
 
     public Session LoginGestor(String username, String password) throws SessionException {
-        if(existeSesion(username)){
-            throw new SessionException("Acceso denegado. El usuario ya está logueado.");
-        }
+        if(existeSesion(username))throw new SessionException("Acceso denegado. El usuario ya está logueado.");
 
         Gestor gestor = (Gestor) buscarUsuario(username,password,listaGestores);
-        Session s = null;
         if(gestor!=null){
-            s = new Session(gestor);
+            Session s = new Session(gestor);
             SesionesActivas.add(s);
+            return s;
         }else {
             throw new SessionException("Credenciales incorrectas.");
         }
-        return s;
     }
 
-
     private Usuario buscarUsuario(String username, String password, ArrayList lista){
-        Usuario u;
         for(Object o:lista){
-            u = (Usuario) o;
-            if(u.getIdentificador().equals(username) && u.getPassword().equals(password)){
-                return u;
-            }
+            Usuario u = (Usuario) o;
+            if(u.getIdentificador().equals(username) && u.getPassword().equals(password)) return u;
         }
         return null;
     }
 
     private Boolean existeSesion(String Username){
-        Session s;
         for(Session session : SesionesActivas){
-            s =  session;
-            if(s.getUsuario().getIdentificador().equals(Username)){
-                return true;
-            }
+            Session s =  session;
+            if(s.getUsuario().getIdentificador().equals(Username)) return true;
         }
         return false;
     }
