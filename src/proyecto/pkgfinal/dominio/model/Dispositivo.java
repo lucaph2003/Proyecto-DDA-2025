@@ -44,8 +44,6 @@ public class Dispositivo {
         this.clienteLogueado = null;
     }
     
-    
-    
     //TODO agregar Equals
     @Override
     public boolean equals(Object obj) {
@@ -67,18 +65,6 @@ public class Dispositivo {
         return "Dispositivo{" + "numeroIdentificador=" + numeroIdentificador + ", clienteLogueado=" + clienteLogueado + ", servicioActual=" + servicioActual + '}';
     }
 
-    public void setSessionActual(SessionCliente nuevaSesion) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public void cerrarSession() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Session getSessionActual() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
     
     
 }
