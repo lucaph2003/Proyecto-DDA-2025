@@ -3,6 +3,7 @@ package proyecto.pkgfinal.dominio.logic;
 import java.util.ArrayList;
 import proyecto.pkgfinal.dominio.model.Cliente;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
+import proyecto.pkgfinal.dominio.model.Pedido;
 
 public class SistemaDispositivo {
     private final ArrayList<Dispositivo> listDispositivos = new ArrayList<>();
@@ -45,5 +46,12 @@ public class SistemaDispositivo {
         }
         return null;
     }
-    
+
+    public void AgregarPedido(Pedido pedido,Dispositivo dispositivo) {
+        for(Dispositivo d : listDispositivos){
+            if(d.equals(dispositivo)){
+                d.agregarPedido(pedido);
+            }
+        }
+    }
 }

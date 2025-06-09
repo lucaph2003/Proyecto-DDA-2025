@@ -70,6 +70,17 @@ public class Pedido {
         return this.item.getPrecio();
     }
 
+    @Override
+    public String toString() {
+        return "Pedido{" +
+                "id=" + id +
+                ", item=" + item.toString() +
+                ", Comentario='" + Comentario + '\'' +
+                ", estado=" + estado +
+                ", fechaHora=" + fechaHora.toString() +
+                '}';
+    }
+
     public Date getFechaHora() {
         return fechaHora;
     }

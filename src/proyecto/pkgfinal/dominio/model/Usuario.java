@@ -36,6 +36,11 @@ public class Usuario {
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nombreCompleto=" + nombreCompleto.show() +
+                '}';
+    }
 }

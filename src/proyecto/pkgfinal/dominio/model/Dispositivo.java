@@ -51,11 +51,15 @@ public class Dispositivo {
 
     @Override
     public String toString() {
-        return "Dispositivo{" + "numeroIdentificador=" + numeroIdentificador + ", clienteLogueado=" + clienteLogueado + ", servicioActual=" + servicioActual + '}';
+        return "Dispositivo{" + "numeroIdentificador=" + numeroIdentificador + ", clienteLogueado=" + clienteLogueado + ", servicioActual=" + servicioActual.toString() + '}';
     }
 
 
     public boolean esLogueado() {
         return this.clienteLogueado != null;
+    }
+
+    public void agregarPedido(Pedido pedido) {
+        this.servicioActual.agregarPedido(pedido);
     }
 }

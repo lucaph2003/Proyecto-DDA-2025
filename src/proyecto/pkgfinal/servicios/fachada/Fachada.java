@@ -118,7 +118,10 @@ public class Fachada extends Observable {
     public void AgregarServicioDispositivo(Dispositivo dispositivo,Cliente c) {
         sDispositivo.AgregarServicioDispositivo(dispositivo,c);
     }
-    
+
+    public void AgregarPedido(Pedido pedido, Dispositivo dispositivo) {
+        sDispositivo.AgregarPedido(pedido,dispositivo);
+    }
     
     //Metodos para Sistema de Categorias
     public ArrayList<Categoria> VerCategorias(){
@@ -126,9 +129,7 @@ public class Fachada extends Observable {
     }
 
     //Metodos para Sistem de Pedidos
-    public void AgregarPedido(Pedido pedido) {
-        sPedido.AgregarPedido(pedido);
-    }
+
     
     public ArrayList<Pedido> getPedidos(){
         return sPedido.getPedidos();

@@ -61,8 +61,18 @@ public class Servicio {
         this.montoTotal += pedido.calcularPrecio();
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoAgregado);
     }
-    
-    
+
+
+    @Override
+    public String toString() {
+        return "Servicio{" +
+                "id=" + id +
+                ", montoTotal=" + montoTotal +
+                ", pedidos=" + pedidos.toString() +
+                ", estado=" + estado.toString() +
+                '}';
+    }
+
     public void eliminarPedido(Pedido pedido) {
         this.pedidos.remove(pedido);
         this.montoTotal -= pedido.calcularPrecio();
