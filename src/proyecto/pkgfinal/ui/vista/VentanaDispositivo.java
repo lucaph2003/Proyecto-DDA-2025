@@ -325,7 +325,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
         this.setTitle(valorTitleInicial);
         this.setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-
     }
 
     @Override
@@ -336,10 +335,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void cerrar() {
-        controlador.logout();
         this.setTitle(valorTitleInicial);
-        this.jpanelMenu.setVisible(false);
-        this.jPanelPedidos.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -397,7 +393,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
 
     @Override
     public void finalizarServicio() {
-        this.cerrar();
+        controlador.finalizarServicio();
     }
 
     @Override

@@ -127,6 +127,19 @@ public class DispositivoController implements Observador {
             vista.mostrarEror(ex.getMessage());
         }
     }
-    
-    
+
+
+    public void finalizarServicio() {
+        try{
+            if(!this.dispositivo.esLogueado()) throw new SessionException("Debe identificarse antes de finalizar el servicio.");
+
+            if(!dispositivo.getServicioActual().getPedidos().isEmpty()){
+                dispositivo.getServicioActual().finalizar();
+            }
+
+            vista.cerrar();
+        }catch(Exception ex){
+            vista.mostrarEror(ex.getMessage());
+        }
+    }
 }

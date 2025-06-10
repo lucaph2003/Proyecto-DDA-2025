@@ -2,6 +2,7 @@ package proyecto.pkgfinal.dominio.model;
 
 import java.util.ArrayList;
 
+import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.helpers.enums.ServicioStatus;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
@@ -97,5 +98,21 @@ public class Servicio {
             if (p.esSinConfirmar()) return true;
         }
         return false;
+    }
+
+    public int pedidosProcesados(){
+        int contador = 0;
+        for(Pedido p : pedidos){
+            if (p.estaElaborandose()) contador++;
+        }
+        return contador;
+    }
+
+    public void finalizar() throws PedidoException {
+        if(tienePedidosSinConfirmar()) throw new PedidoException("Tiene pedidos sin confirmar!");
+
+        if(pedidosProcesados() > 0) throw new PedidoException("Tienes "+ pedidosProcesados() +" pedidos en proceso, recuerda ir a retirarlos!");
+
+        //TODO logica de finalizacion
     }
 }
