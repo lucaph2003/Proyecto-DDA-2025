@@ -387,11 +387,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     @Override
     public void eliminarPedido() {
         int filaSeleccionada = tablePedidos.getSelectedRow();
-        ArrayList<Pedido> lista = controlador.getDispositivo().getServicioActual().getPedidos();
-        if (filaSeleccionada >= 0 && filaSeleccionada < lista.size()) {
-            Pedido pedidoSeleccionado = lista.get(filaSeleccionada);
-            controlador.eliminarPedido(pedidoSeleccionado);
-        }
+        controlador.eliminarPedido(filaSeleccionada);
     }
 
     @Override

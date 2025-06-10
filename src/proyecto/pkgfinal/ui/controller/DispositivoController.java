@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
 import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
+import proyecto.pkgfinal.dominio.model.exceptions.NoSelectedOptionMenu;
+import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.exceptions.SessionException;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 import proyecto.pkgfinal.servicios.observador.Observable;
@@ -43,6 +45,7 @@ public class DispositivoController implements Observador {
     private void actualizarVista(){
         vista.actualizarPedidos(dispositivo.getServicioActual().getPedidos());
         vista.actualizarMontoTotal(dispositivo.getServicioActual().getMontoTotal());
+        vista.mostrarEror("");
     }
     
     //Eventos del usuario
@@ -75,6 +78,10 @@ public class DispositivoController implements Observador {
 
     public void agregarPedido(String comentario,  Item_Menu item) {
         try{
+            if(!this.dispositivo.esLogueado()) throw new SessionException("Debe identificarse antes de realizar pedidos.");
+
+            if(item == null) throw new NoSelectedOptionMenu("Debe Seleccionar un item.");
+
             Pedido pedido = new Pedido(item, comentario);
             dispositivo.getServicioActual().agregarPedido(pedido);
             actualizarVista();
@@ -87,14 +94,38 @@ public class DispositivoController implements Observador {
         return this.dispositivo;
     }
     
-    public void eliminarPedido(Pedido pedido){
-        dispositivo.getServicioActual().eliminarPedido(pedido);
-        actualizarVista();
+    public void eliminarPedido(int filaSeleccionada){
+
+        try{
+            if(!this.dispositivo.esLogueado()) throw new SessionException("Debe identificarse antes de eliminar pedidos.");
+
+            if(filaSeleccionada == -1) throw new NoSelectedOptionMenu("Debe Seleccionar un pedido.");
+
+            ArrayList<Pedido> lista = dispositivo.getServicioActual().getPedidos() ;
+            Pedido pedido = lista.get(filaSeleccionada);
+
+            if(pedido.estaElaborandose()) throw new PedidoException("Un poco tarde...Ya estamos elaborando este pedido!");
+
+            dispositivo.getServicioActual().eliminarPedido(pedido);
+            actualizarVista();
+        }catch(Exception ex){
+            vista.mostrarEror(ex.getMessage());
+        }
     }
     
     public void confirmarPedidos(){
-        dispositivo.getServicioActual().confirmarPedidos();
-        actualizarVista();
+        try{
+            if(!this.dispositivo.esLogueado()) throw new SessionException("Debe identificarse antes de confirmar el servicio.");
+
+            if(!dispositivo.getServicioActual().tienePedidosSinConfirmar()) throw new NoSelectedOptionMenu("No hay pedidos nuevos.");
+
+            //TODO error en caso de que n haya stock
+
+            dispositivo.getServicioActual().confirmarPedidos();
+            actualizarVista();
+        }catch(Exception ex){
+            vista.mostrarEror(ex.getMessage());
+        }
     }
     
     

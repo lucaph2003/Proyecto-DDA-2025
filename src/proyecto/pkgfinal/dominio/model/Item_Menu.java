@@ -49,14 +49,10 @@ public class Item_Menu {
     }
     
     public boolean tieneStock(){
-        boolean tieneStock = true;
         for(Ingrediente i : ingredientes){
-            if(!i.estaDisponible()){
-                tieneStock = false;
-                break;
-            }
+            if(!i.estaDisponible()) return false;
         }
-        return tieneStock;
+        return true;
     }
 
     @Override

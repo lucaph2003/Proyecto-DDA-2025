@@ -57,6 +57,9 @@ public class Servicio {
     }
 
     public void agregarPedido(Pedido pedido) {
+
+        pedido.tieneStock();
+
         this.pedidos.add(pedido);
         this.montoTotal += pedido.calcularPrecio();
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoAgregado);
@@ -87,9 +90,12 @@ public class Servicio {
         }
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidosConfirmados);
     }
-    
-    
-    
-    
-    
+
+
+    public boolean tienePedidosSinConfirmar() {
+        for(Pedido p : pedidos){
+            if (p.esSinConfirmar()) return true;
+        }
+        return false;
+    }
 }
