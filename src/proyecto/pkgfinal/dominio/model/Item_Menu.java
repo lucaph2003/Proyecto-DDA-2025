@@ -6,7 +6,6 @@ public class Item_Menu {
     private String nombre;
     private int precio;
     private Unidad_Procesadora_Pedido unidadProcesaora;
-    private boolean disponible;
     private ArrayList<Ingrediente> ingredientes;
 
     public Item_Menu(String nombre, int precio,Unidad_Procesadora_Pedido uni) {
@@ -28,16 +27,8 @@ public class Item_Menu {
         return precio;
     }
 
-    public void setPrecio(int precio) {
-        this.precio = precio;
-    }
-
     public ArrayList<Ingrediente> getIngredientes() {
         return ingredientes;
-    }
-
-    public void setIngredientes(ArrayList<Ingrediente> ingredientes) {
-        this.ingredientes = ingredientes;
     }
     
     public void addIngrediente(Ingrediente ingrediente){
@@ -47,7 +38,11 @@ public class Item_Menu {
     public void removeIngrediente(Ingrediente ingrediente){
         ingredientes.remove(ingrediente);
     }
-    
+
+    public Unidad_Procesadora_Pedido getUnidadProcesaora() {
+        return unidadProcesaora;
+    }
+
     public boolean tieneStock(){
         for(Ingrediente i : ingredientes){
             if(!i.estaDisponible()) return false;
@@ -59,7 +54,6 @@ public class Item_Menu {
     public String toString() {
         return nombre + " - $" + precio ;
     }
-
 
     public boolean esItem(String itemName) {
         return this.getNombre().equals(itemName);

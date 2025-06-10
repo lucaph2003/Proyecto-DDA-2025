@@ -55,12 +55,6 @@ public class Datos {
         Ingrediente ingrediente_4 = new Ingrediente(2,insumo_4);
         Ingrediente ingrediente_5 = new Ingrediente(2,insumo_5);
         
-        fachada.AgregarIngrediente(ingrediente_1);
-        fachada.AgregarIngrediente(ingrediente_2);
-        fachada.AgregarIngrediente(ingrediente_3);
-        fachada.AgregarIngrediente(ingrediente_4);
-        fachada.AgregarIngrediente(ingrediente_5);
-        
         //TODO: Items del menu
         Item_Menu item_1 = new Item_Menu("Ensalada Cesar", 300,unidad_1);
         Item_Menu item_2 = new Item_Menu("Sopa de Calabaza", 250,unidad_1);
@@ -82,13 +76,10 @@ public class Datos {
         categoria_1.addItem(item_4);
         
         Categoria categoria_2 = new Categoria("Platos Principales");
-        
+
         Categoria categoria_3 = new Categoria("Postres");
-        
         Categoria categoria_4 = new Categoria("Bebidas");
-        
         Categoria categoria_5 = new Categoria("Vinos");
-        
         Categoria categoria_6 = new Categoria("Cafes");
         
         fachada.AgregarCategoria(categoria_1);
