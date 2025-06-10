@@ -1,5 +1,7 @@
 package proyecto.pkgfinal.dominio.model.strategy;
 
+import proyecto.pkgfinal.dominio.model.Servicio;
+
 public abstract class TipoCliente {
     
     boolean tieneBeneficios;
@@ -8,5 +10,5 @@ public abstract class TipoCliente {
         this.tieneBeneficios = tieneBeneficios;
     }
     
-    abstract double calcularDescuento(double montoTotal);
+    abstract double calcularDescuento(Servicio servicio);
 }

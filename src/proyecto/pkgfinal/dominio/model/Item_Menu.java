@@ -59,6 +59,9 @@ public class Item_Menu {
     public String toString() {
         return nombre + " - $" + precio ;
     }
-    
-    
+
+
+    public boolean esItem(String itemName) {
+        return this.getNombre().equals(itemName);
+    }
 }

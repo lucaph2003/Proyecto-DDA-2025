@@ -1,5 +1,7 @@
 package proyecto.pkgfinal.dominio.model.strategy;
 
+import proyecto.pkgfinal.dominio.model.Servicio;
+
 public class ClienteComun extends TipoCliente {
 
     public ClienteComun() {
@@ -7,9 +9,8 @@ public class ClienteComun extends TipoCliente {
     }
 
     @Override
-    public double calcularDescuento(double montoTotal) {
-        // TODO Implementar esto
-        throw new UnsupportedOperationException("Unimplemented method 'calcularDescuento'");
+    public double calcularDescuento(Servicio servicio) {
+        return servicio.getMontoTotal();
     }
 
     

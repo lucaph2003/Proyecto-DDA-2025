@@ -17,27 +17,20 @@ import proyecto.pkgfinal.servicios.fachada.Fachada;
 public class Datos {
     private final static Fachada fachada = Fachada.getInstancia();
     public static void precarga(){
-        //TODO implementar las precargas llamando a fachada
-
-        //TODO: Altas de Dispositivos
         fachada.AgregarDispositivo(new Dispositivo(100));
         fachada.AgregarDispositivo(new Dispositivo(101));
         fachada.AgregarDispositivo(new Dispositivo(102));
 
-        //TODO: Altas de Clientes
         fachada.AgregarCliente(new Cliente(new NombreCompleto("Luca","Podesta"),"1234","2000",new ClienteComun()));
         fachada.AgregarCliente(new Cliente(new NombreCompleto("Santiago","Caceres"),"1234","2001",new ClienteDeLaCasa()));
         fachada.AgregarCliente(new Cliente(new NombreCompleto("Lionel","Messi"),"1234","2003",new ClientePreferencial()));
 
-        
-        //TODO: Unidades Procesadoras de pedidos
         Unidad_Procesadora_Pedido unidad_1 = new Unidad_Procesadora_Pedido(100,"Bar");
         Unidad_Procesadora_Pedido unidad_2 = new Unidad_Procesadora_Pedido(101,"Cocina");
         
         fachada.AgregarUnidadProcesadora(unidad_1);
         fachada.AgregarUnidadProcesadora(unidad_2);
-        
-        //TODO: Gestores
+
         fachada.AgregarGestor(new Gestor(new NombreCompleto("Miguel","Fuentes"),"1234","2000",unidad_1));
         fachada.AgregarGestor(new Gestor(new NombreCompleto("Camila","Rayon"),"1234","2001",unidad_1));
         fachada.AgregarGestor(new Gestor(new NombreCompleto("Luis","Suarez"),"1234","2003",unidad_2));
