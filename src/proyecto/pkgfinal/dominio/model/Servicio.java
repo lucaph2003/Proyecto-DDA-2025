@@ -2,6 +2,7 @@ package proyecto.pkgfinal.dominio.model;
 
 import java.util.ArrayList;
 
+import proyecto.pkgfinal.dominio.model.exceptions.NoStockException;
 import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.helpers.enums.ServicioStatus;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
@@ -83,10 +84,15 @@ public class Servicio {
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoEliminado);
     }
 
-    public void confirmarPedidos() {
+    public void confirmarPedidos() throws NoStockException {
         for(Pedido p : this.pedidos){
             if(p.esSinConfirmar()){
-                p.confirmar();
+                try{
+                    p.confirmar();
+                }catch(NoStockException nse){
+                    this.pedidos.remove(p);
+                    throw nse;
+                }
             }
         }
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidosConfirmados);

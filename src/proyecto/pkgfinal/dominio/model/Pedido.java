@@ -45,7 +45,9 @@ public class Pedido {
         this.Comentario = Comentario;
     }
 
-    public void confirmar(){
+    public void confirmar() throws NoStockException {
+        if(!this.item.tieneStock()) throw new NoStockException(item.getNombre());
+        this.item.descontarStock();
         this.estado = PedidoStatus.CONFIRMADO;
     }
 

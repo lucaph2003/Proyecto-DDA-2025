@@ -5,22 +5,18 @@ import java.util.ArrayList;
 public class Item_Menu {
     private String nombre;
     private int precio;
-    private Unidad_Procesadora_Pedido unidadProcesaora;
-    private ArrayList<Ingrediente> ingredientes;
+    private final Unidad_Procesadora_Pedido unidadProcesaora;
+    private final ArrayList<Ingrediente> ingredientes;
 
     public Item_Menu(String nombre, int precio,Unidad_Procesadora_Pedido uni) {
         this.nombre = nombre;
         this.precio = precio;
-        this.ingredientes = new ArrayList();
+        this.ingredientes = new ArrayList<>();
         this.unidadProcesaora = uni;
     }
 
     public String getNombre() {
         return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
     }
 
     public int getPrecio() {
@@ -57,5 +53,11 @@ public class Item_Menu {
 
     public boolean esItem(String itemName) {
         return this.getNombre().equals(itemName);
+    }
+
+    public void descontarStock() {
+        for(Ingrediente i : ingredientes){
+            i.descontarStock();
+        }
     }
 }
