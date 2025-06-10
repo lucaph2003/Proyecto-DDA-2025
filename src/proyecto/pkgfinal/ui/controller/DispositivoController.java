@@ -5,6 +5,7 @@ import proyecto.pkgfinal.dominio.model.Dispositivo;
 import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.exceptions.NoSelectedOptionMenu;
+import proyecto.pkgfinal.dominio.model.exceptions.NoStockException;
 import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.exceptions.SessionException;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
@@ -27,10 +28,17 @@ public class DispositivoController implements Observador {
 
     @Override
     public void actualizar(Observable origen, Object evento) {
-        //TODO aca verificar eventos y mosttrar en la lista
         if(evento == Fachada.eventos_pedidos.pedidoAgregado || evento == Fachada.eventos_pedidos.pedidoEliminado ||  evento == Fachada.eventos_pedidos.pedidosConfirmados){
-
-
+            if(dispositivo.esLogueado()){
+                System.out.println("Vamos a actualizar: "+ evento);
+                if(evento == Fachada.eventos_pedidos.pedidosConfirmados){
+                    System.out.println("Entramos en " + evento);
+                    this.verificarStockPedidos();
+                    actualizarVista(false);
+                }else{
+                    actualizarVista(true);
+                }
+            }
         }
         
         if(evento == Fachada.eventos_acceso.login){
@@ -42,10 +50,10 @@ public class DispositivoController implements Observador {
         }
     }
     
-    private void actualizarVista(){
+    private void actualizarVista(boolean limpiarError){
         vista.actualizarPedidos(dispositivo.getServicioActual().getPedidos());
         vista.actualizarMontoTotal(dispositivo.getServicioActual().getMontoTotal());
-        vista.mostrarEror("");
+        if(limpiarError) vista.mostrarEror("");
     }
     
     //Eventos del usuario
@@ -79,11 +87,10 @@ public class DispositivoController implements Observador {
     public void agregarPedido(String comentario,  Item_Menu item) {
         try{
             if(!this.dispositivo.esLogueado()) throw new SessionException("Debe identificarse antes de realizar pedidos.");
-
             if(item == null) throw new NoSelectedOptionMenu("Debe Seleccionar un item.");
+
             Pedido pedido = new Pedido(item, comentario);
             dispositivo.getServicioActual().agregarPedido(pedido);
-            actualizarVista();
         }catch(Exception ex){
             vista.mostrarEror(ex.getMessage());
         } 
@@ -91,6 +98,14 @@ public class DispositivoController implements Observador {
 
     public Dispositivo getDispositivo() {
         return this.dispositivo;
+    }
+
+    private void verificarStockPedidos(){
+        try{
+            dispositivo.getServicioActual().verificarStockPedidos();
+        }catch(PedidoException nse){
+            vista.mostrarEror(nse.getMessage());
+        }
     }
     
     public void eliminarPedido(int filaSeleccionada){
@@ -103,10 +118,7 @@ public class DispositivoController implements Observador {
             ArrayList<Pedido> lista = dispositivo.getServicioActual().getPedidos() ;
             Pedido pedido = lista.get(filaSeleccionada);
 
-            if(pedido.estaElaborandose()) throw new PedidoException("Un poco tarde...Ya estamos elaborando este pedido!");
-
             dispositivo.getServicioActual().eliminarPedido(pedido);
-            actualizarVista();
         }catch(Exception ex){
             vista.mostrarEror(ex.getMessage());
         }
@@ -118,10 +130,7 @@ public class DispositivoController implements Observador {
 
             if(!dispositivo.getServicioActual().tienePedidosSinConfirmar()) throw new NoSelectedOptionMenu("No hay pedidos nuevos.");
 
-            //TODO error en caso de que n haya stock
-
             dispositivo.getServicioActual().confirmarPedidos();
-            actualizarVista();
         }catch(Exception ex){
             vista.mostrarEror(ex.getMessage());
         }

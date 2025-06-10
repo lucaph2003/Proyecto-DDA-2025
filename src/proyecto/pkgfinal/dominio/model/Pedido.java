@@ -4,6 +4,7 @@ import java.util.Date;
 
 import proyecto.pkgfinal.dominio.model.exceptions.NoStockException;
 import proyecto.pkgfinal.dominio.model.helpers.enums.PedidoStatus;
+import proyecto.pkgfinal.servicios.fachada.Fachada;
 
 public class Pedido {
     private final int id;
@@ -49,6 +50,7 @@ public class Pedido {
         if(!this.item.tieneStock()) throw new NoStockException(item.getNombre());
         this.item.descontarStock();
         this.estado = PedidoStatus.CONFIRMADO;
+        Fachada.getInstancia().avisar(PedidoStatus.CONFIRMADO);
     }
 
     public void cancelar(){
@@ -58,6 +60,8 @@ public class Pedido {
     public void setGestor(Gestor gestor){
         this.gestorAsignado = gestor;
     }
+
+
 
     public PedidoStatus getEstado() {
         return estado;
@@ -95,13 +99,19 @@ public class Pedido {
         return ( this.estado == PedidoStatus.NO_CONFIRMADO );
     }
 
-
-    public void tieneStock() {
-
-
-    }
-
     public boolean estaElaborandose() {
         return this.estado.equals(PedidoStatus.EN_PROCESO);
+    }
+
+    public boolean esConfirmado() {
+        return ( this.estado == PedidoStatus.CONFIRMADO );
+    }
+
+    public void devolverStock() {
+        this.item.devolverStock();
+    }
+
+    public void verificarStock() throws NoStockException {
+        if(!this.item.tieneStock()) throw new NoStockException(item) ;
     }
 }

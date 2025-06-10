@@ -35,4 +35,8 @@ public class Insumo {
     public void desconstarStockActual(int cantidad) {
         this.stockActual -= cantidad;
     }
+
+    public void agregarStock(int cantidad) {
+        this.stockActual += cantidad;
+    }
 }

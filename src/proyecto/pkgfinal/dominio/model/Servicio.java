@@ -59,9 +59,6 @@ public class Servicio {
     }
 
     public void agregarPedido(Pedido pedido) {
-
-        pedido.tieneStock();
-
         this.pedidos.add(pedido);
         this.montoTotal += pedido.calcularPrecio();
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoAgregado);
@@ -78,19 +75,21 @@ public class Servicio {
                 '}';
     }
 
-    public void eliminarPedido(Pedido pedido) {
+    public void eliminarPedido(Pedido pedido) throws PedidoException {
+        if(pedido.estaElaborandose()) throw new PedidoException("Un poco tarde...Ya estamos elaborando este pedido!");
+        if(pedido.esConfirmado()) pedido.devolverStock();
         this.pedidos.remove(pedido);
         this.montoTotal -= pedido.calcularPrecio();
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoEliminado);
     }
 
-    public void confirmarPedidos() throws NoStockException {
+    public void confirmarPedidos() throws PedidoException {
         for(Pedido p : this.pedidos){
             if(p.esSinConfirmar()){
                 try{
                     p.confirmar();
                 }catch(NoStockException nse){
-                    this.pedidos.remove(p);
+                    eliminarPedido(p);
                     throw nse;
                 }
             }
@@ -120,5 +119,16 @@ public class Servicio {
         if(pedidosProcesados() > 0) throw new PedidoException("Tienes "+ pedidosProcesados() +" pedidos en proceso, recuerda ir a retirarlos!");
 
         //TODO logica de finalizacion
+    }
+
+    public void verificarStockPedidos() throws PedidoException {
+        for(Pedido p : pedidos){
+            try{
+                if(p.esSinConfirmar()) p.verificarStock();
+            }catch (NoStockException nse){
+                this.eliminarPedido(p);
+                throw nse;
+            }
+        }
     }
 }

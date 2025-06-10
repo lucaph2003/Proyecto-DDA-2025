@@ -336,6 +336,7 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     @Override
     public void cerrar() {
         this.setTitle(valorTitleInicial);
+        this.mostrarOk("Pago Realizado.");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -443,8 +444,8 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
             datos.setValueAt(pedido.getItem().getNombre(), fila, 0);
             datos.setValueAt(pedido.getComentario(), fila, 1);
             datos.setValueAt(pedido.getEstado().toString(), fila, 2);
-            datos.setValueAt(pedido.getItem().getNombre(), fila, 3);
-            datos.setValueAt(pedido.getItem().getNombre(), fila, 4);
+            datos.setValueAt(pedido.getItem().getUnidadProcesaora().getNombre(), fila, 3);
+            datos.setValueAt((pedido.getGestorAsignado() != null ? pedido.getGestorAsignado().toString() : "-"), fila, 4);
             datos.setValueAt(utils.formatearPrecio(pedido.calcularPrecio()), fila, 5);
             fila++;
         }

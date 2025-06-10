@@ -32,4 +32,8 @@ public class Ingrediente {
     public void descontarStock() {
         this.insumo.desconstarStockActual(this.cantidad);
     }
+
+    public void devolverStock() {
+        this.insumo.agregarStock(this.cantidad);
+    }
 }

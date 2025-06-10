@@ -60,4 +60,10 @@ public class Item_Menu {
             i.descontarStock();
         }
     }
+
+    public void devolverStock() {
+        for(Ingrediente i : ingredientes){
+            i.devolverStock();
+        }
+    }
 }
