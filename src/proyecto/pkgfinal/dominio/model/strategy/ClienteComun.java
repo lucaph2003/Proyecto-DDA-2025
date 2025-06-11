@@ -10,7 +10,7 @@ public class ClienteComun extends TipoCliente {
 
     @Override
     public double calcularDescuento(Servicio servicio) {
-        return servicio.getMontoTotal();
+        return 0;
     }
 
     

@@ -142,7 +142,9 @@ public class DispositivoController implements Observador {
             if(!this.dispositivo.esLogueado()) throw new SessionException("Debe identificarse antes de finalizar el servicio.");
 
             if(!dispositivo.getServicioActual().getPedidos().isEmpty()){
-                dispositivo.getServicioActual().finalizar();
+                double beneficio = dispositivo.getClienteLogueado().getTipoCliente().calcularDescuento(dispositivo.getServicioActual());
+                dispositivo.getServicioActual().finalizar(beneficio);
+                vista.mostrarFacturaFinal("Pago Realizado!",String.valueOf(dispositivo.getServicioActual().getMontoTotal()), "",String.valueOf(beneficio));
             }
 
             vista.cerrar();

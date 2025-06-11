@@ -11,7 +11,13 @@ public class Cliente extends Usuario{
         super(nombreCompleto, password, numeroCliente);
         this.tipoCliente = tipo;
     }
-    
-    
-    
+
+
+    public TipoCliente getTipoCliente() {
+        return tipoCliente;
+    }
+
+    public void setTipoCliente(TipoCliente tipoCliente) {
+        this.tipoCliente = tipoCliente;
+    }
 }

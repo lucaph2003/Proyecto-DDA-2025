@@ -10,5 +10,5 @@ public abstract class TipoCliente {
         this.tieneBeneficios = tieneBeneficios;
     }
     
-    abstract double calcularDescuento(Servicio servicio);
+    public abstract double calcularDescuento(Servicio servicio);
 }

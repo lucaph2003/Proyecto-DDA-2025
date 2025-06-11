@@ -113,7 +113,7 @@ public class Servicio {
         return contador;
     }
 
-    public void finalizar() throws PedidoException {
+    public void finalizar(double descuentoAplicado) throws PedidoException {
         if(tienePedidosSinConfirmar()) throw new PedidoException("Tiene pedidos sin confirmar!");
 
         if(pedidosProcesados() > 0) throw new PedidoException("Tienes "+ pedidosProcesados() +" pedidos en proceso, recuerda ir a retirarlos!");

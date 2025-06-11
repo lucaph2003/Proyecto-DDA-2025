@@ -3,6 +3,7 @@ package proyecto.pkgfinal.ui.controller;
 import proyecto.pkgfinal.dominio.model.Gestor;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.Session;
+import proyecto.pkgfinal.dominio.model.exceptions.NoSelectedOptionMenu;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 import proyecto.pkgfinal.ui.vista.VistaGestor;
 
@@ -23,7 +24,7 @@ public class GestorController {
     
     public void tomarPedido(Pedido p){
         try{
-            
+            if(p == null) throw new NoSelectedOptionMenu("Debe seleccionar un pedido");
         }catch(Exception e){
             vista.mostrarEror(e.getMessage());
         }
@@ -31,7 +32,10 @@ public class GestorController {
     
     public void finalizarPedido(Pedido p){
         try{
-            
+            if(p == null) throw new NoSelectedOptionMenu("Debe seleccionar un pedido");
+
+            //TODO si el pedido ya esta finalizado error
+
         }catch(Exception e){
             vista.mostrarEror(e.getMessage());
         }

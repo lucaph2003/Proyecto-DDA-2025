@@ -16,6 +16,7 @@ public interface IVistaDispositivo extends IVista{
     void mostrarCategorias(ArrayList<Categoria> lista);
     void mostrarSesion(String nombreCompleto);
     void mostrarOk(String mensaje);
+    void mostrarFacturaFinal(String mensajePago, String montoTotal, String nombreBeneficio, String descuento);
     void mostrarItems(List<Item_Menu> lis);
     void actualizarPedidos(ArrayList<Pedido> lista);
     void actualizarMontoTotal(double montoTotal);

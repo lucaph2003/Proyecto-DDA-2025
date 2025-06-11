@@ -336,7 +336,6 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     @Override
     public void cerrar() {
         this.setTitle(valorTitleInicial);
-        this.mostrarOk("Pago Realizado.");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -406,6 +405,11 @@ public class VentanaDispositivo extends javax.swing.JFrame implements IVistaDisp
     public void mostrarOk(String mensaje) {
         this.txtError.setForeground(Color.BLUE);
         this.txtError.setText(mensaje);
+    }
+
+    @Override
+    public void mostrarFacturaFinal(String mensajePago, String montoTotal, String nombreBeneficio, String descuento) {
+        this.mostrarOk(mensajePago + " \t Monto Total: $"+ montoTotal + " \t Beneficio: "+ nombreBeneficio + " \t Descuento Aplicado: - $"+ descuento);
     }
 
     @Override
