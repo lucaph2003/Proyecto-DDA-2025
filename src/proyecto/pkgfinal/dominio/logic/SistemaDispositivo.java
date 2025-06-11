@@ -3,6 +3,7 @@ package proyecto.pkgfinal.dominio.logic;
 import java.util.ArrayList;
 import proyecto.pkgfinal.dominio.model.Cliente;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
+import proyecto.pkgfinal.dominio.model.Pedido;
 
 public class SistemaDispositivo {
     private final ArrayList<Dispositivo> listDispositivos = new ArrayList<>();
@@ -15,13 +16,6 @@ public class SistemaDispositivo {
         return listDispositivos;
     }
     
-    public boolean tieneServicioAsignado(Dispositivo d){
-        for( Dispositivo dispo: this.listDispositivos){
-            if(dispo.equals(d)) return true;
-        }
-        return false;
-    }
-
     public boolean existeSesionEnDispositivo(Dispositivo dispositivo) {
         for(Dispositivo d : listDispositivos){
             if(d.equals(dispositivo)){
@@ -33,9 +27,7 @@ public class SistemaDispositivo {
 
     public boolean existeServicio(Cliente cliente) {
         for(Dispositivo d : listDispositivos){
-            if(d.getClienteLogueado() != null && d.getClienteLogueado().equals(cliente) ){
-                return true;
-            }
+            if(d.getClienteLogueado() != null && d.getClienteLogueado().equals(cliente) ) return true;
         }
         return false;
     }
@@ -50,12 +42,16 @@ public class SistemaDispositivo {
 
     public Dispositivo getDispositivo(Dispositivo d) {
         for(Dispositivo dispositivo: this.listDispositivos){
-            if(dispositivo.equals(d)){
-                d = dispositivo;
-                break;
+            if(dispositivo.equals(d))  return  dispositivo;
+        }
+        return null;
+    }
+
+    public void AgregarPedido(Pedido pedido,Dispositivo dispositivo) {
+        for(Dispositivo d : listDispositivos){
+            if(d.equals(dispositivo)){
+                d.agregarPedido(pedido);
             }
         }
-        return d;
     }
-    
 }

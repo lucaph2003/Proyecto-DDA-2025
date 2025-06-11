@@ -1,15 +1,28 @@
 package proyecto.pkgfinal.dominio.model.strategy;
 
-public class ClientePreferencial implements TipoCliente{
+import proyecto.pkgfinal.dominio.model.Pedido;
+import proyecto.pkgfinal.dominio.model.Servicio;
 
-    @Override
-    public double calcularDescuento(double montoTotal) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+public class ClientePreferencial extends TipoCliente{
+
+    public ClientePreferencial() {
+        super(true);
     }
 
     @Override
-    public int getPrioridad() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public double calcularDescuento(Servicio servicio) {
+        double descuento = 0.0;
+        for(Pedido pedido : servicio.getPedidos()){
+            if (pedido.getItem().esItem("Agua Mineral")){
+                descuento += pedido.getItem().getPrecio();
+            }
+        }
+        if (servicio.getMontoTotal() > 2000) {
+            double total = (servicio.getMontoTotal() - descuento);
+            descuento += total * 0.05;
+        }
+        return descuento;
     }
+
     
 }

@@ -2,6 +2,8 @@ package proyecto.pkgfinal.dominio.model;
 
 import java.util.ArrayList;
 
+import proyecto.pkgfinal.dominio.model.exceptions.NoStockException;
+import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.helpers.enums.ServicioStatus;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
@@ -61,25 +63,72 @@ public class Servicio {
         this.montoTotal += pedido.calcularPrecio();
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoAgregado);
     }
-    
-    
-    public void eliminarPedido(Pedido pedido) {
+
+
+    @Override
+    public String toString() {
+        return "Servicio{" +
+                "id=" + id +
+                ", montoTotal=" + montoTotal +
+                ", pedidos=" + pedidos.toString() +
+                ", estado=" + estado.toString() +
+                '}';
+    }
+
+    public void eliminarPedido(Pedido pedido) throws PedidoException {
+        if(pedido.estaElaborandose()) throw new PedidoException("Un poco tarde...Ya estamos elaborando este pedido!");
+        if(pedido.esConfirmado()) pedido.devolverStock();
         this.pedidos.remove(pedido);
         this.montoTotal -= pedido.calcularPrecio();
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoEliminado);
     }
 
-    public void confirmarPedidos() {
+    public void confirmarPedidos() throws PedidoException {
         for(Pedido p : this.pedidos){
             if(p.esSinConfirmar()){
-                p.confirmar();
+                try{
+                    p.confirmar();
+                }catch(NoStockException nse){
+                    eliminarPedido(p);
+                    throw nse;
+                }
             }
         }
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidosConfirmados);
     }
-    
-    
-    
-    
-    
+
+
+    public boolean tienePedidosSinConfirmar() {
+        for(Pedido p : pedidos){
+            if (p.esSinConfirmar()) return true;
+        }
+        return false;
+    }
+
+    public int pedidosProcesados(){
+        int contador = 0;
+        for(Pedido p : pedidos){
+            if (p.estaElaborandose()) contador++;
+        }
+        return contador;
+    }
+
+    public void finalizar(double descuentoAplicado) throws PedidoException {
+        if(tienePedidosSinConfirmar()) throw new PedidoException("Tiene pedidos sin confirmar!");
+
+        if(pedidosProcesados() > 0) throw new PedidoException("Tienes "+ pedidosProcesados() +" pedidos en proceso, recuerda ir a retirarlos!");
+
+        //TODO logica de finalizacion
+    }
+
+    public void verificarStockPedidos() throws PedidoException {
+        for(Pedido p : pedidos){
+            try{
+                if(p.esSinConfirmar()) p.verificarStock();
+            }catch (NoStockException nse){
+                this.eliminarPedido(p);
+                throw nse;
+            }
+        }
+    }
 }

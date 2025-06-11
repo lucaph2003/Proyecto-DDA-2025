@@ -1,0 +1,18 @@
+package proyecto.pkgfinal.dominio.logic;
+
+import proyecto.pkgfinal.dominio.model.Insumo;
+import java.util.ArrayList;
+
+public class SistemaInsumo {
+
+    private final ArrayList<Insumo> listaInsumos = new ArrayList<>();
+
+
+    public void AgregarInsumo(Insumo Insumo){
+        listaInsumos.add(Insumo);
+    }
+
+    public ArrayList<Insumo> getInsumos(){
+        return listaInsumos;
+    }
+}

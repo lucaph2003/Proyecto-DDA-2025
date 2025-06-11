@@ -1,10 +1,8 @@
 package proyecto.pkgfinal.servicios.fachada;
 
 import java.util.ArrayList;
-import proyecto.pkgfinal.dominio.logic.SistemaAccesso;
-import proyecto.pkgfinal.dominio.logic.SistemaCategoria;
-import proyecto.pkgfinal.dominio.logic.SistemaDispositivo;
-import proyecto.pkgfinal.dominio.logic.SistemaPedido;
+
+import proyecto.pkgfinal.dominio.logic.*;
 import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Cliente;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
@@ -25,6 +23,8 @@ public class Fachada extends Observable {
     private final SistemaDispositivo sDispositivo;
     private final SistemaCategoria sCategoria;
     private final SistemaPedido sPedido;
+    private final SistemaUnidadProcesadora sUnidadProcesadora;
+    private final SistemaInsumo sInsumo;
 
    
 
@@ -38,10 +38,12 @@ public class Fachada extends Observable {
     //Singleton
     private static Fachada instancia;
     private Fachada(){
-        sAcceso = new SistemaAccesso();
+        sAcceso = new SistemaAccesso(this);
         sDispositivo = new SistemaDispositivo();
         sCategoria = new SistemaCategoria();
         sPedido = new SistemaPedido();
+        sUnidadProcesadora = new SistemaUnidadProcesadora();
+        sInsumo = new SistemaInsumo();
     }
     
     public static Fachada getInstancia(){
@@ -51,7 +53,7 @@ public class Fachada extends Observable {
         return instancia;
     }
     
-    //Metodos para las precargas
+    //Métodos para las precargas
     public void AgregarCliente(Cliente cliente){
         sAcceso.AgregarCliente(cliente);
     }
@@ -65,25 +67,16 @@ public class Fachada extends Observable {
     }
 
     public void AgregarUnidadProcesadora(Unidad_Procesadora_Pedido unidad){
-
+        sUnidadProcesadora.AgregarUnidadProcesadora(unidad);
     }
 
     public void AgregarCategoria(Categoria categoria){
         sCategoria.AgregarCategoria(categoria);
     }
 
-    public void AgregarItemsMenu(Item_Menu item){
-
-    }
-
     public void AgregarInsumo(Insumo insumo){
-
+        sInsumo.AgregarInsumo(insumo);
     }
-    
-    public void AgregarIngrediente(Ingrediente ingrediente){
-
-    }
-    
 
     //Metodos para Sistema de Acceso al Sistema
      public Session LoginGestor(String username, String password) throws SessionException {
@@ -98,7 +91,7 @@ public class Fachada extends Observable {
         this.sAcceso.LogoutCliente(d);
     }
     
-    //MEtodos para Sistema Dispositivo
+    //Métodos para Sistema Dispositivo
     public ArrayList<Dispositivo> getDispositivos(){
         return sDispositivo.getDispositivos();
     }
@@ -118,17 +111,18 @@ public class Fachada extends Observable {
     public void AgregarServicioDispositivo(Dispositivo dispositivo,Cliente c) {
         sDispositivo.AgregarServicioDispositivo(dispositivo,c);
     }
+
+    public void AgregarPedido(Pedido pedido, Dispositivo dispositivo) {
+        sDispositivo.AgregarPedido(pedido,dispositivo);
+    }
     
-    
-    //Metodos para Sistema de Categorias
+    //Métodos para Sistema de Categorias
     public ArrayList<Categoria> VerCategorias(){
         return sCategoria.getCategorias();
     }
 
-    //Metodos para Sistem de Pedidos
-    public void AgregarPedido(Pedido pedido) {
-        sPedido.AgregarPedido(pedido);
-    }
+    //Métodos para sistema de Pedidos
+
     
     public ArrayList<Pedido> getPedidos(){
         return sPedido.getPedidos();

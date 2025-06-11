@@ -1,6 +1,14 @@
 package proyecto.pkgfinal.dominio.model.strategy;
 
-public interface TipoCliente {
-    double calcularDescuento(double montoTotal);
-    int getPrioridad(); 
+import proyecto.pkgfinal.dominio.model.Servicio;
+
+public abstract class TipoCliente {
+    
+    boolean tieneBeneficios;
+    
+    public TipoCliente(boolean tieneBeneficios){
+        this.tieneBeneficios = tieneBeneficios;
+    }
+    
+    public abstract double calcularDescuento(Servicio servicio);
 }

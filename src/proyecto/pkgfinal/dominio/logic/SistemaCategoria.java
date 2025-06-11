@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import proyecto.pkgfinal.dominio.model.Categoria;
 
 public class SistemaCategoria {
-    private ArrayList<Categoria> listaCategorias = new ArrayList<>();
+    private final ArrayList<Categoria> listaCategorias = new ArrayList<>();
      
     public void AgregarCategoria(Categoria categoria){
         listaCategorias.add(categoria);

@@ -1,17 +1,17 @@
 package proyecto.pkgfinal.dominio.model.strategy;
 
-public class ClienteDeLaCasa implements TipoCliente {
+import proyecto.pkgfinal.dominio.model.Servicio;
 
-    @Override
-    public double calcularDescuento(double montoTotal) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'calcularDescuento'");
+public class ClienteDeLaCasa extends TipoCliente {
+
+    public ClienteDeLaCasa() {
+        super(true);
     }
 
     @Override
-    public int getPrioridad() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPrioridad'");
+    public double calcularDescuento(Servicio servicio) {
+        return 500.0;
     }
+
     
 }

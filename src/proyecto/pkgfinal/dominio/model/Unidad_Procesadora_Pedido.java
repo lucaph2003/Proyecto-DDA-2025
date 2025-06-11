@@ -1,5 +1,7 @@
 package proyecto.pkgfinal.dominio.model;
 
+import java.util.Objects;
+
 public class Unidad_Procesadora_Pedido {
     private int id;
     private String Nombre;
@@ -13,8 +15,10 @@ public class Unidad_Procesadora_Pedido {
         return Nombre;
     }
 
-    public void setNombre(String Nombre) {
-        this.Nombre = Nombre;
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Unidad_Procesadora_Pedido that)) return false;
+        return id == that.id;
     }
 
 }

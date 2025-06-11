@@ -24,10 +24,9 @@ public class Categoria {
     }
     
      public ArrayList<Item_Menu> getItemsStock() {
-        ArrayList<Item_Menu> items_Disponibles =  new ArrayList();
+        ArrayList<Item_Menu> items_Disponibles =  new ArrayList<>();
         for(Item_Menu item : items){
             if(item.tieneStock()) items_Disponibles.add(item);
-            System.out.println("item: " + item.getNombre() + " ,stock: " + item.tieneStock());
         }
         return items_Disponibles;
     }

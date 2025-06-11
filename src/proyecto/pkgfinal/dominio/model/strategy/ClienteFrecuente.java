@@ -1,17 +1,24 @@
 package proyecto.pkgfinal.dominio.model.strategy;
 
-public class ClienteFrecuente implements TipoCliente{
+import proyecto.pkgfinal.dominio.model.Pedido;
+import proyecto.pkgfinal.dominio.model.Servicio;
 
-    @Override
-    public double calcularDescuento(double montoTotal) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'calcularDescuento'");
+public class ClienteFrecuente extends TipoCliente{
+
+    public ClienteFrecuente() {
+        super(true);
     }
 
     @Override
-    public int getPrioridad() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPrioridad'");
+    public double calcularDescuento(Servicio servicio) {
+        double descuento = 0.0;
+        for(Pedido pedido : servicio.getPedidos()){
+            if (pedido.getItem().esItem("Cafe")){
+                descuento += pedido.getItem().getPrecio();
+            }
+        }
+        return descuento;
     }
+
     
 }

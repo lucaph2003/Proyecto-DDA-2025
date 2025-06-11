@@ -8,15 +8,16 @@ import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
 
 public interface IVistaDispositivo extends IVista{
-    public void login();
-    public void agregarPedido();
-    public void eliminarPedido();
-    public void confirmarPedidos();
-    public void finalizarServicio();
-    public void mostrarCategorias(ArrayList<Categoria> lista);
-    public void mostrarSesion(String nombreCompleto);
-    public void mostrarOk(String mensaje);
-    public void mostrarItems(List<Item_Menu> lis);
-    public void actualizarPedidos(ArrayList<Pedido> lista);
-    public void actualizarMontoTotal(double montoTotal);
+    void login();
+    void agregarPedido();
+    void eliminarPedido();
+    void confirmarPedidos();
+    void finalizarServicio();
+    void mostrarCategorias(ArrayList<Categoria> lista);
+    void mostrarSesion(String nombreCompleto);
+    void mostrarOk(String mensaje);
+    void mostrarFacturaFinal(String mensajePago, String montoTotal, String nombreBeneficio, String descuento);
+    void mostrarItems(List<Item_Menu> lis);
+    void actualizarPedidos(ArrayList<Pedido> lista);
+    void actualizarMontoTotal(double montoTotal);
 }
