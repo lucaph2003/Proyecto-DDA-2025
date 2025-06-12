@@ -1,5 +1,9 @@
 package proyecto.pkgfinal.dominio.model;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Dispositivo {
     private int numeroIdentificador;
     private Cliente clienteLogueado;
@@ -61,5 +65,21 @@ public class Dispositivo {
 
     public void agregarPedido(Pedido pedido) {
         this.servicioActual.agregarPedido(pedido);
+    }
+
+    public ArrayList<Pedido> getPedidosByGestor(Gestor g) {
+        return this.servicioActual.getPedidosByGestor(g);
+    }
+
+    public ArrayList<Pedido> getPedidosByUnidadProcesadora(Unidad_Procesadora_Pedido unidad) {
+        return this.servicioActual.getPedidosByUnidadProcesadora(unidad);
+    }
+
+    public boolean existePedido(Pedido pedido) {
+        return this.servicioActual.existePedido(pedido);
+    }
+
+    public void asignarGestor(Pedido p,Gestor usuario) {
+        this.servicioActual.asignarGestor(p,usuario);
     }
 }

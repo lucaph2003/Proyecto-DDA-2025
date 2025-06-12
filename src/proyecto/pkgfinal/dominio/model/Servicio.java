@@ -131,4 +131,43 @@ public class Servicio {
             }
         }
     }
+
+    public ArrayList<Pedido> getPedidosByGestor(Gestor g) {
+        ArrayList<Pedido> lista = new ArrayList<>();
+        for (Pedido p : this.pedidos){
+            if(p.getGestorAsignado() != null){
+                if(p.getGestorAsignado().equals(g)){
+                    lista.add(p);
+                }
+            }
+        }
+        return lista;
+    }
+
+    public ArrayList<Pedido> getPedidosByUnidadProcesadora(Unidad_Procesadora_Pedido unidad) {
+        ArrayList<Pedido> lista = new ArrayList<>();
+        for (Pedido p : this.pedidos){
+            if(p.esUnidad(unidad)){
+                lista.add(p);
+            }
+        }
+        return lista;
+    }
+
+    public boolean existePedido(Pedido pedido) {
+        for (Pedido p : this.pedidos){
+            if(p.equals(pedido)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void asignarGestor(Pedido pedido, Gestor usuario) {
+        for (Pedido p : this.pedidos){
+            if(p.equals(pedido)){
+                p.setGestor(usuario);
+            }
+        }
+    }
 }

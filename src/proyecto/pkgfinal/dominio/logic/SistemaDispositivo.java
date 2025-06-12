@@ -1,9 +1,8 @@
 package proyecto.pkgfinal.dominio.logic;
 
 import java.util.ArrayList;
-import proyecto.pkgfinal.dominio.model.Cliente;
-import proyecto.pkgfinal.dominio.model.Dispositivo;
-import proyecto.pkgfinal.dominio.model.Pedido;
+
+import proyecto.pkgfinal.dominio.model.*;
 
 public class SistemaDispositivo {
     private final ArrayList<Dispositivo> listDispositivos = new ArrayList<>();
@@ -51,6 +50,37 @@ public class SistemaDispositivo {
         for(Dispositivo d : listDispositivos){
             if(d.equals(dispositivo)){
                 d.agregarPedido(pedido);
+            }
+        }
+    }
+
+
+    //TODO esta bien esto en dispositivo?
+
+    public ArrayList<Pedido> getPedidosByGestor(Gestor g){
+        ArrayList<Pedido> lista = new ArrayList<>();
+        for(Dispositivo d : listDispositivos){
+            if(d.esLogueado()){
+                lista.addAll(d.getPedidosByGestor(g));
+            }
+        }
+        return lista;
+    }
+
+    public ArrayList<Pedido> getPedidosByUnidadProcesadora(Unidad_Procesadora_Pedido unidad){
+        ArrayList<Pedido> lista = new ArrayList<>();
+        for(Dispositivo d : listDispositivos){
+            if(d.esLogueado()){
+                lista.addAll(d.getPedidosByUnidadProcesadora(unidad));
+            }
+        }
+        return lista;
+    }
+
+    public void tomarPedido(Pedido pedido, Gestor usuario) {
+        for(Dispositivo d : listDispositivos){
+            if(d.esLogueado()){
+                if(d.existePedido(pedido)) d.asignarGestor(pedido,usuario);
             }
         }
     }
