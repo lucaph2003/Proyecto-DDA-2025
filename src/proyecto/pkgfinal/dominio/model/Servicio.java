@@ -147,7 +147,7 @@ public class Servicio {
     public ArrayList<Pedido> getPedidosByUnidadProcesadora(Unidad_Procesadora_Pedido unidad) {
         ArrayList<Pedido> lista = new ArrayList<>();
         for (Pedido p : this.pedidos){
-            if(p.esUnidad(unidad)){
+            if(p.esUnidad(unidad) && p.esConfirmado()){
                 lista.add(p);
             }
         }
@@ -166,7 +166,23 @@ public class Servicio {
     public void asignarGestor(Pedido pedido, Gestor usuario) {
         for (Pedido p : this.pedidos){
             if(p.equals(pedido)){
-                p.setGestor(usuario);
+                p.asignarGestor(usuario);
+            }
+        }
+    }
+
+    public void finalizarPedido(Pedido pedido) {
+        for (Pedido p : this.pedidos){
+            if(p.equals(pedido)){
+                p.finalizar();
+            }
+        }
+    }
+
+    public void entregarPedido(Pedido pedido) {
+        for (Pedido p : this.pedidos){
+            if(p.equals(pedido)){
+                p.entregar();
             }
         }
     }

@@ -28,7 +28,7 @@ public class DispositivoController implements Observador {
 
     @Override
     public void actualizar(Observable origen, Object evento) {
-        if(evento == Fachada.eventos_pedidos.pedidoAgregado || evento == Fachada.eventos_pedidos.pedidoEliminado ||  evento == Fachada.eventos_pedidos.pedidosConfirmados){
+        if(evento == Fachada.eventos_pedidos.pedidoAgregado || evento == Fachada.eventos_pedidos.pedidoEliminado ||  evento == Fachada.eventos_pedidos.pedidosConfirmados ||  evento == Fachada.eventos_pedidos.pedidoEnProceso ||  evento == Fachada.eventos_pedidos.pedidoFinalizado ||  evento == Fachada.eventos_pedidos.pedidoEntregado){
             if(dispositivo.esLogueado()){
                 System.out.println("Vamos a actualizar: "+ evento);
                 if(evento == Fachada.eventos_pedidos.pedidosConfirmados){
