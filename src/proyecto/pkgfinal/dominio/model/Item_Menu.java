@@ -3,8 +3,8 @@ package proyecto.pkgfinal.dominio.model;
 import java.util.ArrayList;
 
 public class Item_Menu {
-    private String nombre;
-    private int precio;
+    private final String nombre;
+    private final int precio;
     private final Unidad_Procesadora_Pedido unidadProcesaora;
     private final ArrayList<Ingrediente> ingredientes;
 
@@ -22,17 +22,9 @@ public class Item_Menu {
     public int getPrecio() {
         return precio;
     }
-
-    public ArrayList<Ingrediente> getIngredientes() {
-        return ingredientes;
-    }
     
     public void addIngrediente(Ingrediente ingrediente){
         ingredientes.add(ingrediente);
-    }
-
-    public void removeIngrediente(Ingrediente ingrediente){
-        ingredientes.remove(ingrediente);
     }
 
     public Unidad_Procesadora_Pedido getUnidadProcesaora() {

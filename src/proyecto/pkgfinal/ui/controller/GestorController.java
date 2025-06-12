@@ -11,13 +11,11 @@ import proyecto.pkgfinal.ui.vista.VistaGestor;
 
 import java.util.ArrayList;
 
-
 public class GestorController implements Observador {
     private final Session session;
     private final VistaGestor vista;
     private Fachada fachada;
     private ArrayList<Pedido> pedidosTomados;
-
 
     public GestorController(VistaGestor v,Session s) {
         this.vista = v;
@@ -89,7 +87,6 @@ public class GestorController implements Observador {
             vista.mostrarEror(e.getMessage());
         }
     }
-
 
     @Override
     public void actualizar(Observable origen, Object evento) {

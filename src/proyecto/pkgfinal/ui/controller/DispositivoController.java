@@ -1,17 +1,17 @@
 package proyecto.pkgfinal.ui.controller;
 
-import java.util.ArrayList;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
 import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.exceptions.NoSelectedOptionMenu;
-import proyecto.pkgfinal.dominio.model.exceptions.NoStockException;
 import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.exceptions.SessionException;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 import proyecto.pkgfinal.servicios.observador.Observable;
 import proyecto.pkgfinal.servicios.observador.Observador;
 import proyecto.pkgfinal.ui.vista.VentanaDispositivo;
+
+import java.util.ArrayList;
 
 public class DispositivoController implements Observador {
     
@@ -135,7 +135,6 @@ public class DispositivoController implements Observador {
             vista.mostrarEror(ex.getMessage());
         }
     }
-
 
     public void finalizarServicio() {
         try{

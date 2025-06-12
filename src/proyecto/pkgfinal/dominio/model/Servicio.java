@@ -1,7 +1,6 @@
 package proyecto.pkgfinal.dominio.model;
 
 import java.util.ArrayList;
-
 import proyecto.pkgfinal.dominio.model.exceptions.NoStockException;
 import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.helpers.enums.ServicioStatus;
@@ -30,32 +29,8 @@ public class Servicio {
         return montoTotal;
     }
 
-    public void setMontoTotal(double montoTotal) {
-        this.montoTotal = montoTotal;
-    }
-
-    public static int getContador() {
-        return contador;
-    }
-
-    public static void setContador(int contador) {
-        Servicio.contador = contador;
-    }
-
     public ArrayList<Pedido> getPedidos() {
         return pedidos;
-    }
-
-    public void setPedidos(ArrayList<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
-
-    public ServicioStatus getEstado() {
-        return estado;
-    }
-
-    public void setEstado(ServicioStatus estado) {
-        this.estado = estado;
     }
 
     public void agregarPedido(Pedido pedido) {
@@ -63,7 +38,6 @@ public class Servicio {
         this.montoTotal += pedido.calcularPrecio();
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoAgregado);
     }
-
 
     @Override
     public String toString() {
@@ -136,9 +110,7 @@ public class Servicio {
         ArrayList<Pedido> lista = new ArrayList<>();
         for (Pedido p : this.pedidos){
             if(p.getGestorAsignado() != null){
-                if(p.getGestorAsignado().equals(g)){
-                    lista.add(p);
-                }
+                if(p.getGestorAsignado().equals(g)) lista.add(p);
             }
         }
         return lista;
@@ -147,43 +119,33 @@ public class Servicio {
     public ArrayList<Pedido> getPedidosByUnidadProcesadora(Unidad_Procesadora_Pedido unidad) {
         ArrayList<Pedido> lista = new ArrayList<>();
         for (Pedido p : this.pedidos){
-            if(p.esUnidad(unidad) && p.esConfirmado()){
-                lista.add(p);
-            }
+            if(p.esUnidad(unidad) && p.esConfirmado()) lista.add(p);
         }
         return lista;
     }
 
     public boolean existePedido(Pedido pedido) {
         for (Pedido p : this.pedidos){
-            if(p.equals(pedido)){
-                return true;
-            }
+            if(p.equals(pedido)) return true;
         }
         return false;
     }
 
     public void asignarGestor(Pedido pedido, Gestor usuario) {
         for (Pedido p : this.pedidos){
-            if(p.equals(pedido)){
-                p.asignarGestor(usuario);
-            }
+            if(p.equals(pedido)) p.asignarGestor(usuario);
         }
     }
 
     public void finalizarPedido(Pedido pedido) {
         for (Pedido p : this.pedidos){
-            if(p.equals(pedido)){
-                p.finalizar();
-            }
+            if(p.equals(pedido)) p.finalizar();
         }
     }
 
     public void entregarPedido(Pedido pedido) {
         for (Pedido p : this.pedidos){
-            if(p.equals(pedido)){
-                p.entregar();
-            }
+            if(p.equals(pedido)) p.entregar();
         }
     }
 }

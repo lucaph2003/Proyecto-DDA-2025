@@ -1,7 +1,6 @@
 package proyecto.pkgfinal.servicios.fachada;
 
 import java.util.ArrayList;
-
 import proyecto.pkgfinal.dominio.logic.*;
 import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Cliente;
@@ -80,12 +79,11 @@ public class Fachada extends Observable {
     }
     
     public void Logout(Dispositivo d){
-        this.sAcceso.LogoutCliente(d);
+        sAcceso.LogoutCliente(d);
     }
 
-
     public void logoutGestor(Session session) {
-        this.sAcceso.logoutGestor(session);
+        sAcceso.logoutGestor(session);
     }
 
     //Métodos para Sistema Dispositivo
@@ -107,10 +105,6 @@ public class Fachada extends Observable {
 
     public void AgregarServicioDispositivo(Dispositivo dispositivo,Cliente c) {
         sDispositivo.AgregarServicioDispositivo(dispositivo,c);
-    }
-
-    public void AgregarPedido(Pedido pedido, Dispositivo dispositivo) {
-        sDispositivo.AgregarPedido(pedido,dispositivo);
     }
     
     //Métodos para Sistema de Categorias
@@ -138,6 +132,4 @@ public class Fachada extends Observable {
     public void entregarPedido(Pedido pedido) {
         sDispositivo.entregarPedido(pedido);
     }
-
-
 }

@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import proyecto.pkgfinal.dominio.model.Categoria;
 
 public class SistemaCategoria {
-    private final ArrayList<Categoria> listaCategorias = new ArrayList<>();
-     
+    private final ArrayList<Categoria> listaCategorias;
+
+    public SistemaCategoria() {
+        this.listaCategorias = new ArrayList<>();;
+    }
+
     public void AgregarCategoria(Categoria categoria){
         listaCategorias.add(categoria);
     }
@@ -13,5 +17,4 @@ public class SistemaCategoria {
     public ArrayList<Categoria> getCategorias(){
         return listaCategorias;
     }
-    
 }

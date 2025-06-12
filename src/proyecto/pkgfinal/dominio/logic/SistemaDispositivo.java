@@ -1,7 +1,6 @@
 package proyecto.pkgfinal.dominio.logic;
 
 import java.util.ArrayList;
-
 import proyecto.pkgfinal.dominio.model.*;
 
 public class SistemaDispositivo {
@@ -53,9 +52,6 @@ public class SistemaDispositivo {
             }
         }
     }
-
-
-    //TODO esta bien esto en dispositivo?
 
     public ArrayList<Pedido> getPedidosByGestor(Gestor g){
         ArrayList<Pedido> lista = new ArrayList<>();

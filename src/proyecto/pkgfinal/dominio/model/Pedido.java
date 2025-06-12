@@ -1,7 +1,6 @@
 package proyecto.pkgfinal.dominio.model;
 
 import java.util.Date;
-
 import proyecto.pkgfinal.dominio.model.exceptions.NoStockException;
 import proyecto.pkgfinal.dominio.model.helpers.enums.PedidoStatus;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
@@ -34,16 +33,8 @@ public class Pedido {
         return item;
     }
 
-    public void setItem(Item_Menu item) {
-        this.item = item;
-    }
-
     public String getComentario() {
         return Comentario;
-    }
-
-    public void setComentario(String Comentario) {
-        this.Comentario = Comentario;
     }
 
     public void confirmar() throws NoStockException {

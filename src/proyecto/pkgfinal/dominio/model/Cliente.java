@@ -12,7 +12,6 @@ public class Cliente extends Usuario{
         this.tipoCliente = tipo;
     }
 
-
     public TipoCliente getTipoCliente() {
         return tipoCliente;
     }
