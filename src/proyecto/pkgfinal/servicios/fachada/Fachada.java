@@ -7,9 +7,7 @@ import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Cliente;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
 import proyecto.pkgfinal.dominio.model.Gestor;
-import proyecto.pkgfinal.dominio.model.Ingrediente;
 import proyecto.pkgfinal.dominio.model.Insumo;
-import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.Session;
 import proyecto.pkgfinal.dominio.model.Unidad_Procesadora_Pedido;
@@ -22,14 +20,11 @@ public class Fachada extends Observable {
     private final SistemaAccesso sAcceso;
     private final SistemaDispositivo sDispositivo;
     private final SistemaCategoria sCategoria;
-    private final SistemaPedido sPedido;
     private final SistemaUnidadProcesadora sUnidadProcesadora;
     private final SistemaInsumo sInsumo;
+    private final SistemaServicio sServicio;
 
-   
 
-
-    
     //Eventos
     public enum eventos_pedidos {pedidoAgregado, pedidoEliminado, pedidosConfirmados};
     
@@ -41,8 +36,8 @@ public class Fachada extends Observable {
         sAcceso = new SistemaAccesso(this);
         sDispositivo = new SistemaDispositivo();
         sCategoria = new SistemaCategoria();
-        sPedido = new SistemaPedido();
         sUnidadProcesadora = new SistemaUnidadProcesadora();
+        sServicio = new SistemaServicio();
         sInsumo = new SistemaInsumo();
     }
     
@@ -90,7 +85,13 @@ public class Fachada extends Observable {
     public void Logout(Dispositivo d){
         this.sAcceso.LogoutCliente(d);
     }
-    
+
+
+    public void logoutGestor(Session session) {
+        this.sAcceso.logoutGestor(session);
+    }
+
+
     //Métodos para Sistema Dispositivo
     public ArrayList<Dispositivo> getDispositivos(){
         return sDispositivo.getDispositivos();
@@ -121,12 +122,21 @@ public class Fachada extends Observable {
         return sCategoria.getCategorias();
     }
 
-    //Métodos para sistema de Pedidos
-
-    
-    public ArrayList<Pedido> getPedidos(){
-        return sPedido.getPedidos();
+    //Métodos para sistema de Servicio
+    public ArrayList<Pedido> getPedidosByGestor(Gestor g){
+        return sDispositivo.getPedidosByGestor(g);
     }
+
+    public ArrayList<Pedido> getPedidosByUnidadProcesadora(Unidad_Procesadora_Pedido unidad){
+        return sDispositivo.getPedidosByUnidadProcesadora(unidad);
+    }
+
+
+    public void tomarPedido(Pedido pedido, Gestor usuario) {
+        sDispositivo.tomarPedido(pedido,usuario);
+    }
+
+
 
     
 }

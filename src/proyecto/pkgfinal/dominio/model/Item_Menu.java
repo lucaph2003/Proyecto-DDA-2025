@@ -66,4 +66,8 @@ public class Item_Menu {
             i.devolverStock();
         }
     }
+
+    public boolean esUnidad(Unidad_Procesadora_Pedido unidad) {
+        return this.unidadProcesaora.equals(unidad);
+    }
 }

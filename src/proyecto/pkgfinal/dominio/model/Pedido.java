@@ -82,13 +82,9 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" +
-                "id=" + id +
-                ", item=" + item.toString() +
-                ", Comentario='" + Comentario + '\'' +
-                ", estado=" + estado +
-                ", fechaHora=" + fechaHora.toString() +
-                '}';
+        return item.toString() +
+                "- Cliente: "+
+                " " + fechaHora.toString();
     }
 
     public Date getFechaHora() {
@@ -113,5 +109,9 @@ public class Pedido {
 
     public void verificarStock() throws NoStockException {
         if(!this.item.tieneStock()) throw new NoStockException(item) ;
+    }
+
+    public boolean esUnidad(Unidad_Procesadora_Pedido unidad) {
+        return this.item.esUnidad(unidad);
     }
 }

@@ -82,5 +82,8 @@ public class SistemaAccesso {
     public void AgregarGestor(Gestor gestor){
         listaGestores.add(gestor);
     }
-    
+
+    public void logoutGestor(Session session) {
+        SesionesActivas.remove(session);
+    }
 }

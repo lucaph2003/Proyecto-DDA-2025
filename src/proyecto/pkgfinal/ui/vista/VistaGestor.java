@@ -1,7 +1,10 @@
 package proyecto.pkgfinal.ui.vista;
 
 import java.util.ArrayList;
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Gestor;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.Session;
@@ -33,6 +36,7 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         tablePedidosTomados = new javax.swing.JTable();
         btnFinalizarPedido = new javax.swing.JButton();
         btnEntregarPedido = new javax.swing.JButton();
+        txtError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +76,8 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
             }
         });
 
+        txtError.setForeground(new java.awt.Color(255, 51, 51));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -81,9 +87,9 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(btnFinalizarPedido)
-                .addGap(37, 37, 37)
+                .addGap(57, 57, 57)
                 .addComponent(btnEntregarPedido)
-                .addGap(43, 43, 43))
+                .addGap(46, 46, 46))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -97,7 +103,10 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1173, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1203, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(txtError, javax.swing.GroupLayout.PREFERRED_SIZE, 717, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -115,11 +124,13 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFinalizarPedido)
                     .addComponent(btnEntregarPedido))
-                .addGap(31, 31, 31))
+                .addGap(57, 57, 57)
+                .addComponent(txtError)
+                .addGap(18, 18, 18))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,7 +143,7 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 22, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -158,16 +169,17 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         Gestor gestor = controlador.getGestor();
         this.txtGestorLogueado.setText("Gestor: " + gestor.getNombreCompleto() + " | Unidad Procesadora: " + gestor.getUnidadAsignada().getNombre());
         actualizarPedidosTomados(null);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     @Override
     public void mostrarEror(String error) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.txtError.setText(error);
     }
 
     @Override
     public void cerrar() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        controlador.logout();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -179,21 +191,29 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JList<String> listPedidosPendientes;
+    private javax.swing.JList<Pedido> listPedidosPendientes;
     private javax.swing.JTable tablePedidosTomados;
+    private javax.swing.JLabel txtError;
     private javax.swing.JLabel txtGestorLogueado;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void actualizarPedidosPendientes(ArrayList<Pedido> lista) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DefaultListModel<Pedido> modelo = new DefaultListModel<>();
+        for (Pedido p : lista) {
+            modelo.addElement(p);
+        }
+        listPedidosPendientes.setModel(modelo);
     }
 
     @Override
     public void tomarPedido() {
-        //Obtener pedido y mandarlo al controlador
-        //Pedido pedido = 
-        ///this.controlador.tomarPedido(pedido);
+        int pos = listPedidosPendientes.getSelectedIndex();
+        controlador.tomarPedido(pos);
+    }
+
+    public Pedido getPedidoPendientePorPoscicion(int pos){
+       return listPedidosPendientes.getModel().getElementAt(pos);
     }
 
     @Override
