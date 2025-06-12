@@ -114,4 +114,20 @@ public class Pedido {
     public boolean esUnidad(Unidad_Procesadora_Pedido unidad) {
         return this.item.esUnidad(unidad);
     }
+
+    public void finalizar() {
+        this.setEstado(PedidoStatus.FINALIZADO);
+        Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoFinalizado);
+    }
+
+    public void asignarGestor(Gestor usuario) {
+        this.setGestor(usuario);
+        this.setEstado(PedidoStatus.EN_PROCESO);
+        Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoEnProceso);
+    }
+
+    public void entregar() {
+        this.setEstado(PedidoStatus.ENTREGADO);
+        Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoEntregado);
+    }
 }

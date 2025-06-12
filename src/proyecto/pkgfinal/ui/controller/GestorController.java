@@ -1,7 +1,6 @@
 package proyecto.pkgfinal.ui.controller;
 
 import proyecto.pkgfinal.dominio.model.Gestor;
-import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.Session;
 import proyecto.pkgfinal.dominio.model.exceptions.NoSelectedOptionMenu;
@@ -12,15 +11,19 @@ import proyecto.pkgfinal.ui.vista.VistaGestor;
 
 import java.util.ArrayList;
 
+
 public class GestorController implements Observador {
     private final Session session;
     private final VistaGestor vista;
     private Fachada fachada;
+    private ArrayList<Pedido> pedidosTomados;
+
 
     public GestorController(VistaGestor v,Session s) {
         this.vista = v;
         this.fachada = Fachada.getInstancia();
         this.session = s;
+        pedidosTomados = new ArrayList<>();
         fachada.agregar(this);
         actualizarVista();
     }
@@ -28,7 +31,6 @@ public class GestorController implements Observador {
     public Gestor getGestor(){
         return (Gestor) this.session.getUsuario();
     }
-
 
     public void actualizarVista(){
         this.listarPedidosGestor();
@@ -39,8 +41,9 @@ public class GestorController implements Observador {
         vista.actualizarPedidosPendientes(fachada.getPedidosByUnidadProcesadora(((Gestor) this.session.getUsuario()).getUnidadAsignada()));
     }
 
-    public void listarPedidosGestor(){
-        vista.actualizarPedidosTomados(fachada.getPedidosByGestor((Gestor) this.session.getUsuario()));
+    private void listarPedidosGestor(){
+        pedidosTomados = fachada.getPedidosByGestor((Gestor) this.session.getUsuario());
+        vista.actualizarPedidosTomados(this.pedidosTomados);
     }
     
     public void tomarPedido(int posPedido){
@@ -57,33 +60,42 @@ public class GestorController implements Observador {
         }
     }
     
-    public void finalizarPedido(Pedido p){
+    public void finalizarPedido(int posPedido){
         try{
-            if(p == null) throw new NoSelectedOptionMenu("Debe seleccionar un pedido");
-
-            //TODO si el pedido ya esta finalizado error
-
+            if(posPedido!=-1){
+                Pedido pedido = pedidosTomados.get(posPedido);
+                System.out.println(pedido);
+                fachada.finalizarPedido(pedido);
+                actualizarVista();
+            }else {
+                throw new NoSelectedOptionMenu("Debe seleccionar un pedido");
+            }
         }catch(Exception e){
             vista.mostrarEror(e.getMessage());
         }
     }
     
-    public void entregarPedido(Pedido p){
+    public void entregarPedido(int posPedido){
         try{
-            
+            if(posPedido!=-1){
+                Pedido pedido = pedidosTomados.get(posPedido);
+                System.out.println(pedido);
+                fachada.entregarPedido(pedido);
+                actualizarVista();
+            }else {
+                throw new NoSelectedOptionMenu("Debe seleccionar un pedido");
+            }
         }catch(Exception e){
             vista.mostrarEror(e.getMessage());
         }
     }
 
-    public void finarServicio() {
-        //TODO Implementacion de finalizar servicio
-        
-    }
 
     @Override
     public void actualizar(Observable origen, Object evento) {
-        //TODO configurar eventos
+        if(evento == Fachada.eventos_pedidos.pedidosConfirmados ||evento == Fachada.eventos_pedidos.pedidoEnProceso || evento == Fachada.eventos_pedidos.pedidoEliminado ){
+            actualizarVista();
+        }
     }
 
     public void logout() {

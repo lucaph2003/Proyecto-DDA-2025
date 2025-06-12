@@ -84,4 +84,20 @@ public class SistemaDispositivo {
             }
         }
     }
+
+    public void finalizarPedido(Pedido pedido) {
+        for(Dispositivo d : listDispositivos){
+            if(d.esLogueado()){
+                if(d.existePedido(pedido)) d.getServicioActual().finalizarPedido(pedido);
+            }
+        }
+    }
+
+    public void entregarPedido(Pedido pedido) {
+        for(Dispositivo d : listDispositivos){
+            if(d.esLogueado()){
+                if(d.existePedido(pedido)) d.getServicioActual().entregarPedido(pedido);
+            }
+        }
+    }
 }

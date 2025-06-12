@@ -22,13 +22,11 @@ public class Fachada extends Observable {
     private final SistemaCategoria sCategoria;
     private final SistemaUnidadProcesadora sUnidadProcesadora;
     private final SistemaInsumo sInsumo;
-    private final SistemaServicio sServicio;
-
 
     //Eventos
-    public enum eventos_pedidos {pedidoAgregado, pedidoEliminado, pedidosConfirmados};
+    public enum eventos_pedidos {pedidoAgregado, pedidoEliminado, pedidoFinalizado, pedidosConfirmados, pedidoEnProceso, pedidoEntregado};
     
-    public enum eventos_acceso { login};
+    public enum eventos_acceso { login };
     
     //Singleton
     private static Fachada instancia;
@@ -37,7 +35,6 @@ public class Fachada extends Observable {
         sDispositivo = new SistemaDispositivo();
         sCategoria = new SistemaCategoria();
         sUnidadProcesadora = new SistemaUnidadProcesadora();
-        sServicio = new SistemaServicio();
         sInsumo = new SistemaInsumo();
     }
     
@@ -91,7 +88,6 @@ public class Fachada extends Observable {
         this.sAcceso.logoutGestor(session);
     }
 
-
     //Métodos para Sistema Dispositivo
     public ArrayList<Dispositivo> getDispositivos(){
         return sDispositivo.getDispositivos();
@@ -131,12 +127,17 @@ public class Fachada extends Observable {
         return sDispositivo.getPedidosByUnidadProcesadora(unidad);
     }
 
-
     public void tomarPedido(Pedido pedido, Gestor usuario) {
         sDispositivo.tomarPedido(pedido,usuario);
     }
 
+    public void finalizarPedido(Pedido pedido) {
+        sDispositivo.finalizarPedido(pedido);
+    }
+
+    public void entregarPedido(Pedido pedido) {
+        sDispositivo.entregarPedido(pedido);
+    }
 
 
-    
 }

@@ -39,6 +39,11 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         txtError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jScrollPane1.setViewportView(listPedidosPendientes);
 
@@ -161,6 +166,10 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         tomarPedido();
     }//GEN-LAST:event_btnTomarPedidoActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        cerrar();
+    }//GEN-LAST:event_formWindowClosing
+
     @Override
     public void inicializar() {
         this.setTitle("Procesar Pedidos");
@@ -232,9 +241,9 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
             for (Pedido pedido: lista){
                 datos.setValueAt(pedido.getItem().getNombre(),fila,0);
                 datos.setValueAt(pedido.getComentario(),fila,1);
+                datos.setValueAt(pedido.getFechaHora(),fila,2);
                 datos.setValueAt(pedido.getFechaHora(),fila,3);
-                datos.setValueAt(pedido.getItem().getNombre(),fila,4);
-                datos.setValueAt(pedido.getEstado(),fila,2);
+                datos.setValueAt(pedido.getEstado(),fila,4);
                 fila++;
             }
         }
@@ -243,7 +252,8 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
 
     @Override
     public void finalizarServicio() {
-        controlador.finarServicio();
+        int filaSeleccionada = tablePedidosTomados.getSelectedRow();
+        controlador.finalizarPedido(filaSeleccionada);
     }
 
     @Override
