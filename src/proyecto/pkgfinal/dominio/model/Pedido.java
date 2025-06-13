@@ -2,6 +2,7 @@ package proyecto.pkgfinal.dominio.model;
 
 import java.util.Date;
 import proyecto.pkgfinal.dominio.model.exceptions.NoStockException;
+import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.helpers.enums.PedidoStatus;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 
@@ -106,7 +107,8 @@ public class Pedido {
         return this.item.esUnidad(unidad);
     }
 
-    public void finalizar() {
+    public void finalizar() throws PedidoException {
+        if (this.getEstado().equals(PedidoStatus.FINALIZADO)) throw new PedidoException("El pedido ya es finalizado.");
         this.setEstado(PedidoStatus.FINALIZADO);
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoFinalizado);
     }
@@ -117,8 +119,11 @@ public class Pedido {
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoEnProceso);
     }
 
-    public void entregar() {
+    public void entregar() throws PedidoException {
+        if(this.getEstado().equals(PedidoStatus.ENTREGADO)) throw new PedidoException("El pedido ya fue entregado.");
+        if(!this.getEstado().equals(PedidoStatus.FINALIZADO)) throw new PedidoException("Debe Finalizar el pedido antes de entregarlo.");
         this.setEstado(PedidoStatus.ENTREGADO);
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoEntregado);
     }
+
 }

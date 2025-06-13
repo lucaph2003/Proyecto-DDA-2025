@@ -17,6 +17,7 @@ public class ClienteFrecuente extends TipoCliente{
                 descuento += pedido.getItem().getPrecio();
             }
         }
+        if(descuento > 0.0) servicio.setBeneficioAsignado("Cafe Gratis!");
         return descuento;
     }
 

@@ -10,6 +10,7 @@ import proyecto.pkgfinal.dominio.model.Insumo;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.Session;
 import proyecto.pkgfinal.dominio.model.Unidad_Procesadora_Pedido;
+import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.exceptions.SessionException;
 import proyecto.pkgfinal.servicios.observador.Observable;
 
@@ -125,11 +126,16 @@ public class Fachada extends Observable {
         sDispositivo.tomarPedido(pedido,usuario);
     }
 
-    public void finalizarPedido(Pedido pedido) {
+    public void finalizarPedido(Pedido pedido) throws PedidoException {
         sDispositivo.finalizarPedido(pedido);
     }
 
-    public void entregarPedido(Pedido pedido) {
+    public void entregarPedido(Pedido pedido) throws PedidoException {
         sDispositivo.entregarPedido(pedido);
     }
+
+    public boolean tienePedidosPendientes(Gestor usuario) {
+        return sDispositivo.tienePedidosPendientes(usuario);
+    }
+
 }

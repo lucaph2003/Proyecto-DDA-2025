@@ -15,8 +15,8 @@ public class Unidad_Procesadora_Pedido {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Unidad_Procesadora_Pedido that)) return false;
-        return id == that.id;
+        Unidad_Procesadora_Pedido s = (Unidad_Procesadora_Pedido) o;
+        return this.id == s.id;
     }
 
 }

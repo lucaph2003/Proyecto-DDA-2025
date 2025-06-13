@@ -11,6 +11,7 @@ public class Servicio {
     private double montoTotal;
     private ArrayList<Pedido> pedidos;
     private ServicioStatus estado;
+    private String beneficioAsignado;
     
     private static int contador = 0;
 
@@ -19,6 +20,14 @@ public class Servicio {
         this.montoTotal = 0;
         this.pedidos = new ArrayList<>();
         this.estado = ServicioStatus.ACTIVO;
+    }
+
+    public String getBeneficioAsignado() {
+        return beneficioAsignado;
+    }
+
+    public void setBeneficioAsignado(String beneficioAsignado) {
+        this.beneficioAsignado = beneficioAsignado;
     }
 
     public int getId() {
@@ -92,7 +101,8 @@ public class Servicio {
 
         if(pedidosProcesados() > 0) throw new PedidoException("Tienes "+ pedidosProcesados() +" pedidos en proceso, recuerda ir a retirarlos!");
 
-        //TODO logica de finalizacion
+        this.montoTotal -= descuentoAplicado;
+        this.estado = ServicioStatus.FINALIZADO;
     }
 
     public void verificarStockPedidos() throws PedidoException {
@@ -137,15 +147,22 @@ public class Servicio {
         }
     }
 
-    public void finalizarPedido(Pedido pedido) {
+    public void finalizarPedido(Pedido pedido) throws PedidoException {
         for (Pedido p : this.pedidos){
             if(p.equals(pedido)) p.finalizar();
         }
     }
 
-    public void entregarPedido(Pedido pedido) {
+    public void entregarPedido(Pedido pedido) throws PedidoException {
         for (Pedido p : this.pedidos){
             if(p.equals(pedido)) p.entregar();
         }
+    }
+
+    public boolean tienePedidosPendientes(Gestor usuario) {
+        for(Pedido p : pedidos){
+            if(p.getGestorAsignado().equals(usuario) && p.estaElaborandose()) return true;
+        }
+        return false;
     }
 }

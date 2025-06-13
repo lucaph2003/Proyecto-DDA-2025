@@ -10,6 +10,7 @@ public class ClienteDeLaCasa extends TipoCliente {
 
     @Override
     public double calcularDescuento(Servicio servicio) {
+        servicio.setBeneficioAsignado("$500 Gratis.");
         return 500.0;
     }
 

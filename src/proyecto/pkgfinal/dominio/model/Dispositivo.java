@@ -67,4 +67,8 @@ public class Dispositivo {
     public void asignarGestor(Pedido p,Gestor usuario) {
         this.servicioActual.asignarGestor(p,usuario);
     }
+
+    public boolean tienePedidosPendientes(Gestor usuario) {
+        return servicioActual.tienePedidosPendientes(usuario);
+    }
 }

@@ -1,5 +1,6 @@
 package proyecto.pkgfinal.ui.vista;
 
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -178,7 +179,7 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         Gestor gestor = controlador.getGestor();
         this.txtGestorLogueado.setText("Gestor: " + gestor.getNombreCompleto() + " | Unidad Procesadora: " + gestor.getUnidadAsignada().getNombre());
         actualizarPedidosTomados(null);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
     @Override
@@ -258,7 +259,8 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
 
     @Override
     public void entregarPedido() {
-        //Pedido p = Lista pedido seleccionado
-        //controlador.entregarPedido(p);
+        int filaSeleccionada = tablePedidosTomados.getSelectedRow();
+        controlador.entregarPedido(filaSeleccionada);
     }
+
 }

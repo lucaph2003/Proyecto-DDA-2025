@@ -10,6 +10,7 @@ public class ClienteComun extends TipoCliente {
 
     @Override
     public double calcularDescuento(Servicio servicio) {
+        servicio.setBeneficioAsignado("Ninguno");
         return 0;
     }
 

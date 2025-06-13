@@ -1,5 +1,6 @@
 package proyecto.pkgfinal.ui.controller;
 
+import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Dispositivo;
 import proyecto.pkgfinal.dominio.model.Item_Menu;
 import proyecto.pkgfinal.dominio.model.Pedido;
@@ -30,9 +31,7 @@ public class DispositivoController implements Observador {
     public void actualizar(Observable origen, Object evento) {
         if(evento == Fachada.eventos_pedidos.pedidoAgregado || evento == Fachada.eventos_pedidos.pedidoEliminado ||  evento == Fachada.eventos_pedidos.pedidosConfirmados ||  evento == Fachada.eventos_pedidos.pedidoEnProceso ||  evento == Fachada.eventos_pedidos.pedidoFinalizado ||  evento == Fachada.eventos_pedidos.pedidoEntregado){
             if(dispositivo.esLogueado()){
-                System.out.println("Vamos a actualizar: "+ evento);
                 if(evento == Fachada.eventos_pedidos.pedidosConfirmados){
-                    System.out.println("Entramos en " + evento);
                     this.verificarStockPedidos();
                     actualizarVista(false);
                 }else{
@@ -61,14 +60,17 @@ public class DispositivoController implements Observador {
         try{
             fachada.LoginCliente(numeroUsuario, password, dispositivo);
             this.dispositivo = fachada.getDispositivo(dispositivo);
-            vista.mostrarCategorias(fachada.VerCategorias());
         }catch(SessionException ex){
             vista.mostrarEror(ex.getMessage());
         } 
     }
+
+    public ArrayList<Categoria> getCategorias(){
+        return fachada.VerCategorias();
+    }
     
     public void logout(){
-        fachada.Logout(dispositivo);
+        dispositivo.liberar();
     }
     
     public void cargarItems(int categoriaPos){
@@ -143,7 +145,7 @@ public class DispositivoController implements Observador {
             if(!dispositivo.getServicioActual().getPedidos().isEmpty()){
                 double beneficio = dispositivo.getClienteLogueado().getTipoCliente().calcularDescuento(dispositivo.getServicioActual());
                 dispositivo.getServicioActual().finalizar(beneficio);
-                vista.mostrarFacturaFinal("Pago Realizado!",String.valueOf(dispositivo.getServicioActual().getMontoTotal()), "",String.valueOf(beneficio));
+                vista.mostrarFacturaFinal("Pago Realizado!",String.valueOf(dispositivo.getServicioActual().getMontoTotal()), dispositivo.getServicioActual().getBeneficioAsignado(),String.valueOf(beneficio));
             }
 
             vista.cerrar();

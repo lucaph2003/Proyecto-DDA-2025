@@ -4,11 +4,13 @@ import proyecto.pkgfinal.dominio.model.Gestor;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.Session;
 import proyecto.pkgfinal.dominio.model.exceptions.NoSelectedOptionMenu;
+import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.servicios.fachada.Fachada;
 import proyecto.pkgfinal.servicios.observador.Observable;
 import proyecto.pkgfinal.servicios.observador.Observador;
 import proyecto.pkgfinal.ui.vista.VistaGestor;
 
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class GestorController implements Observador {
@@ -51,7 +53,7 @@ public class GestorController implements Observador {
                 fachada.tomarPedido(pedido,(Gestor) session.getUsuario());
                 actualizarVista();
             }else {
-                throw new NoSelectedOptionMenu("Debe seleccionar un pedido");
+                throw new NoSelectedOptionMenu("Debe seleccionar un pedido para tomar.");
             }
         }catch(Exception e){
             vista.mostrarEror(e.getMessage());
@@ -62,11 +64,10 @@ public class GestorController implements Observador {
         try{
             if(posPedido!=-1){
                 Pedido pedido = pedidosTomados.get(posPedido);
-                System.out.println(pedido);
                 fachada.finalizarPedido(pedido);
                 actualizarVista();
             }else {
-                throw new NoSelectedOptionMenu("Debe seleccionar un pedido");
+                throw new NoSelectedOptionMenu("Debe seleccionar un pedido para finalizar.");
             }
         }catch(Exception e){
             vista.mostrarEror(e.getMessage());
@@ -77,11 +78,10 @@ public class GestorController implements Observador {
         try{
             if(posPedido!=-1){
                 Pedido pedido = pedidosTomados.get(posPedido);
-                System.out.println(pedido);
                 fachada.entregarPedido(pedido);
                 actualizarVista();
             }else {
-                throw new NoSelectedOptionMenu("Debe seleccionar un pedido");
+                throw new NoSelectedOptionMenu("Debe seleccionar un pedido para entregar.");
             }
         }catch(Exception e){
             vista.mostrarEror(e.getMessage());
@@ -96,6 +96,12 @@ public class GestorController implements Observador {
     }
 
     public void logout() {
-        fachada.logoutGestor(session);
+        try{
+            if(fachada.tienePedidosPendientes((Gestor) session.getUsuario())) throw new PedidoException("Tiene pedidos pendientes");
+            fachada.logoutGestor(session);
+            vista.dispose();
+        }catch(PedidoException pex){
+            vista.mostrarEror(pex.getMessage());
+        }
     }
 }
