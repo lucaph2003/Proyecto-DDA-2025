@@ -5,8 +5,11 @@ import java.util.ArrayList;
 
 public class SistemaInsumo {
 
-    private final ArrayList<Insumo> listaInsumos = new ArrayList<>();
+    private final ArrayList<Insumo> listaInsumos;
 
+    public SistemaInsumo() {
+        listaInsumos = new ArrayList<>();
+    }
 
     public void AgregarInsumo(Insumo Insumo){
         listaInsumos.add(Insumo);

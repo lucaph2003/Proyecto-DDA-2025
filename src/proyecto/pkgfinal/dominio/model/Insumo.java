@@ -11,26 +11,9 @@ public class Insumo {
         this.stockActual = stockActual;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public int getStockMinimo() {
-        return stockMinimo;
-    }
-
-    public void setStockMinimo(int stockMinimo) {
-        this.stockMinimo = stockMinimo;
-    }
-
     public int getStockActual() {
         return stockActual;
     }
-
-    public void setStockActual(int stockActual) {
-        this.stockActual = stockActual;
-    }
-
 
     public void desconstarStockActual(int cantidad) {
         this.stockActual -= cantidad;

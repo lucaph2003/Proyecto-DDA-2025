@@ -1,7 +1,6 @@
 package proyecto.pkgfinal.dominio.logic;
 
 import java.util.ArrayList;
-
 import proyecto.pkgfinal.dominio.model.Session;
 import proyecto.pkgfinal.dominio.model.Usuario;
 import proyecto.pkgfinal.dominio.model.exceptions.SessionException;
@@ -17,26 +16,22 @@ public class SistemaAccesso {
     private final ArrayList<Gestor> listaGestores;
     
     private final ArrayList<Session> SesionesActivas;
-    
-    //TODO esta bien inyectarla como dependencia?
-    private Fachada fachada;
 
     public SistemaAccesso(Fachada pFachada) {
         this.listaGestores = new ArrayList<>();
         this.listaClientes = new ArrayList<>();
         this.SesionesActivas = new ArrayList<>();
-        this.fachada = pFachada;
     }
     
     public void LoginCliente(String numeroCliente, String password, Dispositivo dispositivo) throws SessionException {
         Cliente cliente = (Cliente) buscarUsuario(numeroCliente,password,listaClientes);
         if(cliente!=null){
-            if(fachada.existeSesionEnDispositivo(dispositivo)) throw new SessionException("Debe primero finalizar el servicio actual.");
+            if(Fachada.getInstancia().existeSesionEnDispositivo(dispositivo)) throw new SessionException("Debe primero finalizar el servicio actual.");
 
-            if(fachada.existeServicio(cliente)) throw new SessionException("Ud. ya esta identificado en otro dispositivo.");
-        
-            fachada.AgregarServicioDispositivo(dispositivo,cliente);
-            fachada.avisar(Fachada.eventos_acceso.login);
+            if(Fachada.getInstancia().existeServicio(cliente)) throw new SessionException("Ud. ya esta identificado en otro dispositivo.");
+
+            Fachada.getInstancia().AgregarServicioDispositivo(dispositivo,cliente);
+            Fachada.getInstancia().avisar(Fachada.eventos_acceso.login);
         }else {
             throw new SessionException("Credenciales incorrectas.");   
         }   
@@ -65,8 +60,7 @@ public class SistemaAccesso {
 
     private Boolean existeSesion(String Username){
         for(Session session : SesionesActivas){
-            Session s =  session;
-            if(s.getUsuario().getIdentificador().equals(Username)) return true;
+            if(session.getUsuario().getIdentificador().equals(Username)) return true;
         }
         return false;
     }

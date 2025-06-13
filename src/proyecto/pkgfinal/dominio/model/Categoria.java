@@ -3,24 +3,12 @@ package proyecto.pkgfinal.dominio.model;
 import java.util.ArrayList;
 
 public class Categoria {
-    private String nombre;
-    private ArrayList<Item_Menu> items;
+    private final String nombre;
+    private final ArrayList<Item_Menu> items;
 
     public Categoria(String Nombre) {
         this.nombre = Nombre;
-        this.items = new ArrayList();
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String Nombre) {
-        this.nombre = Nombre;
-    }
-
-    public ArrayList<Item_Menu> getItems() {
-        return items;
+        this.items = new ArrayList<>();
     }
     
      public ArrayList<Item_Menu> getItemsStock() {
@@ -31,27 +19,12 @@ public class Categoria {
         return items_Disponibles;
     }
 
-    public void setItems(ArrayList<Item_Menu> items) {
-        this.items = items;
-    }
-    
     public void addItem(Item_Menu item){
         items.add(item);
-    }
-
-    public void removeItem(Item_Menu item){
-        items.remove(item);
     }
 
     @Override
     public String toString() {
         return nombre;
     }
-
-    public Item_Menu getItemByPos(int posItem) {
-        return items.get(posItem);
-    }
-    
-
-    
 }

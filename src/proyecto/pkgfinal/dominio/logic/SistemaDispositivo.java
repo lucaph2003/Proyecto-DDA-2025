@@ -1,8 +1,8 @@
 package proyecto.pkgfinal.dominio.logic;
 
 import java.util.ArrayList;
-
 import proyecto.pkgfinal.dominio.model.*;
+import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 
 public class SistemaDispositivo {
     private final ArrayList<Dispositivo> listDispositivos = new ArrayList<>();
@@ -54,9 +54,6 @@ public class SistemaDispositivo {
         }
     }
 
-
-    //TODO esta bien esto en dispositivo?
-
     public ArrayList<Pedido> getPedidosByGestor(Gestor g){
         ArrayList<Pedido> lista = new ArrayList<>();
         for(Dispositivo d : listDispositivos){
@@ -85,7 +82,7 @@ public class SistemaDispositivo {
         }
     }
 
-    public void finalizarPedido(Pedido pedido) {
+    public void finalizarPedido(Pedido pedido) throws PedidoException {
         for(Dispositivo d : listDispositivos){
             if(d.esLogueado()){
                 if(d.existePedido(pedido)) d.getServicioActual().finalizarPedido(pedido);
@@ -93,11 +90,20 @@ public class SistemaDispositivo {
         }
     }
 
-    public void entregarPedido(Pedido pedido) {
+    public void entregarPedido(Pedido pedido) throws PedidoException {
         for(Dispositivo d : listDispositivos){
             if(d.esLogueado()){
                 if(d.existePedido(pedido)) d.getServicioActual().entregarPedido(pedido);
             }
         }
+    }
+
+    public boolean tienePedidosPendientes(Gestor usuario) {
+        for(Dispositivo d : listDispositivos){
+            if(d.esLogueado()){
+                if(d.tienePedidosPendientes(usuario)) return true;
+            }
+        }
+        return false;
     }
 }

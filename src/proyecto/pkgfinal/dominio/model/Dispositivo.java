@@ -1,11 +1,9 @@
 package proyecto.pkgfinal.dominio.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Dispositivo {
-    private int numeroIdentificador;
+    private final int numeroIdentificador;
     private Cliente clienteLogueado;
     private Servicio servicioActual;
 
@@ -17,24 +15,12 @@ public class Dispositivo {
         return numeroIdentificador;
     }
 
-    public void setNumeroIdentificador(int numeroIdentificador) {
-        this.numeroIdentificador = numeroIdentificador;
-    }
-
     public Cliente getClienteLogueado() {
         return clienteLogueado;
     }
 
-    public void setClienteLogueado(Cliente clienteLogueado) {
-        this.clienteLogueado = clienteLogueado;
-    }
-
     public Servicio getServicioActual() {
         return servicioActual;
-    }
-
-    public void setServicioActual(Servicio servicioActual) {
-        this.servicioActual = servicioActual;
     }
     
     public void iniciarNuevoServicioCliente(Cliente c){
@@ -58,7 +44,6 @@ public class Dispositivo {
         return "Dispositivo{" + "numeroIdentificador=" + numeroIdentificador + ", clienteLogueado=" + clienteLogueado + ", servicioActual=" + servicioActual.toString() + '}';
     }
 
-
     public boolean esLogueado() {
         return this.clienteLogueado != null;
     }
@@ -81,5 +66,9 @@ public class Dispositivo {
 
     public void asignarGestor(Pedido p,Gestor usuario) {
         this.servicioActual.asignarGestor(p,usuario);
+    }
+
+    public boolean tienePedidosPendientes(Gestor usuario) {
+        return servicioActual.tienePedidosPendientes(usuario);
     }
 }

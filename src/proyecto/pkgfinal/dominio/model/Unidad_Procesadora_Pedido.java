@@ -1,10 +1,8 @@
 package proyecto.pkgfinal.dominio.model;
 
-import java.util.Objects;
-
 public class Unidad_Procesadora_Pedido {
-    private int id;
-    private String Nombre;
+    private final int id;
+    private final String Nombre;
 
     public Unidad_Procesadora_Pedido(int id,String Nombre) {
         this.id = id;
@@ -17,8 +15,8 @@ public class Unidad_Procesadora_Pedido {
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof Unidad_Procesadora_Pedido that)) return false;
-        return id == that.id;
+        Unidad_Procesadora_Pedido s = (Unidad_Procesadora_Pedido) o;
+        return this.id == s.id;
     }
 
 }

@@ -1,7 +1,6 @@
 package proyecto.pkgfinal.servicios.fachada;
 
 import java.util.ArrayList;
-
 import proyecto.pkgfinal.dominio.logic.*;
 import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Cliente;
@@ -11,6 +10,7 @@ import proyecto.pkgfinal.dominio.model.Insumo;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.Session;
 import proyecto.pkgfinal.dominio.model.Unidad_Procesadora_Pedido;
+import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.exceptions.SessionException;
 import proyecto.pkgfinal.servicios.observador.Observable;
 
@@ -80,12 +80,11 @@ public class Fachada extends Observable {
     }
     
     public void Logout(Dispositivo d){
-        this.sAcceso.LogoutCliente(d);
+        sAcceso.LogoutCliente(d);
     }
 
-
     public void logoutGestor(Session session) {
-        this.sAcceso.logoutGestor(session);
+        sAcceso.logoutGestor(session);
     }
 
     //Métodos para Sistema Dispositivo
@@ -108,10 +107,6 @@ public class Fachada extends Observable {
     public void AgregarServicioDispositivo(Dispositivo dispositivo,Cliente c) {
         sDispositivo.AgregarServicioDispositivo(dispositivo,c);
     }
-
-    public void AgregarPedido(Pedido pedido, Dispositivo dispositivo) {
-        sDispositivo.AgregarPedido(pedido,dispositivo);
-    }
     
     //Métodos para Sistema de Categorias
     public ArrayList<Categoria> VerCategorias(){
@@ -131,13 +126,16 @@ public class Fachada extends Observable {
         sDispositivo.tomarPedido(pedido,usuario);
     }
 
-    public void finalizarPedido(Pedido pedido) {
+    public void finalizarPedido(Pedido pedido) throws PedidoException {
         sDispositivo.finalizarPedido(pedido);
     }
 
-    public void entregarPedido(Pedido pedido) {
+    public void entregarPedido(Pedido pedido) throws PedidoException {
         sDispositivo.entregarPedido(pedido);
     }
 
+    public boolean tienePedidosPendientes(Gestor usuario) {
+        return sDispositivo.tienePedidosPendientes(usuario);
+    }
 
 }

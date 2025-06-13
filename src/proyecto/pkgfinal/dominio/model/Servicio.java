@@ -1,7 +1,6 @@
 package proyecto.pkgfinal.dominio.model;
 
 import java.util.ArrayList;
-
 import proyecto.pkgfinal.dominio.model.exceptions.NoStockException;
 import proyecto.pkgfinal.dominio.model.exceptions.PedidoException;
 import proyecto.pkgfinal.dominio.model.helpers.enums.ServicioStatus;
@@ -12,6 +11,7 @@ public class Servicio {
     private double montoTotal;
     private ArrayList<Pedido> pedidos;
     private ServicioStatus estado;
+    private String beneficioAsignado;
     
     private static int contador = 0;
 
@@ -22,6 +22,14 @@ public class Servicio {
         this.estado = ServicioStatus.ACTIVO;
     }
 
+    public String getBeneficioAsignado() {
+        return beneficioAsignado;
+    }
+
+    public void setBeneficioAsignado(String beneficioAsignado) {
+        this.beneficioAsignado = beneficioAsignado;
+    }
+
     public int getId() {
         return id;
     }
@@ -30,32 +38,8 @@ public class Servicio {
         return montoTotal;
     }
 
-    public void setMontoTotal(double montoTotal) {
-        this.montoTotal = montoTotal;
-    }
-
-    public static int getContador() {
-        return contador;
-    }
-
-    public static void setContador(int contador) {
-        Servicio.contador = contador;
-    }
-
     public ArrayList<Pedido> getPedidos() {
         return pedidos;
-    }
-
-    public void setPedidos(ArrayList<Pedido> pedidos) {
-        this.pedidos = pedidos;
-    }
-
-    public ServicioStatus getEstado() {
-        return estado;
-    }
-
-    public void setEstado(ServicioStatus estado) {
-        this.estado = estado;
     }
 
     public void agregarPedido(Pedido pedido) {
@@ -63,7 +47,6 @@ public class Servicio {
         this.montoTotal += pedido.calcularPrecio();
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoAgregado);
     }
-
 
     @Override
     public String toString() {
@@ -118,7 +101,8 @@ public class Servicio {
 
         if(pedidosProcesados() > 0) throw new PedidoException("Tienes "+ pedidosProcesados() +" pedidos en proceso, recuerda ir a retirarlos!");
 
-        //TODO logica de finalizacion
+        this.montoTotal -= descuentoAplicado;
+        this.estado = ServicioStatus.FINALIZADO;
     }
 
     public void verificarStockPedidos() throws PedidoException {
@@ -136,9 +120,7 @@ public class Servicio {
         ArrayList<Pedido> lista = new ArrayList<>();
         for (Pedido p : this.pedidos){
             if(p.getGestorAsignado() != null){
-                if(p.getGestorAsignado().equals(g)){
-                    lista.add(p);
-                }
+                if(p.getGestorAsignado().equals(g)) lista.add(p);
             }
         }
         return lista;
@@ -147,43 +129,40 @@ public class Servicio {
     public ArrayList<Pedido> getPedidosByUnidadProcesadora(Unidad_Procesadora_Pedido unidad) {
         ArrayList<Pedido> lista = new ArrayList<>();
         for (Pedido p : this.pedidos){
-            if(p.esUnidad(unidad) && p.esConfirmado()){
-                lista.add(p);
-            }
+            if(p.esUnidad(unidad) && p.esConfirmado()) lista.add(p);
         }
         return lista;
     }
 
     public boolean existePedido(Pedido pedido) {
         for (Pedido p : this.pedidos){
-            if(p.equals(pedido)){
-                return true;
-            }
+            if(p.equals(pedido)) return true;
         }
         return false;
     }
 
     public void asignarGestor(Pedido pedido, Gestor usuario) {
         for (Pedido p : this.pedidos){
-            if(p.equals(pedido)){
-                p.asignarGestor(usuario);
-            }
+            if(p.equals(pedido)) p.asignarGestor(usuario);
         }
     }
 
-    public void finalizarPedido(Pedido pedido) {
+    public void finalizarPedido(Pedido pedido) throws PedidoException {
         for (Pedido p : this.pedidos){
-            if(p.equals(pedido)){
-                p.finalizar();
-            }
+            if(p.equals(pedido)) p.finalizar();
         }
     }
 
-    public void entregarPedido(Pedido pedido) {
+    public void entregarPedido(Pedido pedido) throws PedidoException {
         for (Pedido p : this.pedidos){
-            if(p.equals(pedido)){
-                p.entregar();
-            }
+            if(p.equals(pedido)) p.entregar();
         }
+    }
+
+    public boolean tienePedidosPendientes(Gestor usuario) {
+        for(Pedido p : pedidos){
+            if(p.getGestorAsignado().equals(usuario) && p.estaElaborandose()) return true;
+        }
+        return false;
     }
 }

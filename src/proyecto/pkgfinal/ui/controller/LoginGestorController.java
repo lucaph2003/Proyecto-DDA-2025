@@ -25,7 +25,5 @@ public class LoginGestorController {
             vista.mostrarEror(ex.getMessage());
         }
     }
-    
-    
-    
+
 }
