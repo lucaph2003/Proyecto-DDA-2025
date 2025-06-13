@@ -20,6 +20,7 @@ public class Servicio {
         this.montoTotal = 0;
         this.pedidos = new ArrayList<>();
         this.estado = ServicioStatus.ACTIVO;
+        this.beneficioAsignado = "";
     }
 
     public String getBeneficioAsignado() {

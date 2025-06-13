@@ -200,19 +200,19 @@ public class Datos {
         categoria_5.addItem(vino_4);
 
 // CAFÉS
-        Item_Menu cafe_1 = new Item_Menu("Café solo", 60, unidad_2);
+        Item_Menu cafe_1 = new Item_Menu("Cafe solo", 60, unidad_2);
         cafe_1.addIngrediente(ingCafe);
 
-        Item_Menu cafe_2 = new Item_Menu("Café con leche", 70, unidad_2);
+        Item_Menu cafe_2 = new Item_Menu("Cafe con leche", 70, unidad_2);
         cafe_2.addIngrediente(ingCafe);
         cafe_2.addIngrediente(ingLeche);
 
-        Item_Menu cafe_3 = new Item_Menu("Capuccino", 90, unidad_2);
+        Item_Menu cafe_3 = new Item_Menu("Cafe Capuccino", 90, unidad_2);
         cafe_3.addIngrediente(ingCafe);
         cafe_3.addIngrediente(ingLeche);
         cafe_3.addIngrediente(ingCrema);
 
-        Item_Menu cafe_4 = new Item_Menu("Café cortado", 65, unidad_2);
+        Item_Menu cafe_4 = new Item_Menu("Cafe cortado", 65, unidad_2);
         cafe_4.addIngrediente(ingCafe);
         cafe_4.addIngrediente(ingLeche);
 

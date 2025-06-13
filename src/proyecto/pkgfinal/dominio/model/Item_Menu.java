@@ -44,7 +44,7 @@ public class Item_Menu {
     }
 
     public boolean esItem(String itemName) {
-        return this.getNombre().equals(itemName);
+        return this.getNombre().contains(itemName);
     }
 
     public void descontarStock() {
