@@ -24,9 +24,9 @@ public class Fachada extends Observable {
     private final SistemaInsumo sInsumo;
 
     //Eventos
-    public enum eventos_pedidos {pedidoAgregado, pedidoEliminado, pedidoFinalizado, pedidosConfirmados, pedidoEnProceso, pedidoEntregado};
+    public enum eventos_pedidos {pedidoAgregado, pedidoEliminado, pedidoFinalizado, pedidosConfirmados, pedidoEnProceso, pedidoEntregado}
     
-    public enum eventos_acceso { login };
+    public enum eventos_acceso { login }
     
     //Singleton
     private static Fachada instancia;
@@ -77,10 +77,6 @@ public class Fachada extends Observable {
 
     public void LoginCliente(String username, String password,Dispositivo dispositivo) throws SessionException {
         sAcceso.LoginCliente(username, password,dispositivo);
-    }
-    
-    public void Logout(Dispositivo d){
-        sAcceso.LogoutCliente(d);
     }
 
     public void logoutGestor(Session session) {

@@ -9,7 +9,7 @@ import proyecto.pkgfinal.servicios.fachada.Fachada;
 public class Servicio {
     private final int id;
     private double montoTotal;
-    private ArrayList<Pedido> pedidos;
+    private final ArrayList<Pedido> pedidos;
     private ServicioStatus estado;
     private String beneficioAsignado;
     
@@ -53,7 +53,7 @@ public class Servicio {
         return "Servicio{" +
                 "id=" + id +
                 ", montoTotal=" + montoTotal +
-                ", pedidos=" + pedidos.toString() +
+                ", pedidos=" + pedidos +
                 ", estado=" + estado.toString() +
                 '}';
     }

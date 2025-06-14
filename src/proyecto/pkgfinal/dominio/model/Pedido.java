@@ -13,17 +13,18 @@ public class Pedido {
     private PedidoStatus estado;
     private Gestor gestorAsignado;
     private Date fechaHora;
+    private Cliente cliente;
     
     private static int contador = 0;
 
-    public Pedido(Item_Menu item, String Comentario) throws NoStockException {
-        //TODO crear un evento que gestione cada vez que se confirma se verifique el stock de los demas
+    public Pedido(Item_Menu item, String Comentario, Cliente clienteAsignado) throws NoStockException {
         if(! item.tieneStock()) throw new NoStockException(item);
         this.id = contador++;
         this.item = item;
         this.estado = PedidoStatus.NO_CONFIRMADO;
         this.Comentario = Comentario;
         this.fechaHora = new Date();
+        this.cliente = clienteAsignado;
     }
 
     public int getId() {
@@ -45,15 +46,9 @@ public class Pedido {
         Fachada.getInstancia().avisar(PedidoStatus.CONFIRMADO);
     }
 
-    public void cancelar(){
-
-    }
-
     public void setGestor(Gestor gestor){
         this.gestorAsignado = gestor;
     }
-
-
 
     public PedidoStatus getEstado() {
         return estado;
@@ -75,7 +70,7 @@ public class Pedido {
     @Override
     public String toString() {
         return item.toString() +
-                "- Cliente: "+
+                "- Cliente: "+ cliente.toString() +
                 " " + fechaHora.toString();
     }
 

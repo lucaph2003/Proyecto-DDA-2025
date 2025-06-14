@@ -1,16 +1,14 @@
 package proyecto.pkgfinal.ui.vista;
 
-import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-
-import proyecto.pkgfinal.dominio.model.Categoria;
 import proyecto.pkgfinal.dominio.model.Gestor;
 import proyecto.pkgfinal.dominio.model.Pedido;
 import proyecto.pkgfinal.dominio.model.Session;
 import proyecto.pkgfinal.ui.controller.GestorController;
 import proyecto.pkgfinal.ui.interfaces.IVistaGestor;
+
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
 
 public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
 
