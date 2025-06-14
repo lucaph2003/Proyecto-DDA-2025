@@ -21,7 +21,7 @@ public class ClientePreferencial extends TipoCliente{
         if (servicio.getMontoTotal() > 2000) {
             double total = (servicio.getMontoTotal() - descuento);
             descuento += total * 0.05;
-            servicio.setBeneficioAsignado((servicio.getBeneficioAsignado() != null ? servicio.getBeneficioAsignado() + " y " : " ") + "5% de descuento");
+            servicio.setBeneficioAsignado(servicio.getBeneficioAsignado() + " 5% de descuento");
         }
         return descuento;
     }

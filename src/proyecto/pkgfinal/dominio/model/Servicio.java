@@ -22,6 +22,7 @@ public class Servicio {
         this.pedidos = new ArrayList<>();
         this.estado = ServicioStatus.ACTIVO;
         this.cliente = cli;
+        this.beneficioAsignado = "";
     }
 
     public String getBeneficioAsignado() {
