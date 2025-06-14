@@ -9,8 +9,6 @@ import proyecto.pkgfinal.servicios.fachada.Fachada;
 import proyecto.pkgfinal.servicios.observador.Observable;
 import proyecto.pkgfinal.servicios.observador.Observador;
 import proyecto.pkgfinal.ui.vista.VistaGestor;
-
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class GestorController implements Observador {
@@ -100,6 +98,7 @@ public class GestorController implements Observador {
             if(fachada.tienePedidosPendientes((Gestor) session.getUsuario())) throw new PedidoException("Tiene pedidos pendientes");
             fachada.logoutGestor(session);
             vista.dispose();
+            fachada.quitar(this);
         }catch(PedidoException pex){
             vista.mostrarEror(pex.getMessage());
         }

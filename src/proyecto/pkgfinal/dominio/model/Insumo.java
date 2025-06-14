@@ -1,8 +1,8 @@
 package proyecto.pkgfinal.dominio.model;
 
 public class Insumo {
-    private String nombre;
-    private int stockMinimo;
+    private final  String nombre;
+    private final  int stockMinimo;
     private int stockActual;
 
     public Insumo(String nombre, int stockMinimo, int stockActual) {

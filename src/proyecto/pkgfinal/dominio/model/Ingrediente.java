@@ -1,8 +1,8 @@
 package proyecto.pkgfinal.dominio.model;
 
 public class Ingrediente {
-    private int cantidad;
-    private Insumo insumo;
+    private final int cantidad;
+    private final  Insumo insumo;
 
     public Ingrediente(int cantidad, Insumo insumo) {
         this.cantidad = cantidad;

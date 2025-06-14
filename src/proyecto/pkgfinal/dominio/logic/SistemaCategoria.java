@@ -7,7 +7,7 @@ public class SistemaCategoria {
     private final ArrayList<Categoria> listaCategorias;
 
     public SistemaCategoria() {
-        this.listaCategorias = new ArrayList<>();;
+        this.listaCategorias = new ArrayList<>();
     }
 
     public void AgregarCategoria(Categoria categoria){

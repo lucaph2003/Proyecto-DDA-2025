@@ -14,8 +14,4 @@ public class SistemaInsumo {
     public void AgregarInsumo(Insumo Insumo){
         listaInsumos.add(Insumo);
     }
-
-    public ArrayList<Insumo> getInsumos(){
-        return listaInsumos;
-    }
 }

@@ -9,17 +9,19 @@ import proyecto.pkgfinal.servicios.fachada.Fachada;
 public class Servicio {
     private final int id;
     private double montoTotal;
-    private ArrayList<Pedido> pedidos;
+    private final ArrayList<Pedido> pedidos;
     private ServicioStatus estado;
     private String beneficioAsignado;
+    private final Cliente cliente;
     
     private static int contador = 0;
 
-    public Servicio() {
+    public Servicio(Cliente cli) {
         this.id = contador++;
         this.montoTotal = 0;
         this.pedidos = new ArrayList<>();
         this.estado = ServicioStatus.ACTIVO;
+        this.cliente = cli;
         this.beneficioAsignado = "";
     }
 
@@ -49,12 +51,16 @@ public class Servicio {
         Fachada.getInstancia().avisar(Fachada.eventos_pedidos.pedidoAgregado);
     }
 
+    public Cliente getCliente(){
+        return this.cliente;
+    }
+
     @Override
     public String toString() {
         return "Servicio{" +
                 "id=" + id +
                 ", montoTotal=" + montoTotal +
-                ", pedidos=" + pedidos.toString() +
+                ", pedidos=" + pedidos +
                 ", estado=" + estado.toString() +
                 '}';
     }

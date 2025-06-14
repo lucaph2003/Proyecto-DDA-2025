@@ -25,7 +25,7 @@ public class Dispositivo {
     
     public void iniciarNuevoServicioCliente(Cliente c){
         this.clienteLogueado = c;
-        this.servicioActual = new Servicio();
+        this.servicioActual = new Servicio(c);
     }
 
     public void liberar(){

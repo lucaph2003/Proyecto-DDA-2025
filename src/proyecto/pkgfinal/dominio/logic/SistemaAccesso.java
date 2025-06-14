@@ -65,10 +65,6 @@ public class SistemaAccesso {
         return false;
     }
 
-    public void LogoutCliente(Dispositivo d){
-        d.liberar();
-    }
-
     public void AgregarCliente(Cliente cliente){
         listaClientes.add(cliente);
     }
