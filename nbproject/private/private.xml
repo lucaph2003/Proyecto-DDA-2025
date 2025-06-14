@@ -8,6 +8,18 @@
             <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/model/Dispositivo.java</file>
             <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/ui/vista/VentanaDispositivo.java</file>
             <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/ui/controller/DispositivoController.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/servicios/observador/Observable.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/servicios/observador/Observador.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/model/Categoria.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/model/Cliente.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/model/Usuario.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/model/Pedido.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/model/Unidad_Procesadora_Pedido.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/logic/SistemaInsumo.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/logic/SistemaAccesso.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/logic/SistemaUnidadProcesadora.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/model/strategy/TipoCliente.java</file>
+            <file>file:/C:/Users/lucap/OneDrive/Documents/NetBeansProjects/Proyecto-Final/src/proyecto/pkgfinal/dominio/model/strategy/ClientePreferencial.java</file>
         </group>
     </open-files>
 </project-private>
