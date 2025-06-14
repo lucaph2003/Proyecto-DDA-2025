@@ -13,18 +13,18 @@ public class Pedido {
     private PedidoStatus estado;
     private Gestor gestorAsignado;
     private Date fechaHora;
-    private Cliente cliente;
+    private Servicio servicio;
     
     private static int contador = 0;
 
-    public Pedido(Item_Menu item, String Comentario, Cliente clienteAsignado) throws NoStockException {
+    public Pedido(Item_Menu item, String Comentario, Servicio servicioAsignado) throws NoStockException {
         if(! item.tieneStock()) throw new NoStockException(item);
         this.id = contador++;
         this.item = item;
         this.estado = PedidoStatus.NO_CONFIRMADO;
         this.Comentario = Comentario;
         this.fechaHora = new Date();
-        this.cliente = clienteAsignado;
+        this.servicio = servicioAsignado;
     }
 
     public int getId() {
@@ -70,7 +70,7 @@ public class Pedido {
     @Override
     public String toString() {
         return item.toString() +
-                "- Cliente: "+ cliente.toString() +
+                "- Cliente: "+ servicio.getCliente().toString() +
                 " " + fechaHora.toString();
     }
 

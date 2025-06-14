@@ -92,7 +92,7 @@ public class DispositivoController implements Observador {
             if(!this.dispositivo.esLogueado()) throw new SessionException("Debe identificarse antes de realizar pedidos.");
             if(item == null) throw new NoSelectedOptionMenu("Debe Seleccionar un item.");
 
-            Pedido pedido = new Pedido(item, comentario,dispositivo.getClienteLogueado());
+            Pedido pedido = new Pedido(item, comentario,dispositivo.getServicioActual());
             dispositivo.getServicioActual().agregarPedido(pedido);
         }catch(Exception ex){
             vista.mostrarEror(ex.getMessage());
